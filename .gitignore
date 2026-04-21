@@ -1,5 +1,6 @@
 EEsample
 eg
+.DS_Store
 
 Client/.quasar
 Client/node_modules
