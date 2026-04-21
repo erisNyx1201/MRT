@@ -1,0 +1,35 @@
+<template>
+  <q-layout view="lHh Lpr lFf">
+    <q-header elevated>
+      <q-toolbar class="bg-blue-grey-10 text-white">
+        <q-btn flat to="/" style="font-size: 16pt">
+          <q-img src="/MR-logo.png" style="width: 110px; height: 40px" />
+        </q-btn>
+
+        <q-btn stretch flat label="Team" @click="navigate('/team')"/>
+
+        <q-btn stretch flat label="Room" @click="navigate('/room')"/>
+
+        <q-btn stretch flat label="Live" @click="navigate('/live')"/>
+
+      </q-toolbar>
+    </q-header>
+
+    <!-- Page Container Section -->
+    <q-page-container class="bg-dark">
+      <router-view />
+    </q-page-container>
+  </q-layout>
+</template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+// const isViewMode = window.location.port
+const router = useRouter()
+
+function navigate(path) {
+  router.push(path)
+}
+
+</script>

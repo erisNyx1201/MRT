@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1032,
+    "name": "Yggdrasill Path",
+    "full_name": "Yggdrasill Path - Yggsgard",
+    "location": "Yggsgard",
+    "description": "Beneath the sky-shutting canopy of the World Tree, Yggdrasill, lies the golden glory of Asgard, realm of the gods, now overgrown with the roots and flora. However, the throne-seizing scheme of Loki, god of mischief, threatens the ever-lasting prosperity of this kingdom and all of the Ten Realms.",
+    "game_mode": "Convoy",
+    "is_competitive": false,
+    "sub_map_id": 1003,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1032.png",
+      "/rivals/maps/medium/map_1032.png",
+      "/rivals/maps/large/map_1032.png",
+      "/premium/maps/xl/map_1032.png?expires=1763034204&signature=a12055ff665686ec1910f59c9ae82f2b1a0c9baa6682a3a8d14d59a24b9fbdb8"
+    ],
+    "video": "https://youtu.be/8nYwiVjhBWQ"
+  },
+  {
+    "id": 1034,
+    "name": "Shin-Shibuya",
+    "full_name": "Shin-Shibuya - Tokyo 2099",
+    "location": "Tokyo 2099",
+    "description": "Another world has emerged from the Timestream Entanglement! It's time to have some ramen and sushi after that nature walk! I'm thrilled that these foods still retain their classic flavors even in Tokyo of 2099! But it is a pity that there aren't any Kaiju or giant robots fighting in the city anymore...",
+    "game_mode": "Convergence",
+    "is_competitive": false,
+    "sub_map_id": 1021,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1034.png",
+      "/rivals/maps/medium/map_1034.png",
+      "/rivals/maps/large/map_1034.png",
+      "/premium/maps/xl/map_1034.png?expires=1763034204&signature=a9f4555b2df110019373251acab0dac637794f97a3b808a9a153980b884fcd6c"
+    ],
+    "video": "https://youtu.be/8NUtV1CkyKs"
+  },
+  {
+    "id": 1101,
+    "name": "Hall of Djalia",
+    "full_name": "Hall of Djalia - Intergalactic Empire of Wakanda",
+    "location": "Intergalactic Empire of Wakanda",
+    "description": "",
+    "game_mode": "Convergence",
+    "is_competitive": false,
+    "sub_map_id": 1035,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1101.png",
+      "/rivals/maps/medium/map_1101.png",
+      "/rivals/maps/large/map_1101.png",
+      "/premium/maps/xl/map_1101.png?expires=1763034204&signature=f3d8e0255038138d4e3662474c19aac13c90c91e57a5f1c20b244e86d13da6f0"
+    ],
+    "video": "https://youtu.be/dz_778SYulo"
+  },
+  {
+    "id": 1118,
+    "name": "Sanctum Sanctorum",
+    "full_name": "Sanctum Sanctorum - Empire of Eternal Night",
+    "location": "Empire of Eternal Night",
+    "description": "Doctor Strange's Sanctum Sanctorum stands as the last beacon of hope in a city consumed by darkness. Protected by ancient wards and powerful magic, it serves as a refuge for those battling the chaos unleashed by Dracula and his legion. Explore its eerie corridors and powerful secrets as you prepare to face the chaos unleashed by Dracula's dark forces. Are you ready to step into the shadows and uncover the secrets of the Sanctum?",
+    "game_mode": "Doom match",
+    "is_competitive": false,
+    "sub_map_id": 1078,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1118.png",
+      "/rivals/maps/medium/map_1118.png",
+      "/rivals/maps/large/map_1118.png",
+      "/premium/maps/xl/map_1118.png?expires=1763034204&signature=976195dbc40fe029e2dfb3589f242127bcc56b3a486bfb291d1ea6dfe7338cbe"
+    ],
+    "video": "https://youtu.be/pVlerpIo3Pk"
+  },
+  {
+    "id": 1148,
+    "name": "Spider-Islands",
+    "full_name": "Spider-Islands - Tokyo 2099",
+    "location": "Tokyo 2099",
+    "description": "Take a journey above Tokyo 2099 into the Web of Life and Destiny! To patch up the temporal rift, the Master Weaver is working around the clock to spin his magic while also suspending an entire network of islands aloft, far above from the urban hustle. As a lover of time, he's preserved many more classic Japanese elements, from zen gardens to his own sacred tenshu, where he protects a personal sliver of the Web of Life and Destiny itself. It seems that weaving the Multiverse back together is difficult for one spider, so let's get Spider-Zero back in action!",
+    "game_mode": "Convoy",
+    "is_competitive": false,
+    "sub_map_id": 1060,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1148.png",
+      "/rivals/maps/medium/map_1148.png",
+      "/rivals/maps/large/map_1148.png",
+      "/premium/maps/xl/map_1148.png?expires=1763034204&signature=51a3a77c44e3363e271de958501b7c99febb783c36b7a0da950966b0bd8bcad1"
+    ],
+    "video": "https://youtu.be/jqnZzywDfTs"
+  },
+  {
+    "id": 1154,
+    "name": "ODIN'S ARCHIVE",
+    "full_name": "Odin's Archive",
+    "location": "",
+    "description": "",
+    "game_mode": "Domination",
+    "is_competitive": false,
+    "sub_map_id": 1003,
+    "sub_map_name": null,
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1154.png",
+      "/rivals/maps/medium/map_1154.png",
+      "/rivals/maps/large/map_1154.png"
+    ],
+    "video": null
+  },
+  {
+    "id": 1155,
+    "name": "Bifrost Garden",
+    "full_name": "Bifrost Garden - Royal Palace",
+    "location": "Yggsgard",
+    "description": "Beneath the sky-shutting canopy of the World Tree, Yggdrasill, lies the golden glory of Asgard, realm of the gods, now overgrown with the roots and flora. However, the throne-seizing scheme of Loki, god of mischief, threatens the ever-lasting prosperity of this kingdom and all of the Ten Realms.",
+    "game_mode": "Domination",
+    "is_competitive": false,
+    "sub_map_id": 1003,
+    "sub_map_name": "Bifrost Garden",
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1155.png",
+      "/rivals/maps/medium/map_1155.png",
+      "/rivals/maps/large/map_1155.png",
+      "/premium/maps/xl/map_1155.png?expires=1763034204&signature=95e5000cce74b7e1bffaf1f2090b8aded2a2c54a2e9b5af622eafb95fcdcd72d"
+    ],
+    "video": "https://youtu.be/8nYwiVjhBWQ"
+  },
+  {
+    "id": 1156,
+    "name": "Throne Room",
+    "full_name": "Throne Room - Royal Palace",
+    "location": "Yggsgard",
+    "description": "Beneath the sky-shutting canopy of the World Tree, Yggdrasill, lies the golden glory of Asgard, realm of the gods, now overgrown with the roots and flora. However, the throne-seizing scheme of Loki, god of mischief, threatens the ever-lasting prosperity of this kingdom and all of the Ten Realms.",
+    "game_mode": "Domination",
+    "is_competitive": false,
+    "sub_map_id": 1003,
+    "sub_map_name": "Throne Room",
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1156.png",
+      "/rivals/maps/medium/map_1156.png",
+      "/rivals/maps/large/map_1156.png",
+      "/premium/maps/xl/map_1156.png?expires=1763034204&signature=c7e35e327dfacb50f171b067ed8a7e8ef223290670a07451a116b050f3e25e7e"
+    ],
+    "video": "https://youtu.be/8nYwiVjhBWQ"
+  },
+  {
+    "id": 1161,
+    "name": "Stellar Spaceport",
+    "full_name": "Stellar Spaceport - Birnin T'Challa",
+    "location": "Intergalactic Empire of Wakanda",
+    "description": "From a single Vibranium meteorite, Wakanda rose to greatness. Now, at the heart of the galaxy, they’ve uncovered the homeland of that very mound. But no matter how far it's technology advances, Wakanda's strength will always be its people. Wakanda Forever!",
+    "game_mode": "Domination",
+    "is_competitive": false,
+    "sub_map_id": 1067,
+    "sub_map_name": "Stellar Spaceport",
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1161.png",
+      "/rivals/maps/medium/map_1161.png",
+      "/rivals/maps/large/map_1161.png",
+      "/premium/maps/xl/map_1161.png?expires=1763034204&signature=911e3b319be09423cef6fd96d9266f5bd52435c5ac2c416e68199ff1d13971d9"
+    ],
+    "video": "https://youtu.be/Sc_cXElDvU0"
+  },
+  {
+    "id": 1162,
+    "name": "Imperial Institute of Science",
+    "full_name": "Imperial Institute of Science - Birnin T'Challa",
+    "location": "Intergalactic Empire of Wakanda",
+    "description": "From a single Vibranium meteorite, Wakanda rose to greatness. Now, at the heart of the galaxy, they’ve uncovered the homeland of that very mound. But no matter how far it's technology advances, Wakanda's strength will always be its people. Wakanda Forever!",
+    "game_mode": "Domination",
+    "is_competitive": false,
+    "sub_map_id": 1064,
+    "sub_map_name": "Imperial Institute of Science",
+    "sub_map_thumbnail": null,
+    "images": [
+      "/rivals/maps/map_1162.png",
+      "/rivals/maps/medium/map_1162.png",
+      "/rivals/maps/large/map_1162.png",
+      "/premium/maps/xl/map_1162.png?expires=1763034204&signature=05abcc976d0721222df62f6e6696a91488a6fbb98e06a222cf90d84bdba944bb"
+    ],
+    "video": "https://youtu.be/Sc_cXElDvU0"
+  }
+]

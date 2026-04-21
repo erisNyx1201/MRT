@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1230,
+    "sub_name": "Shin-Shibuya",
+    "name": "Tokyo 2099: Shin-Shibuya",
+    "location": "Tokyo 2099",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/8NUtV1CkyKs"
+  },
+  {
+    "id": 1231,
+    "sub_name": "Yggdrasill Path",
+    "name": "Yggsgard: Yggdrasill Path",
+    "location": "Yggsgard",
+    "game_mode": "Convoy",
+    "video": "https://youtu.be/8nYwiVjhBWQ"
+  },
+  {
+    "id": 1236,
+    "sub_name": "Royal Palace",
+    "name": "Yggsgard: Royal Palace",
+    "location": "Yggsgard",
+    "game_mode": "Domination",
+    "video": "https://youtu.be/8nYwiVjhBWQ"
+  },
+  {
+    "id": 1245,
+    "sub_name": "Spider-Islands",
+    "name": "Tokyo 2099: Spider-Islands",
+    "location": "Tokyo 2099",
+    "game_mode": "Convoy",
+    "video": "https://youtu.be/jqnZzywDfTs"
+  },
+  {
+    "id": 1267,
+    "sub_name": "Hall of Djalia",
+    "name": "Intergalactic Empire of Wakanda: Hall of Djalia",
+    "location": "Intergalactic Empire of Wakanda",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/dz_778SYulo"
+  },
+  {
+    "id": 1272,
+    "sub_name": "Birnin T'Challa",
+    "name": "Intergalactic Empire of Wakanda: Birnin T'Challa",
+    "location": "Intergalactic Empire of Wakanda",
+    "game_mode": "Domination",
+    "video": "https://youtu.be/Sc_cXElDvU0"
+  },
+  {
+    "id": 1288,
+    "sub_name": "Hell's Heaven",
+    "name": "Hydra Charteris Base: Hell's Heaven",
+    "location": "Hydra Charteris Base",
+    "game_mode": "Domination",
+    "video": "https://youtu.be/6iCCVb7SIaE"
+  },
+  {
+    "id": 1290,
+    "sub_name": "Symbiotic Surface",
+    "name": "Klyntar: Symbiotic Surface",
+    "location": "Klyntar",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/X-CFFxqFNRo"
+  },
+  {
+    "id": 1291,
+    "sub_name": "Midtown",
+    "name": "Empire of Eternal Night: Midtown",
+    "location": "Empire of Eternal Night",
+    "game_mode": "Convoy",
+    "video": "https://youtu.be/DmtMVOcHr-8"
+  },
+  {
+    "id": 1292,
+    "sub_name": "Central Park",
+    "name": "Empire of Eternal Night: Central Park",
+    "location": "Empire of Eternal Night",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/fs_pMBXSr9Y"
+  },
+  {
+    "id": 1310,
+    "sub_name": "Krakoa",
+    "name": "Hellfire Gala: Krakoa",
+    "location": "Hellfire Gala",
+    "game_mode": "Domination",
+    "video": "https://youtu.be/xIo0RxLYkQU"
+  },
+  {
+    "id": 1311,
+    "sub_name": "Arakko",
+    "name": "Hellfire Gala: Arakko",
+    "location": "Hellfire Gala",
+    "game_mode": "Convoy",
+    "video": "https://youtu.be/_DCOXD7X7yA"
+  },
+  {
+    "id": 1318,
+    "sub_name": "Celestial Husk",
+    "name": "Klyntar: Celestial Husk",
+    "location": "Klyntar",
+    "game_mode": "Domination",
+    "video": "https://youtu.be/CUvBdR0HUqw"
+  },
+  {
+    "id": 1320,
+    "sub_name": "Throne of Knull",
+    "name": "Klyntar: Throne of Knull",
+    "location": "Klyntar",
+    "game_mode": "Resource Rumble",
+    "video": "https://youtu.be/P44x3oxvhFY"
+  },
+  {
+    "id": 1418,
+    "sub_name": "",
+    "name": "Museum of Contemplation",
+    "location": "",
+    "game_mode": "Convoy",
+    "video": "https://youtu.be/AWEtIaKvs5w"
+  },
+  {
+    "id": 2042,
+    "sub_name": "Heart of Heaven",
+    "name": "K'un-Lun: Heart of Heaven",
+    "location": "K'un-Lun",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/WkTmJp0dcUA"
+  },
+  {
+    "id": 1421,
+    "sub_name": "Lower Manhattan",
+    "name": "New York: Lower Manhattan",
+    "location": "New York",
+    "game_mode": "Convergence",
+    "video": "https://youtu.be/ChBE64P3Ams"
+  }
+]

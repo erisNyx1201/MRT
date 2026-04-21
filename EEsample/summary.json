@@ -1,0 +1,133 @@
+{
+  "room_id": "2242269725397750748",
+  "live": {
+    "ecode": 0,
+    "data": {
+      "statistics_data": {
+        "Career_HitRate_hero:13736_1024": {
+          "hero_hit": 9,
+          "shield_hit": 5,
+          "summoner_hit": 0,
+          "chaos_hit": 7,
+          "use_cnt": 40,
+          "real_hit_hero_cnt": 0,
+          "enemy_hit": 9,
+          "ally_hit": 0
+        },
+        "Career_Damage_hero:13736_1024": 701.8678970336914,
+        // ... full statistics_data object (same as /api/live)
+      },
+      "players_data": {
+        "818998850": {
+          "tab_data": {
+            "common_data": {
+              "kill_score": 0,
+              "death_score": 5,
+              "assist_score": 0,
+              "main_hit_rate": 0.2708333432674408,
+              "total_hero_damage": 1629.8623046875,
+              "total_heal": 0.0,
+              "total_token_damage": 3649.64990234375
+            },
+            "special_data": {
+              "1053": [1.0, 1.0, 0.0]
+            }
+          },
+          "select_hero": 1053,
+          "respawn_time": -1,
+          "curr_energy": 1920.0,
+          "max_energy": 3400.0,
+          "abilities_cooldown": {
+            "105321": {
+              "regen": 0.0,
+              "energy": 70.0,
+              "energy_cost": 1.0,
+              "energy_max": 70.0,
+              "cooldown": 0.0
+            }
+            // ... more abilities
+          },
+          "mvp_val": -33.930695931254924,
+          "camp": 1,
+          "player_name": "ObsAngela",
+          "hp": 650.0,
+          "responsibility": 1,
+          "continue_kill(KDA)": 0,
+          "hit_rate": 0,
+          "solo_kill": 0,
+          "consecutive KOs": 0
+        }
+        // ... full players_data object (same as /api/live)
+      },
+      "ban_pick_info": [
+        {
+          "operate_type": 0,
+          "battle_side": 1,
+          "hero_id": 1011,
+          "round_index": 0,
+          "ban_pick_num": 1,
+          "is_only_one_side": true,
+          "mode_order_type": 1,
+          "votes": [],
+          "conf_id": 2004,
+          "camp": 2
+        }
+        // ... full ban_pick_info array
+      ],
+      "ban_pick_time_info": {
+        "pre_ban_pick_time_limit": -782.4451293945312,
+        "ban_pick_time_limit": -1.0,
+        "ban_pick_announce_time_limit": -699.2498168945312
+      },
+      "level_info": {
+        "map_id": 1245,
+        "current_owner": 1,
+        "current_degree": 0.6426406029548503,
+        "overtime": 0,
+        "overtime_remain": -1.0,
+        "point_character_num": [1, 2],
+        "round_index": 2,
+        "match_state": 4,
+        "round_score": [3, 0],
+        "fight_time": 159.66068471595645,
+        "stalemate_time": {
+          "35270": 5.916278388351202,
+          "484": 0.7141187638044357,
+          "45661": 0.11758854705840349
+        }
+      },
+      "mvps": {
+        "2": 45661,
+        "1": 35270
+      }
+    }
+  },
+  "pickban": [
+    {
+      "operate_type": 0,
+      "battle_side": 1,
+      "hero_id": 1011,
+      "round_index": 0,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 0,
+      "hero_id": 1021,
+      "round_index": 0,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    }
+    // ... full ban_pick_info array (same as /api/pickban)
+  ],
+  "_from_cache": true
+}

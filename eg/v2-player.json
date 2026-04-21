@@ -1,0 +1,374 @@
+{
+    "uid": 1481866201,
+    "name": "ErisBoreas",
+    "updates": {
+        "info_update_time": "12/26/2024, 11:26:31 AM",
+        "last_history_update": "1/8/2026, 12:53:51 AM",
+        "last_inserted_match": "12/31/2025, 7:48:27 PM",
+        "last_update_request": "1/8/2026, 12:53:16 AM"
+    },
+    "player": {
+        "uid": 1481866201,
+        "level": "68",
+        "name": "ErisBoreas",
+        "icon": {
+            "player_icon_id": "31047204",
+            "player_icon": "/players/heads/player_head_31047204.png"
+        },
+        "rank": {
+            "rank": "Invalid level",
+            "image": null,
+            "color": null
+        },
+        "team": {
+            "club_team_id": "",
+            "club_team_mini_name": "",
+            "club_team_type": "0"
+        },
+        "info": {
+            "completed_achievements": "135",
+            "login_os": "PC",
+            "rank_game_season": {
+                "1001001": {
+                    "rank_game_id": 1,
+                    "level": 16,
+                    "rank_score": 4521.90407817647,
+                    "max_level": 16,
+                    "max_rank_score": 4521.90407817647,
+                    "update_time": 1736346185,
+                    "win_count": 94,
+                    "protect_score": 0,
+                    "diff_score": 29.458345401246333
+                },
+                "1001002": {
+                    "rank_game_id": 2,
+                    "level": 18,
+                    "rank_score": 4768.612678947794,
+                    "max_level": 19,
+                    "max_rank_score": 4821.410256006951,
+                    "update_time": 1740110831,
+                    "win_count": 134,
+                    "protect_score": 0,
+                    "diff_score": 22.346837588856943
+                },
+                "1001003": {
+                    "rank_game_id": 3,
+                    "level": 19,
+                    "rank_score": 4864.809085012857,
+                    "max_level": 19,
+                    "max_rank_score": 4872.458753753411,
+                    "update_time": 1742432578,
+                    "win_count": 50,
+                    "protect_score": 0,
+                    "diff_score": 19.432800006102298
+                },
+                "1001004": {
+                    "rank_game_id": 4,
+                    "level": 18,
+                    "rank_score": 4743.144224664787,
+                    "max_level": 19,
+                    "max_rank_score": 4825.30947623951,
+                    "update_time": 1748537083,
+                    "win_count": 79,
+                    "protect_score": 0,
+                    "diff_score": -24.92526201884175
+                },
+                "1001005": {
+                    "rank_game_id": 5,
+                    "level": 18,
+                    "rank_score": 4713.824414002632,
+                    "max_level": 19,
+                    "max_rank_score": 4848.427498774491,
+                    "update_time": 1749422412,
+                    "win_count": 24,
+                    "protect_score": 0,
+                    "diff_score": 23.43542905105278
+                },
+                "1001006": {
+                    "rank_game_id": 6,
+                    "level": 17,
+                    "rank_score": 4646.2126576023875,
+                    "max_level": 17,
+                    "max_rank_score": 4646.2126576023875,
+                    "update_time": 1754612824,
+                    "win_count": 71,
+                    "protect_score": 0,
+                    "diff_score": 20.18070503385752
+                },
+                "1001007": {
+                    "rank_game_id": 7,
+                    "level": 19,
+                    "rank_score": 4823.602177677458,
+                    "max_level": 20,
+                    "max_rank_score": 4956.806113828134,
+                    "update_time": 1756239120,
+                    "win_count": 54,
+                    "protect_score": 0,
+                    "diff_score": -20.545271992780727
+                },
+                "1001008": {
+                    "rank_game_id": 8,
+                    "level": 12,
+                    "rank_score": 4097.519775690244,
+                    "max_level": 12,
+                    "max_rank_score": 4150,
+                    "update_time": 1758335831,
+                    "win_count": 0,
+                    "protect_score": 0,
+                    "diff_score": -15.185427809065914
+                },
+                "1001010": {
+                    "rank_game_id": 10,
+                    "level": 19,
+                    "rank_score": 4804.386192349372,
+                    "max_level": 19,
+                    "max_rank_score": 4804.386192349372,
+                    "update_time": 1765394464,
+                    "win_count": 111,
+                    "protect_score": 0,
+                    "diff_score": 21.3268491838744
+                },
+                "1001011": {
+                    "rank_game_id": 11,
+                    "level": 18,
+                    "rank_score": 4715.123000182621,
+                    "max_level": 19,
+                    "max_rank_score": 4806.57206365535,
+                    "update_time": 1766886321,
+                    "win_count": 9,
+                    "protect_score": 0,
+                    "diff_score": 21.927208351930858
+                }
+            }
+        }
+    },
+    "isPrivate": false,
+    "overall_stats": {
+        "total_matches": 1,
+        "total_wins": 0,
+        "unranked": {
+            "total_matches": 0,
+            "total_wins": 0,
+            "total_assists": 0,
+            "total_deaths": 0,
+            "total_kills": 0,
+            "total_time_played": "0m 0s",
+            "total_time_played_raw": 0,
+            "total_mvp": 0,
+            "total_svp": 0
+        },
+        "ranked": {
+            "total_matches": 1,
+            "total_wins": 0,
+            "total_assists": 10,
+            "total_deaths": 9,
+            "total_kills": 5,
+            "total_time_played": "11m 52s",
+            "total_time_played_raw": 712.7605891227722,
+            "total_mvp": 0,
+            "total_svp": 0
+        }
+    },
+    "match_history": [
+        {
+            "match_uid": "5514328_1771015484_1231179_11001_12",
+            "map_id": 1231,
+            "map_thumbnail": "/rivals/maps/map_1231.png",
+            "duration": 712.7605891227722,
+            "season": 12,
+            "winner_side": 0,
+            "mvp_uid": 289579190,
+            "svp_uid": 1345046613,
+            "match_time_stamp": 1771016465,
+            "play_mode_id": 0,
+            "game_mode_id": 2,
+            "score_info": {
+                "0": 3,
+                "1": 1
+            },
+            "player_performance": {
+                "player_uid": 1481866201,
+                "hero_id": 1046,
+                "hero_name": "adam warlock",
+                "hero_type": "/heroes/transformations/adam-warlock-headbig-0.webp",
+                "kills": 5,
+                "deaths": 9,
+                "assists": 10,
+                "is_win": {
+                    "score": 0,
+                    "is_win": false
+                },
+                "disconnected": false,
+                "camp": 1,
+                "score_change": -23.393567258829535,
+                "level": 19,
+                "new_level": 19,
+                "new_score": 4825.051592142988
+            }
+        }
+    ],
+    "rank_history": [],
+    "hero_matchups": [
+        {
+            "hero_id": 1027,
+            "hero_name": "groot",
+            "hero_class": "Vanguard",
+            "hero_thumbnail": "/heroes/transformations/groot-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        },
+        {
+            "hero_id": 1038,
+            "hero_name": "scarlet witch",
+            "hero_class": "Duelist",
+            "hero_thumbnail": "/heroes/transformations/scarlet-witch-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        },
+        {
+            "hero_id": 1023,
+            "hero_name": "rocket raccoon",
+            "hero_class": "Strategist",
+            "hero_thumbnail": "/heroes/transformations/rocket-raccoon-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        },
+        {
+            "hero_id": 1018,
+            "hero_name": "doctor strange",
+            "hero_class": "Vanguard",
+            "hero_thumbnail": "/heroes/transformations/doctor-strange-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        },
+        {
+            "hero_id": 1050,
+            "hero_name": "invisible woman",
+            "hero_class": "Strategist",
+            "hero_thumbnail": "/heroes/transformations/invisible-woman-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        },
+        {
+            "hero_id": 1059,
+            "hero_name": "elsa bloodstone",
+            "hero_class": "Duelist",
+            "hero_thumbnail": "/heroes/transformations/elsa-bloodstone-headbig-0.webp",
+            "matches": 1,
+            "wins": 1,
+            "win_rate": "100.00"
+        }
+    ],
+    "team_mates": [
+        {
+            "player_info": {
+                "nick_name": "lukasdps1",
+                "player_icon": "/rivals/players/heads/player_head_31030201.png",
+                "player_uid": 803439001
+            },
+            "matches": 1,
+            "wins": 0,
+            "win_rate": "0.00"
+        },
+        {
+            "player_info": {
+                "nick_name": "DanyaI",
+                "player_icon": "/rivals/players/heads/player_head_31047204.png",
+                "player_uid": 86757796
+            },
+            "matches": 1,
+            "wins": 0,
+            "win_rate": "0.00"
+        },
+        {
+            "player_info": {
+                "nick_name": "Ḿiku",
+                "player_icon": "/rivals/players/heads/player_head_30000901.png",
+                "player_uid": 2147282420
+            },
+            "matches": 1,
+            "wins": 0,
+            "win_rate": "0.00"
+        },
+        {
+            "player_info": {
+                "nick_name": "Elcousteau",
+                "player_icon": "/rivals/players/heads/player_head_31042204.png",
+                "player_uid": 1294203775
+            },
+            "matches": 1,
+            "wins": 0,
+            "win_rate": "0.00"
+        },
+        {
+            "player_info": {
+                "nick_name": "StaggeredRay",
+                "player_icon": "/rivals/players/heads/player_head_31050205.png",
+                "player_uid": 1345046613
+            },
+            "matches": 1,
+            "wins": 0,
+            "win_rate": "0.00"
+        }
+    ],
+    "heroes_ranked": [
+        {
+            "hero_id": 1046,
+            "hero_name": "adam warlock",
+            "hero_thumbnail": "/heroes/transformations/adam-warlock-headbig-0.webp",
+            "matches": 1,
+            "wins": 0,
+            "mvp": 0,
+            "svp": 0,
+            "kills": 4,
+            "deaths": 4,
+            "assists": 5,
+            "play_time": 390.00535863637924,
+            "damage": 4455.615589141846,
+            "heal": 8672.200969696045,
+            "damage_taken": 3356.078411102295,
+            "main_attack": {
+                "total": 367,
+                "hits": 65
+            }
+        },
+        {
+            "hero_id": 1047,
+            "hero_name": "jeff the land shark",
+            "hero_thumbnail": "/heroes/transformations/jeff-the-land-shark-headbig-0.webp",
+            "matches": 0,
+            "wins": 0,
+            "mvp": 0,
+            "svp": 0,
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "play_time": 322.7551608905196,
+            "damage": 0,
+            "heal": 0,
+            "damage_taken": 0,
+            "main_attack": {
+                "total": 0,
+                "hits": 0
+            }
+        }
+    ],
+    "heroes_unranked": [],
+    "maps": [
+        {
+            "map_id": 1231,
+            "map_thumbnail": "/rivals/maps/map_1231.png",
+            "matches": 1,
+            "wins": 0,
+            "kills": 5,
+            "deaths": 9,
+            "assists": 10,
+            "play_time": 712.7605195268989
+        }
+    ]
+}

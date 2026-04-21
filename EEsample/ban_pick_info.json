@@ -1,0 +1,148 @@
+{
+  "ban_pick_info": [
+    {
+      "operate_type": 0,
+      "battle_side": 1,
+      "hero_id": 1011,
+      "round_index": 0,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 0,
+      "hero_id": 1021,
+      "round_index": 0,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 1,
+      "battle_side": 0,
+      "hero_id": 1051,
+      "round_index": 1,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 1,
+      "hero_id": 1029,
+      "round_index": 2,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 1,
+      "battle_side": 1,
+      "hero_id": 1024,
+      "round_index": 3,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 0,
+      "hero_id": 1036,
+      "round_index": 4,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 1,
+      "hero_id": 1034,
+      "round_index": 5,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 0,
+      "hero_id": 1038,
+      "round_index": 5,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 1,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 1,
+      "battle_side": 1,
+      "hero_id": 1029,
+      "round_index": 6,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 0,
+      "hero_id": 1045,
+      "round_index": 7,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 1,
+      "battle_side": 0,
+      "hero_id": 1026,
+      "round_index": 8,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 1
+    },
+    {
+      "operate_type": 0,
+      "battle_side": 1,
+      "hero_id": 1056,
+      "round_index": 9,
+      "ban_pick_num": 1,
+      "is_only_one_side": true,
+      "mode_order_type": 0,
+      "votes": [],
+      "conf_id": 2004,
+      "camp": 2
+    }
+  ]
+}

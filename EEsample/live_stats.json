@@ -1,0 +1,86 @@
+{
+  "teams": {
+    "1": {
+      "totals": {
+        "k": 10,
+        "d": 5,
+        "a": 15,
+        "total_damage": 50000,
+        "total_damage_taken": 30000,
+        "total_heal": 20000,
+        "total_token_damage": 25000,
+        "hero_use_time": 1200,
+        "main_hit_rate": 0.8
+      },
+      "heroes": {
+        "1024": {
+          "hero_id": "1024",
+          "k": 5,
+          "d": 2,
+          "a": 8,
+          "damage": 25000,
+          "damage_taken": 15000,
+          "heal": 10000,
+          "hero_use_time": 600,
+          "hit_rate": {
+            "hero_hit": 50,
+            "shield_hit": 10,
+            "summoner_hit": 0,
+            "chaos_hit": 5,
+            "use_cnt": 100,
+            "real_hit_hero_cnt": 0,
+            "enemy_hit": 50,
+            "ally_hit": 0
+          }
+        }
+        // ... more heroes
+      }
+    },
+    "2": {
+      // similar structure
+    }
+  },
+  "players": [
+    {
+      "player_id": "818998850",
+      "nick_name": "ObsAngela",
+      "camp": 1,
+      "select_hero": 1053,
+      "totals": {
+        "k": 0,
+        "d": 5,
+        "a": 0,
+        "total_damage": 1629.8623046875,
+        "total_damage_taken": 3649.64990234375,
+        "total_heal": 0.0,
+        "total_token_damage": 3649.64990234375,
+        "main_hit_rate": 0.2708333432674408,
+        "hero_use_time": 376.95648193359375
+      },
+      "heroes": [
+        {
+          "hero_id": "1053",
+          "k": 0,
+          "d": 5,
+          "a": 0,
+          "damage": 1629.8623342514038,
+          "damage_taken": 3649.6499671936035,
+          "heal": 0.0,
+          "hero_use_time": 376.95648193359375,
+          "hit_rate": {
+            "hero_hit": 51,
+            "shield_hit": 7,
+            "summoner_hit": 1,
+            "chaos_hit": 0,
+            "use_cnt": 199,
+            "real_hit_hero_cnt": 9,
+            "enemy_hit": 51,
+            "ally_hit": 0
+          }
+        }
+        // ... more heroes per player
+      ]
+    }
+    // ... more players
+  ]
+}

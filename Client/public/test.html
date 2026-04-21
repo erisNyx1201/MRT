@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <button id="testBtn">Test Replay Query</button>
+
+    <script>
+      document.getElementById("testBtn").onclick = async () => {
+        const res = await fetch("/api/mr/replay-query-match", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            player_uid: 1,
+            zone_id: 12001,
+            replay_ids: ["50114224938"]
+          })
+        });
+
+        const data = await res.json();
+        console.log(data);
+        alert(JSON.stringify(data, null, 2));
+      };
+    </script>
+  </body>
+</html>
