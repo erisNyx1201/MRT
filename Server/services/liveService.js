@@ -11,9 +11,9 @@ const insecureAgent = new https.Agent({
 const ROOM_BASE = process.env.MR_GMPROXY_BASE;
 const REPLAY_BASE = process.env.MR_REPLAY_BASE;
 
-console.log("MR_TOKEN:", MR_TOKEN ? "***" : "Not Set");
-console.log("ROOM_BASE:", ROOM_BASE);
-console.log("REPLAY_BASE:", REPLAY_BASE);
+// console.log("MR_TOKEN:", MR_TOKEN ? "***" : "Not Set");
+// console.log("ROOM_BASE:", ROOM_BASE);
+// console.log("REPLAY_BASE:", REPLAY_BASE);
 
 // old version with detailed logging
 // async function fetchMarvelAPI({
@@ -135,7 +135,6 @@ async function fetchMarvelAPI({
   data = {},
 }) {
   try {
-    console.log(`masuk: ${endpoint}`);
     const response = await axios({
       method,
       baseURL,

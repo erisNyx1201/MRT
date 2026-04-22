@@ -28,7 +28,7 @@ const mapMap = Object.fromEntries(
 router.get('/rooms', async (req, res) => {
   try {
     const data = await getRoomList();
-    console.log('Fetched room list:', data);
+    // console.log('Fetched room list:', data);
     res.json(data);
   } catch (err) {
     apiLogger.error('Error fetching room list:', err);
