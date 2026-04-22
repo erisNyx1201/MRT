@@ -5,7 +5,7 @@ const heroesRaw = require('../../Client/src/assets/heroes_UO.json');
 // const mapsRaw = require('../assets/maps_UO.json');
 const mapsRaw = require('../../Client/src/assets/maps.json');
 
-const { dbLogger } = require('../modules/logger');
+const { apiLogger } = require('../modules/logger');
 const {
   getRoomList,
   getRealtimeBanPick,
@@ -28,9 +28,10 @@ const mapMap = Object.fromEntries(
 router.get('/rooms', async (req, res) => {
   try {
     const data = await getRoomList();
+    console.log('Fetched room list:', data);
     res.json(data);
   } catch (err) {
-    dbLogger.error('Error fetching room list:', err);
+    apiLogger.error('Error fetching room list:', err);
     res.status(500).json({
       message: 'Failed to fetch room list',
       error: err.message,
@@ -46,7 +47,7 @@ router.get('/ban-pick/:roomId', async (req, res) => {
     const data = await getRealtimeBanPick(req.params.roomId);
     res.json(data);
   } catch (err) {
-    dbLogger.error(`Error fetching realtime ban pick ${req.params.roomId}:`, err);
+    apiLogger.error(`Error fetching realtime ban pick ${req.params.roomId}:`, err);
     res.status(500).json({
       message: 'Failed to fetch realtime ban pick',
       error: err.message,
@@ -62,7 +63,7 @@ router.get('/battle/:roomId', async (req, res) => {
     const data = await getBattleStatistics(req.params.roomId);
     res.json(data);
   } catch (err) {
-    dbLogger.error(`Error fetching battle statistics ${req.params.roomId}:`, err);
+    apiLogger.error(`Error fetching battle statistics ${req.params.roomId}:`, err);
     res.status(500).json({
       message: 'Failed to fetch battle statistics',
       error: err.message,
@@ -100,7 +101,7 @@ router.get('/dashboard/:roomId', async (req, res) => {
 
     res.json(processed);
   } catch (err) {
-    dbLogger.error(`Error building live dashboard ${req.params.roomId}:`, err);
+    apiLogger.error(`Error building live dashboard ${req.params.roomId}:`, err);
     res.status(500).json({
       message: 'Failed to fetch live dashboard data',
       error: err.message,
@@ -117,7 +118,7 @@ router.post('/replay-query-match', async (req, res) => {
     const match = data?.data?.matches?.[0] || null;
     res.json(match);
   } catch (err) {
-    dbLogger.error('Error fetching replay_query_match:', err);
+    apiLogger.error('Error fetching replay_query_match:', err);
     res.status(500).json({
       message: 'Failed to fetch replay query match',
       error: err.message,
