@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { api } from 'src/boot/axios';
 import { useQuasar } from 'quasar';
 
@@ -178,4 +178,17 @@ const checkDuplicate = async (id) => {
     throw err;
   }
 };
+
+const loadTeams = async () => {
+  try {
+    const response = await api.get('/teams');
+    teams.value = response.data;
+    sortTeams();
+  } catch (err) {
+    console.error('Failed to load teams:', err);
+    $q.notify({ type: 'negative', message: 'Failed to load teams' });
+  }
+};
+
+onMounted(loadTeams);
 </script>
