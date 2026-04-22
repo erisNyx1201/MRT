@@ -1,0 +1,128 @@
+[
+    {
+        "name": "PLANET X PALS",
+        "heroes": [ROCKET RACOON, GROOT, JEFF],
+        "heroesID": [1023, 1027, 1047]
+    },
+    {
+        "name": "GAMMA FASTBALL",
+        "heroes": [THE THING, HULK, WOLVERINE],
+        "heroesID": [1051, 1011, 1049]
+    },
+    {
+        "name": "STARS ALIGNED",
+        "heroes": [CAPTAIN AMERICA, WINTER SOLDIER],
+        "heroesID": [1022, 1041]
+    },
+    {
+        "name": "STARK PROTOCOL",
+        "heroes": [SQUIRREL GIRL, IRON MAN, ULTRON],
+        "heroesID": [1032, 1034, 1028]
+    },
+    {
+        "name": "SYMBIOTE SHENANIGANS",
+        "heroes": [JEFF, VENOM, HELA],
+        "heroesID": [1047, 1035, 1024]
+    },
+    {
+        "name": "DIVINE ARMORY",
+        "heroes": [ANGELA, THOR],
+        "heroesID": [1056, 1039]
+    },
+    {
+        "name": "LUNAR FORCE",
+        "heroes": [MOON KNIGHT, BLADE, CLOAK & DAGGER],
+        "heroesID": [1030, 1044, 1025]
+    },
+    {
+        "name": "VIBRANT VITALITY",
+        "heroes": [GROOT, MANTIS, LOKI],
+        "heroesID": [1027, 1020, 1016]
+    },
+    {
+        "name": "FIRST STEPS",
+        "heroes": [HUMAN TORCH, THE THING],
+        "heroesID": [1017, 1051]
+    },
+    {
+        "name": "ARCANE ORDER",
+        "heroes": [MAGIK, DOCTOR STRANGE, SCARLET WITCH],
+        "heroesID": [1029, 1018, 1038]
+    },
+    {
+        "name": "BESTIAL HUNT",
+        "heroes": [DAREDEVIL, THE PUNISHER],
+        "heroesID": [1055, 1014]
+    },
+    {
+        "name": "DEEP WRATH",
+        "heroes": [HELA, NAMOR],
+        "heroesID": [1024, 1045]
+    },
+    {
+        "name": "BLADE OF KHONSHU",
+        "heroes": [MOON KNIGHT, BLADE],
+        "heroesID": [1030, 1044]
+    },
+    {
+        "name": "PRIMAL FLAME",
+        "heroes": [PHOENIX, BLACK WIDOW, WOLVERINE],
+        "heroesID": [1054, 1033, 1049]
+    },
+    {
+        "name": "CHILLING ASSAULT",
+        "heroes": [IRON FIST, LUNA SNOW, EMMA FROST],
+        "heroesID": [1052, 1031, 1053]
+    },
+    {
+        "name": "SWORD OF DUALITY",
+        "heroes": [PSYLOCKE, HAWKEYE, CLOAK & DAGGER],
+        "heroesID": [1048, 1021, 1025]
+    },
+    {
+        "name": "EXPLOSIVE ENTANGLEMENT",
+        "heroes": [MAGNETO, GAMBIT, ROGUE],
+        "heroesID": [1037, 1058, 1065]
+    },
+    {
+        "name": "PARKER POWER-UP",
+        "heroes": [PENI, SPIDER-MAN],
+        "heroesID": [1042, 1036]
+    },
+    {
+        "name": "MR POOL'S INTERDIMENSIONAL TOY BOX",
+        "heroes": [JEFF, DEADPOOL, ELSA BLOODSTONE],
+        "heroesID": [1047, 1057, 1059]
+    },
+    {
+        "name": "ROCKET NETWORK",
+        "heroes": [STAR-LORD, ROCKET RACCOON, MISTER FANTASTIC],
+        "heroesID": [1043, 1023, 1040]
+    },
+    {
+        "name": "GAMMA CHARGE",
+        "heroes": [THE THING, HULK, BLACK PANTHER],
+        "heroesID": [1051, 1011, 1026]
+    },
+    {
+        "name": "PSIONITE MAYHEM",
+        "heroes": [INVISIBLE WOMAN, DOCTOR STRANGE],
+        "heroesID": [1050, 1018]
+    },
+    {
+        "name": "COSMIC CYCLONE",
+        "heroes": [STORM, ADAM WARLOCK],
+        "heroesID": [1015, 1046]
+    },
+    {
+        "name": "BLESS OF THE KUMIHO",
+        "heroes": [WHITE FOX, LUNA SNOW],
+        "heroesID": [1060, 1031]
+    }
+]
+
+/***{
+        "name": "Jeff-Nado",
+        "heroes": [1047, 1015]
+    },
+    ***/
