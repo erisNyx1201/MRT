@@ -1,0 +1,64 @@
+{
+  "ecode": 0,
+  "data": {
+    "cur_round_banpick_info": [
+      {
+        "camp": 1,
+        "cur_pick_hero": 0,
+        "leader_uid": 987415106,
+        "round_index": 10,
+        "operate_type": 0,
+        "battle_side": 0
+      },
+      {
+        "camp": 2,
+        "cur_pick_hero": 0,
+        "leader_uid": 984508306,
+        "round_index": 10,
+        "operate_type": 0,
+        "battle_side": 1
+      }
+    ],
+    "suggest_histories": [
+      {
+        "uid": 1020609170,
+        "camp": 2,
+        "suggest_hero": 1020,
+        "round_index": 1,
+        "battle_side": 0,
+        "operate_type": 1,
+        "create_time": 1776922051
+      },
+      {
+        "uid": 1020609170,
+        "camp": 2,
+        "suggest_hero": 1028,
+        "round_index": 7,
+        "battle_side": 0,
+        "operate_type": 0,
+        "create_time": 1776922100
+      },
+      {
+        "uid": 1020609170,
+        "camp": 2,
+        "suggest_hero": 1050,
+        "round_index": 8,
+        "battle_side": 0,
+        "operate_type": 1,
+        "create_time": 1776922109
+      },
+      {
+        "uid": 1020609170,
+        "camp": 2,
+        "suggest_hero": 10571,
+        "round_index": 8,
+        "battle_side": 0,
+        "operate_type": 1,
+        "create_time": 1776922112
+      }
+    ],
+    "pre_ban_pick_time_limit": -828.6989135742188,
+    "ban_pick_time_limit": -1.0,
+    "ban_pick_announce_time_limit": -730.38037109375
+  }
+}

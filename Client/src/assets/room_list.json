@@ -1,0 +1,221 @@
+{
+  "ecode": 0,
+  "data": [
+    {
+      "members": [
+        {
+          "uid": 998613755,
+          "camp": 1,
+          "name": "Namonaki",
+          "pos": 1
+        },
+        {
+          "uid": 987415106,
+          "camp": 2,
+          "name": "C.C.",
+          "pos": 2
+        },
+        {
+          "uid": 1012446610,
+          "camp": 1,
+          "name": "\u3141\u3141\u3141\u3141\u3141\u3141\u3141",
+          "pos": 3
+        },
+        {
+          "uid": 984508306,
+          "camp": 1,
+          "name": "aztac",
+          "pos": 4
+        },
+        {
+          "uid": 978842347,
+          "camp": 1,
+          "name": "\uc4c9\uc5d8\ub828",
+          "pos": 2
+        },
+        {
+          "uid": 1002543362,
+          "camp": 2,
+          "name": "duep",
+          "pos": 0
+        },
+        {
+          "uid": 1020609170,
+          "camp": 2,
+          "name": "SkittIes",
+          "pos": 5
+        },
+        {
+          "uid": 987705830,
+          "camp": 2,
+          "name": "du\u0435\u0440",
+          "pos": 4
+        },
+        {
+          "uid": 984362987,
+          "camp": 1,
+          "name": "BJ\ub85c\uc774\uc870",
+          "pos": 5
+        },
+        {
+          "uid": 988432675,
+          "camp": 2,
+          "name": "Lovelyz",
+          "pos": 1
+        },
+        {
+          "uid": 1012738022,
+          "camp": 1,
+          "name": "\ub9de\uc7a5\uae4c\uc790\uadf8\ub0e5",
+          "pos": 0
+        },
+        {
+          "uid": 1025276306,
+          "camp": 2,
+          "name": "B O B O",
+          "pos": 3
+        }
+      ],
+      "max_bo": 9,
+      "cur_bo": 1,
+      "round_results": [
+        2
+      ],
+      "group_info": {
+        "1": {
+          "real_camp": 1,
+          "name": "PIRATE",
+          "mini_name": "PRT",
+          "icon_url": "",
+          "score": 0,
+          "editing_uid": 0
+        },
+        "2": {
+          "real_camp": 2,
+          "name": "GENG",
+          "mini_name": "GEN",
+          "icon_url": "",
+          "score": 1,
+          "editing_uid": 0
+        }
+      },
+      "league_tag": "",
+      "room_id": 2242269724339560288,
+      "battle_id": "5167445_1776922002_1230001_12001_33"
+    },
+    {
+      "members": [
+        {
+          "uid": 1066640435,
+          "camp": 255,
+          "name": "Hoonmaru",
+          "pos": 0
+        },
+        {
+          "uid": 1002106667,
+          "camp": 2,
+          "name": "\uae40\ub300\uc911",
+          "pos": 1
+        },
+        {
+          "uid": 1011863810,
+          "camp": 2,
+          "name": "duep....",
+          "pos": 0
+        },
+        {
+          "uid": 1064004731,
+          "camp": 1,
+          "name": "No.1Zrayapiggy",
+          "pos": 0
+        },
+        {
+          "uid": 1063858322,
+          "camp": 1,
+          "name": "TaroCook1e.",
+          "pos": 1
+        },
+        {
+          "uid": 983055206,
+          "camp": 2,
+          "name": "Carpe",
+          "pos": 2
+        },
+        {
+          "uid": 1064151142,
+          "camp": 1,
+          "name": "piggy...",
+          "pos": 2
+        },
+        {
+          "uid": 1067226235,
+          "camp": 1,
+          "name": "CH0R0NG",
+          "pos": 3
+        },
+        {
+          "uid": 1065176075,
+          "camp": 1,
+          "name": "Ninja123",
+          "pos": 5
+        },
+        {
+          "uid": 1065029650,
+          "camp": 1,
+          "name": "\u5e72\u676fOUO",
+          "pos": 4
+        },
+        {
+          "uid": 982328731,
+          "camp": 2,
+          "name": "\uc2e0\uc911\uc6d0",
+          "pos": 4
+        },
+        {
+          "uid": 979423331,
+          "camp": 2,
+          "name": "\ubb38\uc815\uc6d0",
+          "pos": 3
+        },
+        {
+          "uid": 982764610,
+          "camp": 2,
+          "name": "duep.",
+          "pos": 5
+        },
+        {
+          "uid": 1065761795,
+          "camp": 255,
+          "name": "\u5976\u9e70",
+          "pos": 1
+        }
+      ],
+      "max_bo": 9,
+      "cur_bo": 0,
+      "round_results": [
+        
+      ],
+      "group_info": {
+        "1": {
+          "real_camp": 1,
+          "name": "TEAM 1",
+          "mini_name": "TEAM 1",
+          "icon_url": "",
+          "score": 0,
+          "editing_uid": 0
+        },
+        "2": {
+          "real_camp": 2,
+          "name": "TEAM 2",
+          "mini_name": "TEAM 2",
+          "icon_url": "",
+          "score": 0,
+          "editing_uid": 0
+        }
+      },
+      "league_tag": "",
+      "room_id": 2242269724339560291,
+      "battle_id": "4853295_1776920875_1318001_12001_31"
+    }
+  ]
+}

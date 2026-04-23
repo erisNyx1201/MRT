@@ -1,0 +1,1344 @@
+{
+  "ecode": 0,
+  "data": {
+    "statistics_data": {
+      "Career_HitRate_hero:1020609170_1016": {
+        "hero_hit": 75,
+        "shield_hit": 11,
+        "summoner_hit": 0,
+        "chaos_hit": 28,
+        "use_cnt": 199,
+        "real_hit_hero_cnt": 93,
+        "enemy_hit": 31,
+        "ally_hit": 44
+      },
+      "Career_DamageTaken_player:987415106": 8974.522327899933,
+      "Career_DamageTaken_hero:987415106_1055": 8974.522327899933,
+      "Career_Damage_hero:984362987_1060": 4682.0,
+      "Career_Damage_player:984362987": 5618.0,
+      "Career_HitRate_hero:984362987_1060": {
+        "hero_hit": 172,
+        "shield_hit": 10,
+        "summoner_hit": 0,
+        "chaos_hit": 13,
+        "use_cnt": 331,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 103,
+        "ally_hit": 69
+      },
+      "Career_DamageTaken_player:1002543362": 13176.892672538757,
+      "Career_DamageTaken_hero:1002543362_10571": 13176.892672538757,
+      "Career_Heal_hero:1020609170_1016": 2142.9908752441406,
+      "Career_Heal_player:1020609170": 12939.025938510895,
+      "Career_Heal_hero:988432675_1020": 8523.426880717278,
+      "Career_Heal_player:988432675": 8523.426880717278,
+      "Career_HitRate_hero:1002543362_10571": {
+        "hero_hit": 221,
+        "shield_hit": 45,
+        "summoner_hit": 2,
+        "chaos_hit": 26,
+        "use_cnt": 508,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 221,
+        "ally_hit": 0
+      },
+      "Career_HitRate_hero:984508306_1031": {
+        "hero_hit": 256,
+        "shield_hit": 0,
+        "summoner_hit": 6,
+        "chaos_hit": 67,
+        "use_cnt": 530,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 20,
+        "ally_hit": 236
+      },
+      "Career_HeroUseTime_player:1020609170": 318.9588074684143,
+      "Career_HeroUseTime_hero:1020609170_1016": 5.683294773101807,
+      "Career_HitRate_hero:998613755_1059": {
+        "hero_hit": 1623,
+        "shield_hit": 139,
+        "summoner_hit": 78,
+        "chaos_hit": 234,
+        "use_cnt": 3770,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 1623,
+        "ally_hit": 0
+      },
+      "Career_HitRate_hero:978842347_1048": {
+        "hero_hit": 716,
+        "shield_hit": 86,
+        "summoner_hit": 21,
+        "chaos_hit": 187,
+        "use_cnt": 2168,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 716,
+        "ally_hit": 0
+      },
+      "Career_Heal_hero:1020609170_1047": 10796.035063266754,
+      "Career_DamageTaken_player:987705830": 15702.354323625565,
+      "Career_DamageTaken_hero:987705830_1035": 15702.354323625565,
+      "Career_Damage_hero:998613755_1059": 13460.219113349915,
+      "Career_Damage_player:998613755": 13460.219113349915,
+      "Career_DamageTaken_player:988432675": 2941.076046228409,
+      "Career_DamageTaken_hero:988432675_1020": 2941.076046228409,
+      "Career_HitRate_hero:1020609170_1047": {
+        "hero_hit": 1708,
+        "shield_hit": 47,
+        "summoner_hit": 0,
+        "chaos_hit": 281,
+        "use_cnt": 2690,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 802,
+        "ally_hit": 906
+      },
+      "Career_DamageTaken_player:984362987": 8114.466698884964,
+      "Career_DamageTaken_hero:984362987_1060": 7326.366859197617,
+      "Career_Damage_hero:1002543362_10571": 10653.55777990818,
+      "Career_Damage_player:1002543362": 10653.55777990818,
+      "Career_HitRate_hero:987705830_1035": {
+        "hero_hit": 172,
+        "shield_hit": 28,
+        "summoner_hit": 0,
+        "chaos_hit": 14,
+        "use_cnt": 573,
+        "real_hit_hero_cnt": 45,
+        "enemy_hit": 172,
+        "ally_hit": 0
+      },
+      "Career_Damage_hero:1025276306_1014": 96.16167831420898,
+      "Career_Damage_player:1025276306": 6032.8759841918945,
+      "Career_DamageTaken_player:998613755": 4839.139486551285,
+      "Career_DamageTaken_hero:998613755_1059": 4839.139486551285,
+      "Career_HitRate_hero:1025276306_1014": {
+        "hero_hit": 4,
+        "shield_hit": 0,
+        "summoner_hit": 0,
+        "chaos_hit": 6,
+        "use_cnt": 18,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 4,
+        "ally_hit": 0
+      },
+      "Career_DamageTaken_player:984508306": 5718.215661764145,
+      "Career_DamageTaken_hero:984508306_1031": 3226.312613248825,
+      "Career_Heal_hero:984508306_1031": 10890.142823129892,
+      "Career_Heal_player:984508306": 12559.12643662095,
+      "Career_HitRate_hero:1012446610_1035": {
+        "hero_hit": 47,
+        "shield_hit": 0,
+        "summoner_hit": 0,
+        "chaos_hit": 5,
+        "use_cnt": 159,
+        "real_hit_hero_cnt": 10,
+        "enemy_hit": 47,
+        "ally_hit": 0
+      },
+      "Career_Damage_hero:978842347_1048": 12512.376823425293,
+      "Career_Damage_player:978842347": 12512.376823425293,
+      "Career_DamageTaken_player:978842347": 4578.276832103729,
+      "Career_DamageTaken_hero:978842347_1048": 4578.276832103729,
+      "Career_Damage_hero:987705830_1035": 7917.625278949738,
+      "Career_Damage_player:987705830": 7917.625278949738,
+      "Career_DamageTaken_player:1020609170": 4401.227749586105,
+      "Career_DamageTaken_hero:1020609170_1047": 3679.8799810409546,
+      "Career_Damage_hero:1012446610_1035": 2000.7294826507568,
+      "Career_Damage_player:1012446610": 5918.941116333008,
+      "Career_Heal_hero:1002543362_10571": 1605.8746337890625,
+      "Career_Heal_player:1002543362": 1605.8746337890625,
+      "Career_DamageTaken_player:1012446610": 16115.003284335136,
+      "Career_DamageTaken_hero:1012446610_1035": 4240.902779102325,
+      "Career_Damage_hero:1020609170_1047": 3405.7351775169373,
+      "Career_Damage_player:1020609170": 4225.25919675827,
+      "Career_HitRate_hero:987415106_1055": {
+        "hero_hit": 71,
+        "shield_hit": 4,
+        "summoner_hit": 0,
+        "chaos_hit": 1,
+        "use_cnt": 259,
+        "real_hit_hero_cnt": 63,
+        "enemy_hit": 71,
+        "ally_hit": 0
+      },
+      "Career_HitRate_hero:988432675_1020": {
+        "hero_hit": 110,
+        "shield_hit": 41,
+        "summoner_hit": 0,
+        "chaos_hit": 10,
+        "use_cnt": 377,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 110,
+        "ally_hit": 0
+      },
+      "Career_HeroUseTime_player:1025276306": 318.9588165283203,
+      "Career_HeroUseTime_hero:1025276306_1014": 22.595657348632812,
+      "Career_Damage_hero:988432675_1020": 7122.135244369507,
+      "Career_Damage_player:988432675": 7122.135244369507,
+      "Career_Damage_hero:1012738022_1056": 973.4619979858398,
+      "Career_Damage_player:1012738022": 5293.223992347717,
+      "Career_HitRate_hero:1012738022_1056": {
+        "hero_hit": 7,
+        "shield_hit": 0,
+        "summoner_hit": 0,
+        "chaos_hit": 0,
+        "use_cnt": 7,
+        "real_hit_hero_cnt": 9,
+        "enemy_hit": 7,
+        "ally_hit": 0
+      },
+      "Career_Heal_hero:1025276306_1060": 6296.037557601929,
+      "Career_Heal_player:1025276306": 6296.037557601929,
+      "Career_DamageTaken_player:1025276306": 4554.571494340897,
+      "Career_DamageTaken_hero:1025276306_1060": 4554.571494340897,
+      "Career_HitRate_hero:1025276306_1060": {
+        "hero_hit": 200,
+        "shield_hit": 16,
+        "summoner_hit": 0,
+        "chaos_hit": 39,
+        "use_cnt": 443,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 128,
+        "ally_hit": 72
+      },
+      "Career_Damage_hero:987415106_1055": 9350.804649233818,
+      "Career_Damage_player:987415106": 9350.804649233818,
+      "Career_DamageTaken_player:1012738022": 14649.97620689869,
+      "Career_DamageTaken_hero:1012738022_1056": 3636.757321357727,
+      "Career_Heal_hero:984362987_1060": 7801.205770730972,
+      "Career_Heal_player:984362987": 10857.72199511528,
+      "Career_Damage_hero:1025276306_1060": 5936.714305877686,
+      "Career_Damage_hero:984508306_1031": 1391.1040382385254,
+      "Career_Damage_player:984508306": 2764.8540382385254,
+      "Career_D_hero:1012738022_1056": 2,
+      "OnlineLeague_1:1012738022": 6,
+      "Career_D_player:1012738022": 6,
+      "Career_LastK_hero:987705830_1035": 5,
+      "Career_LastK_player:987705830": 5,
+      "Career_A_hero:988432675_1020": 21,
+      "Career_A_player:988432675": 21,
+      "Career_A_hero:1020609170_1047": 22,
+      "Career_A_player:1020609170": 22,
+      "Career_A_hero:1025276306_1060": 9,
+      "Career_A_player:1025276306": 9,
+      "Career_K_player:1020609170": 17,
+      "Career_K_hero:1020609170_1047": 17,
+      "Career_K_player:1025276306": 12,
+      "Career_K_hero:1025276306_1060": 12,
+      "Career_K_player:987705830": 12,
+      "Career_K_hero:987705830_1035": 12,
+      "Career_K_player:988432675": 13,
+      "Career_K_hero:988432675_1020": 13,
+      "Career_HeroUseTime_player:1012738022": 322.6669702529907,
+      "Career_HeroUseTime_hero:1012738022_1056": 83.26064109802246,
+      "Career_DamageTaken_hero:1012738022_1018": 9223.995025992393,
+      "Career_HitRate_hero:1012738022_1018": {
+        "hero_hit": 133,
+        "shield_hit": 20,
+        "summoner_hit": 6,
+        "chaos_hit": 19,
+        "use_cnt": 457,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 133,
+        "ally_hit": 0
+      },
+      "Career_D_hero:998613755_1059": 5,
+      "OnlineLeague_1:998613755": 5,
+      "Career_D_player:998613755": 5,
+      "Career_LastK_hero:987415106_1055": 7,
+      "Career_LastK_player:987415106": 7,
+      "Career_K_player:987415106": 14,
+      "Career_K_hero:987415106_1055": 14,
+      "Career_D_hero:978842347_1048": 4,
+      "OnlineLeague_1:978842347": 4,
+      "Career_D_player:978842347": 4,
+      "Career_LastK_hero:1025276306_1060": 4,
+      "Career_LastK_player:1025276306": 4,
+      "Career_A_hero:987415106_1055": 6,
+      "Career_A_player:987415106": 6,
+      "Career_D_hero:984508306_1031": 3,
+      "OnlineLeague_1:984508306": 6,
+      "Career_D_player:984508306": 6,
+      "Career_HeroUseTime_hero:1012738022_1018": 165.47289276123047,
+      "Career_D_hero:1012446610_1035": 1,
+      "OnlineLeague_1:1012446610": 5,
+      "Career_D_player:1012446610": 5,
+      "Career_LastK_hero:1002543362_10571": 8,
+      "Career_LastK_player:1002543362": 8,
+      "Career_K_player:1002543362": 16,
+      "Career_K_hero:1002543362_10571": 16,
+      "Career_D_hero:984362987_1060": 4,
+      "OnlineLeague_1:984362987": 4,
+      "Career_D_player:984362987": 4,
+      "Career_HeroUseTime_hero:1012738022_1011": 5.939091205596924,
+      "Career_HitRate_hero:1012738022_1035": {
+        "hero_hit": 19,
+        "shield_hit": 8,
+        "summoner_hit": 0,
+        "chaos_hit": 2,
+        "use_cnt": 93,
+        "real_hit_hero_cnt": 7,
+        "enemy_hit": 19,
+        "ally_hit": 0
+      },
+      "Career_HeroUseTime_player:1012446610": 318.95882415771484,
+      "Career_HeroUseTime_hero:1012446610_1035": 97.69335174560547,
+      "Career_DamageTaken_hero:1012446610_1022": 3427.527634859085,
+      "Career_DamageTaken_hero:1012738022_1035": 1789.2238595485687,
+      "Career_Damage_hero:1012446610_1022": 1444.899995803833,
+      "Career_HitRate_hero:1012446610_1022": {
+        "hero_hit": 20,
+        "shield_hit": 1,
+        "summoner_hit": 0,
+        "chaos_hit": 0,
+        "use_cnt": 44,
+        "real_hit_hero_cnt": 13,
+        "enemy_hit": 20,
+        "ally_hit": 0
+      },
+      "Career_Damage_hero:1012738022_1035": 786.8407497406006,
+      "Career_Heal_hero:987415106_1055": 46.000030517578125,
+      "Career_Heal_player:987415106": 46.000030517578125,
+      "Career_A_hero:987705830_1035": 4,
+      "Career_A_player:987705830": 4,
+      "Career_D_hero:1012738022_1035": 1,
+      "Career_LastK_hero:1020609170_1047": 2,
+      "Career_LastK_player:1020609170": 2,
+      "Career_Heal_hero:1012446610_1022": 30.09999942779541,
+      "Career_Heal_player:1012446610": 30.09999942779541,
+      "Career_HeroUseTime_player:984508306": 318.9588165283203,
+      "Career_HeroUseTime_hero:984508306_1031": 148.60946655273438,
+      "Career_HitRate_hero:984508306_1050": {
+        "hero_hit": 47,
+        "shield_hit": 4,
+        "summoner_hit": 0,
+        "chaos_hit": 4,
+        "use_cnt": 136,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 25,
+        "ally_hit": 22
+      },
+      "Career_D_hero:1012446610_1022": 1,
+      "Career_LastK_hero:988432675_1020": 2,
+      "Career_LastK_player:988432675": 2,
+      "Career_HeroUseTime_hero:1012738022_1035": 67.99434518814087,
+      "Career_Damage_hero:984508306_1050": 1373.75,
+      "Career_HeroUseTime_hero:1012446610_1022": 67.38662719726562,
+      "Career_HitRate_hero:1012446610_1011": {
+        "hero_hit": 35,
+        "shield_hit": 2,
+        "summoner_hit": 0,
+        "chaos_hit": 2,
+        "use_cnt": 239,
+        "real_hit_hero_cnt": 35,
+        "enemy_hit": 35,
+        "ally_hit": 0
+      },
+      "Career_DamageTaken_hero:984508306_1050": 2491.90304851532,
+      "Career_DamageTaken_hero:1012446610_1011": 8446.572870373726,
+      "Career_Heal_hero:984508306_1050": 1668.9836134910583,
+      "Career_Damage_hero:1012446610_1011": 2473.311637878418,
+      "Career_Damage_hero:1012738022_1018": 3532.921244621277,
+      "Career_D_hero:1025276306_1060": 1,
+      "OnlineLeague_1:1025276306": 1,
+      "Career_D_player:1025276306": 1,
+      "Career_LastK_hero:998613755_1059": 3,
+      "Career_LastK_player:998613755": 3,
+      "Career_K_player:998613755": 3,
+      "Career_K_hero:998613755_1059": 3,
+      "Career_D_hero:984508306_1050": 3,
+      "Career_D_hero:1012446610_1011": 3,
+      "Career_A_hero:1002543362_10571": 2,
+      "Career_A_player:1002543362": 2,
+      "Career_D_hero:1012738022_1018": 3,
+      "Career_D_hero:987415106_1055": 2,
+      "OnlineLeague_1:987415106": 2,
+      "Career_D_player:987415106": 2,
+      "Career_LastK_hero:1012446610_1011": 1,
+      "Career_LastK_player:1012446610": 1,
+      "Career_K_player:984362987": 2,
+      "Career_K_hero:984362987_1060": 2,
+      "Career_K_player:984508306": 1,
+      "Career_K_hero:984508306_1050": 1,
+      "Career_K_player:978842347": 2,
+      "Career_K_hero:978842347_1048": 2,
+      "Career_K_player:1012446610": 1,
+      "Career_K_hero:1012446610_1011": 1,
+      "Career_A_hero:998613755_1059": 1,
+      "Career_A_player:998613755": 1,
+      "Career_A_hero:984508306_1050": 1,
+      "Career_A_player:984508306": 1,
+      "Career_A_hero:984362987_1060": 2,
+      "Career_A_player:984362987": 2,
+      "Career_D_hero:1020609170_1047": 1,
+      "OnlineLeague_1:1020609170": 2,
+      "Career_D_player:1020609170": 2,
+      "Career_LastK_hero:978842347_1048": 1,
+      "Career_LastK_player:978842347": 1,
+      "Career_K_player:1012738022": 2,
+      "Career_K_hero:1012738022_1018": 1,
+      "Career_K_hero:1012738022_1056": 1,
+      "Career_A_hero:1012738022_1056": 1,
+      "Career_A_player:1012738022": 1,
+      "Career_HeroUseTime_player:998613755": 318.9588317871094,
+      "Career_HeroUseTime_hero:998613755_1059": 318.9588317871094,
+      "Career_HeroUseTime_player:978842347": 318.9588317871094,
+      "Career_HeroUseTime_hero:978842347_1048": 318.9588317871094,
+      "Career_HeroUseTime_hero:1012446610_1011": 153.87884521484375,
+      "Career_HeroUseTime_hero:984508306_1050": 170.34934997558594,
+      "Career_HeroUseTime_player:984362987": 321.73334980010986,
+      "Career_HeroUseTime_hero:984362987_1060": 321.73334980010986,
+      "Career_HeroUseTime_player:1002543362": 318.9588317871094,
+      "Career_HeroUseTime_hero:1002543362_10571": 318.9588317871094,
+      "Career_HeroUseTime_player:988432675": 318.9588317871094,
+      "Career_HeroUseTime_hero:988432675_1020": 318.9588317871094,
+      "Career_HeroUseTime_player:987415106": 318.9588317871094,
+      "Career_HeroUseTime_hero:987415106_1055": 318.9588317871094,
+      "Career_HeroUseTime_hero:1025276306_1060": 296.3631591796875,
+      "Career_HeroUseTime_player:987705830": 318.9588317871094,
+      "Career_HeroUseTime_hero:987705830_1035": 318.9588317871094,
+      "Career_HeroUseTime_hero:1020609170_1047": 313.2755126953125,
+      "Career_HitRate_hero:984362987_1050": {
+        "hero_hit": 50,
+        "shield_hit": 0,
+        "summoner_hit": 2,
+        "chaos_hit": 1,
+        "use_cnt": 88,
+        "real_hit_hero_cnt": 0,
+        "enemy_hit": 15,
+        "ally_hit": 35
+      },
+      "Career_Damage_hero:1020609170_1016": 819.524019241333,
+      "Career_Heal_hero:984362987_1050": 3056.516224384308,
+      "Career_DamageTaken_hero:1020609170_1016": 721.3477685451508,
+      "Career_DamageTaken_hero:984362987_1050": 788.0998396873474,
+      "Career_Damage_hero:984362987_1050": 936.0,
+      "Career_D_hero:1020609170_1016": 1
+    },
+    "players_data": {
+      "1012738022": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 2,
+            "death_score": 6,
+            "assist_score": 1,
+            "main_hit_rate": 0.33253589272499084,
+            "total_hero_damage": 5293.22412109375,
+            "total_heal": 0.0,
+            "total_token_damage": 14649.9765625
+          },
+          "special_data": {
+            "1056": [2.0, 250.0, 0.0],
+            "1035": [5.263157844543457, 1.0, 238.16555786132812],
+            "1018": [3843.93798828125, 0.0, 0.0]
+          }
+        },
+        "select_hero": 1018,
+        "preview_hero": 1018,
+        "respawn_time": -1,
+        "curr_energy": 1815.411376953125,
+        "max_energy": 3100.0,
+        "abilities_cooldown": {
+          "101811": {
+            "regen": 0.0,
+            "energy": 7.0,
+            "energy_cost": 1.0,
+            "energy_max": 10.0,
+            "cooldown": 0.0
+          },
+          "101851": {
+            "regen": 0.0,
+            "energy": 28.0,
+            "energy_cost": 0.0,
+            "energy_max": 100.0,
+            "cooldown": 0.0
+          },
+          "101871": {
+            "regen": 11.0,
+            "energy": 1815.411376953125,
+            "energy_cost": 3100.0,
+            "energy_max": 3100.0,
+            "cooldown": 0.0
+          },
+          "101881": {
+            "regen": 0.0,
+            "energy": 28.0,
+            "energy_cost": 0.0,
+            "energy_max": 100.0,
+            "cooldown": 0.0
+          },
+          "101853": {
+            "regen": 0.0,
+            "energy": 28.0,
+            "energy_cost": 0.0,
+            "energy_max": 100.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -12.191232781010605,
+        "camp": 1,
+        "player_name": "\ub9de\uc7a5\uae4c\uc790\uadf8\ub0e5",
+        "hp": 495.4648742675781,
+        "responsibility": 1,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "998613755": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 3,
+            "death_score": 5,
+            "assist_score": 1,
+            "main_hit_rate": 0.5007359385490417,
+            "total_hero_damage": 13460.21875,
+            "total_heal": 0.0,
+            "total_token_damage": 4839.1396484375
+          },
+          "special_data": { "1059": [5.914972305297852, 64.0449447631836, 1.0] }
+        },
+        "select_hero": 1059,
+        "preview_hero": 1059,
+        "respawn_time": -1,
+        "curr_energy": 2307.029541015625,
+        "max_energy": 3400.0,
+        "abilities_cooldown": {
+          "105901": {
+            "regen": 0.0,
+            "energy": 3.0,
+            "energy_cost": 0.0,
+            "energy_max": 3.0,
+            "cooldown": 0.0
+          },
+          "105941": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 1.34954833984375
+          },
+          "105981": {
+            "regen": 11.0,
+            "energy": 2307.029541015625,
+            "energy_cost": 3400.0,
+            "energy_max": 3400.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -0.6362603239396019,
+        "camp": 1,
+        "player_name": "Namonaki",
+        "hp": 250.0,
+        "responsibility": 2,
+        "continue_kill(KDA)": 1,
+        "hit_rate": 0,
+        "solo_kill": 2,
+        "consecutive KOs": 0
+      },
+      "978842347": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 2,
+            "death_score": 4,
+            "assist_score": 0,
+            "main_hit_rate": 0.3889181911945343,
+            "total_hero_damage": 12512.376953125,
+            "total_heal": 0.0,
+            "total_token_damage": 4578.27685546875
+          },
+          "special_data": {
+            "1048": [5.865921974182129, 5.699999809265137, 1.0]
+          }
+        },
+        "select_hero": 1048,
+        "preview_hero": 1048,
+        "respawn_time": -1,
+        "curr_energy": 1868.1417236328125,
+        "max_energy": 3400.0,
+        "abilities_cooldown": {
+          "104831": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 4.0013427734375
+          },
+          "104841": {
+            "regen": 0.08330000191926956,
+            "energy": 2.0,
+            "energy_cost": 1.0,
+            "energy_max": 2.0,
+            "cooldown": 0.0
+          },
+          "104861": {
+            "regen": 11.0,
+            "energy": 1868.1417236328125,
+            "energy_cost": 3400.0,
+            "energy_max": 3400.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -2.499521538598142,
+        "camp": 1,
+        "player_name": "\uc4c9\uc5d8\ub828",
+        "hp": 187.0,
+        "responsibility": 2,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "1012446610": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 1,
+            "death_score": 5,
+            "assist_score": 0,
+            "main_hit_rate": 0.1489361673593521,
+            "total_hero_damage": 5918.94091796875,
+            "total_heal": 30.099998474121094,
+            "total_token_damage": 16115.0029296875
+          },
+          "special_data": {
+            "1035": [8.510638236999512, 0.0, 830.8526611328125],
+            "1011": [2.0, 2.0, 1.0]
+          }
+        },
+        "select_hero": 1011,
+        "preview_hero": 1011,
+        "respawn_time": -1,
+        "curr_energy": 1854.9150390625,
+        "max_energy": 3400.0,
+        "abilities_cooldown": {
+          "101131": {
+            "regen": 10.0,
+            "energy": 1854.9150390625,
+            "energy_cost": 600.0,
+            "energy_max": 3400.0,
+            "cooldown": 0.0
+          },
+          "101122": {
+            "regen": 0.16699999570846558,
+            "energy": 0.1376013159751892,
+            "energy_cost": 1.0,
+            "energy_max": 2.0,
+            "cooldown": 0.0
+          },
+          "101141": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 2.0,
+            "cooldown": 5.7957763671875
+          },
+          "101132": {
+            "regen": 11.0,
+            "energy": 1854.9150390625,
+            "energy_cost": 3400.0,
+            "energy_max": 3400.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -6.633554531887152,
+        "camp": 1,
+        "player_name": "\u3141\u3141\u3141\u3141\u3141\u3141\u3141",
+        "hp": 624.6693725585938,
+        "responsibility": 1,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "984508306": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 1,
+            "death_score": 6,
+            "assist_score": 1,
+            "main_hit_rate": 0.5658747553825378,
+            "total_hero_damage": 2764.85400390625,
+            "total_heal": 12559.1259765625,
+            "total_token_damage": 5718.2158203125
+          },
+          "special_data": {
+            "1031": [10.0, 57.142860412597656, 0.0],
+            "1050": [873.8660888671875, 8.0]
+          }
+        },
+        "select_hero": 1031,
+        "preview_hero": 1031,
+        "respawn_time": 2.7410691855475307,
+        "curr_energy": 3174.516357421875,
+        "max_energy": 5000.0,
+        "abilities_cooldown": {
+          "103141": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 7.7410888671875
+          },
+          "103151": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 2.67425537109375
+          },
+          "103171": {
+            "regen": 8.0,
+            "energy": 3174.516357421875,
+            "energy_cost": 5000.0,
+            "energy_max": 5000.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -10.554745833172733,
+        "camp": 1,
+        "player_name": "aztac",
+        "hp": 0.0,
+        "responsibility": 3,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "984362987": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 2,
+            "death_score": 4,
+            "assist_score": 2,
+            "main_hit_rate": 0.5977011322975159,
+            "total_hero_damage": 5618.0,
+            "total_heal": 10857.7216796875,
+            "total_token_damage": 8114.466796875
+          },
+          "special_data": {
+            "1060": [76.92308044433594, 1336.8255615234375, 0.0],
+            "1050": [78.39999389648438, 2.0]
+          }
+        },
+        "select_hero": 1050,
+        "preview_hero": 1050,
+        "respawn_time": -1,
+        "curr_energy": 3345.723876953125,
+        "max_energy": 4500.0,
+        "abilities_cooldown": {
+          "105031": {
+            "regen": 0.0,
+            "energy": 4.0,
+            "energy_cost": 1.0,
+            "energy_max": 10.0,
+            "cooldown": 0.0
+          },
+          "105061": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 5.022216796875
+          },
+          "105071": {
+            "regen": 8.0,
+            "energy": 3345.723876953125,
+            "energy_cost": 4500.0,
+            "energy_max": 4500.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": -5.197723047430371,
+        "camp": 1,
+        "player_name": "BJ\ub85c\uc774\uc870",
+        "hp": 103.60236358642578,
+        "responsibility": 3,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "1002543362": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 16,
+            "death_score": 0,
+            "assist_score": 2,
+            "main_hit_rate": 0.5102974772453308,
+            "total_hero_damage": 10653.5576171875,
+            "total_heal": 1605.8746337890625,
+            "total_token_damage": 13176.892578125
+          },
+          "special_data": {
+            "10571": [9.502263069152832, 3099.99462890625, 4.0]
+          }
+        },
+        "select_hero": 10571,
+        "preview_hero": 10571,
+        "respawn_time": -1,
+        "curr_energy": 930.0206298828125,
+        "max_energy": 3400.0,
+        "abilities_cooldown": {
+          "105701": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 28.76690673828125
+          },
+          "105702": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 3.878662109375
+          },
+          "105703": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 500.0,
+            "cooldown": 0.0
+          },
+          "105744": {
+            "regen": 0.10000000149011612,
+            "energy": 1.0,
+            "energy_cost": 0.0,
+            "energy_max": 1.0,
+            "cooldown": 0.0
+          },
+          "105745": {
+            "regen": 0.10000000149011612,
+            "energy": 1.0,
+            "energy_cost": 0.0,
+            "energy_max": 1.0,
+            "cooldown": 0.0
+          },
+          "105751": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 5.8465576171875
+          },
+          "105771": {
+            "regen": 11.0,
+            "energy": 930.0206298828125,
+            "energy_cost": 3400.0,
+            "energy_max": 0.0,
+            "cooldown": 48.70855712890625
+          },
+          "105772": {
+            "regen": 11.0,
+            "energy": 930.0206298828125,
+            "energy_cost": 3400.0,
+            "energy_max": 0.0,
+            "cooldown": 48.70855712890625
+          },
+          "105773": {
+            "regen": 11.0,
+            "energy": 930.0206298828125,
+            "energy_cost": 3400.0,
+            "energy_max": 0.0,
+            "cooldown": 48.70855712890625
+          },
+          "105774": {
+            "regen": 11.0,
+            "energy": 930.0206298828125,
+            "energy_cost": 3400.0,
+            "energy_max": 0.0,
+            "cooldown": 48.70855712890625
+          }
+        },
+        "mvp_val": 1.1278822619845845,
+        "camp": 2,
+        "player_name": "duep",
+        "hp": 355.800048828125,
+        "responsibility": 0,
+        "continue_kill(KDA)": 1,
+        "hit_rate": 0,
+        "solo_kill": 1,
+        "consecutive KOs": 0
+      },
+      "988432675": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 13,
+            "death_score": 0,
+            "assist_score": 21,
+            "main_hit_rate": 0.33742332458496094,
+            "total_hero_damage": 7122.13525390625,
+            "total_heal": 8509.9521484375,
+            "total_token_damage": 2941.075927734375
+          },
+          "special_data": { "1020": [13.636363983154297, 4.0, 13.0] }
+        },
+        "select_hero": 1020,
+        "preview_hero": 1020,
+        "respawn_time": -1,
+        "curr_energy": 2893.064208984375,
+        "max_energy": 4300.0,
+        "abilities_cooldown": {
+          "102011": {
+            "regen": 0.0,
+            "energy": 12.0,
+            "energy_cost": 1.0,
+            "energy_max": 15.0,
+            "cooldown": 0.0
+          },
+          "102041": {
+            "regen": 0.33000001311302185,
+            "energy": 0.44999635219573975,
+            "energy_cost": 1.0,
+            "energy_max": 4.0,
+            "cooldown": 0.0
+          },
+          "102061": {
+            "regen": 0.33000001311302185,
+            "energy": 0.44999635219573975,
+            "energy_cost": 1.0,
+            "energy_max": 4.0,
+            "cooldown": 0.0
+          },
+          "102071": {
+            "regen": 8.0,
+            "energy": 2893.064208984375,
+            "energy_cost": 4300.0,
+            "energy_max": 4300.0,
+            "cooldown": 0.0
+          },
+          "102091": {
+            "regen": 0.33000001311302185,
+            "energy": 0.44999635219573975,
+            "energy_cost": 1.0,
+            "energy_max": 4.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": 0.9003936032817895,
+        "camp": 2,
+        "player_name": "Lovelyz",
+        "hp": 250.0,
+        "responsibility": 3,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      },
+      "987415106": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 14,
+            "death_score": 2,
+            "assist_score": 6,
+            "main_hit_rate": 0.27952754497528076,
+            "total_hero_damage": 9350.8046875,
+            "total_heal": 46.000030517578125,
+            "total_token_damage": 8974.5224609375
+          },
+          "special_data": { "1055": [90.0, 94.73684692382812, 2.0] }
+        },
+        "select_hero": 1055,
+        "preview_hero": 1055,
+        "respawn_time": -1,
+        "curr_energy": 1641.524169921875,
+        "max_energy": 3400.0,
+        "abilities_cooldown": {
+          "105506": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 3.91058349609375
+          },
+          "105531": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 4.111083984375
+          },
+          "105551": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 90.0,
+            "cooldown": 0.0
+          },
+          "105552": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 60.0,
+            "energy_max": 90.0,
+            "cooldown": 0.0
+          },
+          "105553": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 60.0,
+            "energy_max": 90.0,
+            "cooldown": 0.0
+          },
+          "105561": {
+            "regen": 11.0,
+            "energy": 1641.524169921875,
+            "energy_cost": 3400.0,
+            "energy_max": 3400.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": 0.9028609587970944,
+        "camp": 2,
+        "player_name": "C.C.",
+        "hp": 218.53953552246094,
+        "responsibility": 2,
+        "continue_kill(KDA)": 1,
+        "hit_rate": 0,
+        "solo_kill": 1,
+        "consecutive KOs": 0
+      },
+      "1025276306": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 12,
+            "death_score": 1,
+            "assist_score": 9,
+            "main_hit_rate": 0.5167958736419678,
+            "total_hero_damage": 6032.8759765625,
+            "total_heal": 6296.03759765625,
+            "total_token_damage": 4554.5712890625
+          },
+          "special_data": {
+            "1014": [0, 25.0, 0],
+            "1060": [100.0, 792.034912109375, 1.0]
+          }
+        },
+        "select_hero": 1060,
+        "preview_hero": 1060,
+        "respawn_time": -1,
+        "curr_energy": 2651.517822265625,
+        "max_energy": 4800.0,
+        "abilities_cooldown": {
+          "106001": {
+            "regen": 30.0,
+            "energy": 289.96099853515625,
+            "energy_cost": 0.0,
+            "energy_max": 900.0,
+            "cooldown": 0.0
+          },
+          "106011": {
+            "regen": 0.0,
+            "energy": 7.0,
+            "energy_cost": 1.0,
+            "energy_max": 15.0,
+            "cooldown": 0.0
+          },
+          "106041": {
+            "regen": 24.0,
+            "energy": 289.96099853515625,
+            "energy_cost": 300.0,
+            "energy_max": 0.0,
+            "cooldown": 1.291259765625
+          },
+          "106051": {
+            "regen": 30.0,
+            "energy": 289.96099853515625,
+            "energy_cost": 900.0,
+            "energy_max": 0.0,
+            "cooldown": 6.641845703125
+          },
+          "106071": {
+            "regen": 8.0,
+            "energy": 2651.517822265625,
+            "energy_cost": 4800.0,
+            "energy_max": 4800.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": 0.593175870362675,
+        "camp": 2,
+        "player_name": "B O B O",
+        "hp": 275.0,
+        "responsibility": 3,
+        "continue_kill(KDA)": 1,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 1
+      },
+      "987705830": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 12,
+            "death_score": 0,
+            "assist_score": 4,
+            "main_hit_rate": 0.3239171504974365,
+            "total_hero_damage": 7917.62548828125,
+            "total_heal": 0.0,
+            "total_token_damage": 15702.3544921875
+          },
+          "special_data": {
+            "1035": [12.790698051452637, 11.0, 3968.171630859375]
+          }
+        },
+        "select_hero": 1035,
+        "preview_hero": 1035,
+        "respawn_time": -1,
+        "curr_energy": 1316.77392578125,
+        "max_energy": 2500.0,
+        "abilities_cooldown": {
+          "103541": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 0.64019775390625
+          },
+          "103551": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 2.67755126953125
+          },
+          "103561": {
+            "regen": 0.0,
+            "energy": 0.0,
+            "energy_cost": 0.0,
+            "energy_max": 0.0,
+            "cooldown": 5.53125
+          },
+          "103571": {
+            "regen": 11.0,
+            "energy": 1316.77392578125,
+            "energy_cost": 2500.0,
+            "energy_max": 2500.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": 0.8399779956059518,
+        "camp": 2,
+        "player_name": "du\u0435\u0440",
+        "hp": 391.1248474121094,
+        "responsibility": 1,
+        "continue_kill(KDA)": 1,
+        "hit_rate": 0,
+        "solo_kill": 1,
+        "consecutive KOs": 0
+      },
+      "1020609170": {
+        "tab_data": {
+          "common_data": {
+            "kill_score": 17,
+            "death_score": 2,
+            "assist_score": 22,
+            "main_hit_rate": 0.46875,
+            "total_hero_damage": 4225.25927734375,
+            "total_heal": 12939.0263671875,
+            "total_token_damage": 4401.2275390625
+          },
+          "special_data": { "1047": [481.0971374511719, 3.0] }
+        },
+        "select_hero": 1016,
+        "preview_hero": 1016,
+        "respawn_time": -1,
+        "curr_energy": 2662.828857421875,
+        "max_energy": 4300.0,
+        "abilities_cooldown": {
+          "101621": {
+            "regen": 0.0,
+            "energy": 10.0,
+            "energy_cost": 1.0,
+            "energy_max": 10.0,
+            "cooldown": 0.0
+          },
+          "101651": {
+            "regen": 0.08399999886751175,
+            "energy": 2.0,
+            "energy_cost": 1.0,
+            "energy_max": 2.0,
+            "cooldown": 0.0
+          },
+          "101661": {
+            "regen": 8.0,
+            "energy": 2662.828857421875,
+            "energy_cost": 4300.0,
+            "energy_max": 4300.0,
+            "cooldown": 0.0
+          }
+        },
+        "mvp_val": 1.048821206451782,
+        "camp": 2,
+        "player_name": "SkittIes",
+        "hp": 275.0,
+        "responsibility": 3,
+        "continue_kill(KDA)": 0,
+        "hit_rate": 0,
+        "solo_kill": 0,
+        "consecutive KOs": 0
+      }
+    },
+    "ban_pick_info": [
+      {
+        "operate_type": 0,
+        "battle_side": 1,
+        "hero_id": 1058,
+        "round_index": 0,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 1,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 0,
+        "hero_id": 1058,
+        "round_index": 0,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 1,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 1,
+        "battle_side": 0,
+        "hero_id": 1020,
+        "round_index": 1,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 1,
+        "hero_id": 1059,
+        "round_index": 2,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      },
+      {
+        "operate_type": 1,
+        "battle_side": 1,
+        "hero_id": 1059,
+        "round_index": 3,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 0,
+        "hero_id": 1020,
+        "round_index": 4,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 1,
+        "hero_id": 1028,
+        "round_index": 5,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 1,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 0,
+        "hero_id": 10571,
+        "round_index": 5,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 1,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 1,
+        "battle_side": 1,
+        "hero_id": 1060,
+        "round_index": 6,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 0,
+        "hero_id": 1028,
+        "round_index": 7,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 1,
+        "battle_side": 0,
+        "hero_id": 10571,
+        "round_index": 8,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 1
+      },
+      {
+        "operate_type": 0,
+        "battle_side": 1,
+        "hero_id": 1050,
+        "round_index": 9,
+        "ban_pick_num": 1,
+        "is_only_one_side": true,
+        "mode_order_type": 0,
+        "votes": [],
+        "conf_id": 2004,
+        "camp": 2
+      }
+    ],
+    "ban_pick_time_info": {
+      "pre_ban_pick_time_limit": -643.7030639648438,
+      "ban_pick_time_limit": -1.0,
+      "ban_pick_announce_time_limit": -545.384521484375
+    },
+    "level_info": {
+      "map_id": 1230,
+      "current_owner": 2,
+      "current_degree": 0.0,
+      "overtime": 0,
+      "overtime_remain": -1.0,
+      "point_character_num": [0, 2],
+      "round_index": 2,
+      "match_state": 4,
+      "round_score": [3, 0],
+      "fight_time": 63.793259616941214,
+      "stalemate_time": {}
+    },
+    "mvps": { "2": 1002543362, "1": 998613755 }
+  }
+}

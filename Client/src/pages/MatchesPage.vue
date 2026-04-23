@@ -55,6 +55,16 @@
 
           <q-td key="leftHeroes" :props="props">
             <div class="hero-strip left-strip">
+              <!-- <div class="outer-hero-thumb-wrap">
+                <img
+                  v-for="hero in props.row.leftPicks"
+                  :key="hero"
+                  :src="heroImage(hero.hero_id)"
+                  :alt="heroLabel(hero.hero_id)"
+                  class="outer-hero-thumb"
+                  @error="e => (e.target.src = '/imgs/heroes/empty.png')"
+                />
+              </div> -->
               <div class="hero-group picks">
                 <div
                   v-for="hero in props.row.leftPicks"
@@ -831,6 +841,25 @@ onMounted(() => {
 
 .team-table :deep(tbody tr:hover) {
   filter: brightness(1.06);
+}
+
+.outer-hero-thumb-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: #0f172a;
+  flex-shrink: 0;
+}
+
+.outer-hero-thumb {
+  width: 100%;
+  height: 100%;
+  /* height: 80%; */
+  object-fit: cover;
+  transform: scale(1.2) translateY(-8%)
+  /* transform: scale(1.08); */
 }
 
 .inner-hero-cell {
