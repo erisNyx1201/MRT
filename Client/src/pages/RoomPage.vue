@@ -3,40 +3,18 @@
     <div class="page-title q-mb-md">Live Rooms</div>
 
     <div class="toolbar q-mb-md">
-      <q-btn
-        color="primary"
-        icon="refresh"
-        label="Refresh Rooms"
-        @click="loadRooms"
-        :loading="loading"
-      />
+      <q-btn color="primary" icon="refresh" label="Refresh Rooms" @click="loadRooms" :loading="loading" />
 
-      <q-input
-        v-model="search"
-        dense
-        filled
-        dark
-        clearable
-        placeholder="Search room ID, battle ID or team..."
-        class="search-input"
-      >
+      <q-input v-model="search" dense filled dark clearable placeholder="Search room ID, battle ID or team..."
+        class="search-input">
         <template #prepend>
           <q-icon name="search" />
         </template>
       </q-input>
     </div>
 
-    <q-table
-      flat
-      bordered
-      dark
-      :rows="filteredRooms"
-      :columns="columns"
-      row-key="room_id"
-      class="rooms-table"
-      :loading="loading"
-      :pagination="{ rowsPerPage: 20 }"
-    >
+    <q-table flat bordered dark :rows="filteredRooms" :columns="columns" row-key="room_id" class="rooms-table"
+      :loading="loading" :pagination="{ rowsPerPage: 20 }">
       <template #body-cell-round="props">
         <q-td :props="props">
           <q-badge rounded color="primary" :label="roundLabel(props.row)" />
@@ -57,6 +35,14 @@
         </q-td>
       </template>
 
+      <template v-slot:body-cell-roundResults="props">
+        <q-td :props="props">
+          <div style="white-space: pre-line;">
+            {{ roundResultsLabel(props.row) }}
+          </div>
+        </q-td>
+      </template>
+
       <template #body-cell-score="props">
         <q-td :props="props">
           <div class="score-row">
@@ -69,9 +55,6 @@
               <span class="team-score">{{ team2Score(props.row) }}</span>
               <span class="team-mini">{{ team2MiniName(props.row) }}</span>
             </div>
-          </div>
-          <div class="text-caption text-grey-5">
-            {{ roundResultsLabel(props.row) }}
           </div>
         </q-td>
       </template>
@@ -87,12 +70,7 @@
 
       <template #body-cell-action="props">
         <q-td :props="props" class="text-center">
-          <q-btn
-            color="primary"
-            unelevated
-            label="Open"
-            @click="openRoom(props.row)"
-          />
+          <q-btn color="primary" unelevated label="Open" @click="openRoom(props.row)" />
         </q-td>
       </template>
     </q-table>
@@ -116,6 +94,7 @@ const columns = [
   { name: 'round', label: 'Round', field: 'cur_bo', align: 'center' },
   { name: 'match', label: 'Match', field: 'match', align: 'left' },
   { name: 'score', label: 'Score', field: 'score', align: 'center' },
+  { name: 'roundResult', label: 'Round Result', field: 'roundResult', align: 'left' },
   { name: 'meta', label: 'Meta', field: 'meta', align: 'left' },
   { name: 'action', label: 'Action', field: 'action', align: 'center' }
 ]
@@ -206,8 +185,21 @@ function roundLabel(room) {
 
 function roundResultsLabel(room) {
   const results = Array.isArray(room?.round_results) ? room.round_results : []
-  if (!results.length) return 'Round results: -'
-  return `Round results: ${results.join(', ')}`
+  if (!results.length) return '-'
+
+  const team1 = room?.group_info?.["1"]
+  const team2 = room?.group_info?.["2"]
+
+  return results
+    .map((winner, index) => {
+      const winnerName =
+        winner === 1 ? team1?.mini_name :
+          winner === 2 ? team2?.mini_name :
+            '-'
+
+      return `Round ${index + 1}: ${winnerName}`
+    })
+    .join('\n')
 }
 
 function leagueLabel(room) {
