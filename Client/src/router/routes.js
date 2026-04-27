@@ -14,12 +14,15 @@ const routes = [
       },
       {
         path: 'live',
-        children: [{ path: '', component: () => import('pages/LivePage.vue') }],
+        children: [
+          { path: '', component: () => import('pages/LivePage.vue') },
+          { path: 'dashboard', name: 'DashboardPage', component: () => import('pages/DashboardPage.vue') },
+        ],
       },
       {
         path: 'test',
         children: [{ path: '', component: () => import('pages/test/LiveDashboard.vue') }],
-      }
+      },
     ],
   },
 

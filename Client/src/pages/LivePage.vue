@@ -9,22 +9,9 @@
       </div>
 
       <div class="header-actions">
-        <q-btn
-          dense
-          unelevated
-          color="primary"
-          icon="refresh"
-          label="Refresh"
-          :loading="loading"
-          @click="loadBattle"
-        />
-        <q-btn
-          dense
-          unelevated
-          :color="isPolling ? 'negative' : 'positive'"
-          :label="isPolling ? 'Stop Polling' : 'Start Polling'"
-          @click="isPolling ? stopPolling() : startPolling()"
-        />
+        <q-btn dense unelevated color="primary" icon="refresh" label="Refresh" :loading="loading" @click="loadBattle" />
+        <q-btn dense unelevated :color="isPolling ? 'negative' : 'positive'"
+          :label="isPolling ? 'Stop Polling' : 'Start Polling'" @click="isPolling ? stopPolling() : startPolling()" />
       </div>
     </div>
 
@@ -47,11 +34,8 @@
           </div>
 
           <div class="objective-track">
-            <div
-              class="objective-fill"
-              :class="objectiveBarClass"
-              :style="{ width: `${dashboard.objective.percent}%` }"
-            />
+            <div class="objective-fill" :class="objectiveBarClass"
+              :style="{ width: `${dashboard.objective.percent}%` }" />
           </div>
 
           <div class="objective-bottom">
@@ -88,23 +72,11 @@
       <div class="team-panel">
         <div class="team-panel-title">Team 1</div>
 
-        <q-table
-          flat
-          dense
-          hide-bottom
-          :rows="dashboard.teams.team1.players"
-          :columns="playerColumns"
-          row-key="playerId"
-          class="team-table team1-table"
-          :pagination="{ rowsPerPage: 0 }"
-          @row-click="(_, row) => selectPlayer(row)"
-        >
+        <q-table flat dense hide-bottom :rows="dashboard.teams.team1.players" :columns="playerColumns"
+          row-key="playerId" class="team-table team1-table" :pagination="{ rowsPerPage: 0 }"
+          @row-click="(_, row) => selectPlayer(row)">
           <template #body="p">
-            <q-tr
-              :props="p"
-              :class="playerRowClass(p.row, 'team1')"
-              class="clickable-row"
-            >
+            <q-tr :props="p" :class="playerRowClass(p.row, 'team1')" class="clickable-row">
               <q-td key="player" :props="p">
                 <div class="player-name-stack">
                   <span>{{ p.row.playerName }}</span>
@@ -116,12 +88,9 @@
               <q-td key="hero" :props="p">
                 <div class="hero-cell">
                   <div class="hero-thumb-wrap">
-                    <img
-                      :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
-                      :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`"
-                      class="hero-thumb"
-                      @error="e => (e.target.src = '/imgs/heroes/empty.png')"
-                    />
+                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
+                      :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`" class="hero-thumb"
+                      @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
                   </div>
                   <div class="hero-text">
                     <span class="hero-name">
@@ -139,10 +108,8 @@
               <q-td key="heal" :props="p">{{ formatCompact(p.row.heal) }}</q-td>
               <q-td key="hit" :props="p">{{ formatPct(p.row.hitRate) }}</q-td>
               <q-td key="ult" :props="p">
-                <q-badge
-                  :color="p.row.ultRatio >= 0.9 ? 'positive' : 'grey-7'"
-                  :label="p.row.ultRatio >= 0.9 ? 'READY' : 'NOT READY'"
-                />
+                <q-badge :color="p.row.ultRatio >= 0.9 ? 'positive' : 'grey-7'"
+                  :label="p.row.ultRatio >= 0.9 ? 'READY' : 'NOT READY'" />
               </q-td>
             </q-tr>
           </template>
@@ -152,23 +119,11 @@
       <div class="team-panel">
         <div class="team-panel-title">Team 2</div>
 
-        <q-table
-          flat
-          dense
-          hide-bottom
-          :rows="dashboard.teams.team2.players"
-          :columns="playerColumns"
-          row-key="playerId"
-          class="team-table team2-table"
-          :pagination="{ rowsPerPage: 0 }"
-          @row-click="(_, row) => selectPlayer(row)"
-        >
+        <q-table flat dense hide-bottom :rows="dashboard.teams.team2.players" :columns="playerColumns"
+          row-key="playerId" class="team-table team2-table" :pagination="{ rowsPerPage: 0 }"
+          @row-click="(_, row) => selectPlayer(row)">
           <template #body="p">
-            <q-tr
-              :props="p"
-              :class="playerRowClass(p.row, 'team2')"
-              class="clickable-row"
-            >
+            <q-tr :props="p" :class="playerRowClass(p.row, 'team2')" class="clickable-row">
               <q-td key="player" :props="p">
                 <div class="player-name-stack">
                   <span>{{ p.row.playerName }}</span>
@@ -180,12 +135,9 @@
               <q-td key="hero" :props="p">
                 <div class="hero-cell">
                   <div class="hero-thumb-wrap">
-                    <img
-                      :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
-                      :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`"
-                      class="hero-thumb"
-                      @error="e => (e.target.src = '/imgs/heroes/empty.png')"
-                    />
+                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
+                      :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`" class="hero-thumb"
+                      @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
                   </div>
                   <div class="hero-text">
                     <span class="hero-name">
@@ -203,10 +155,8 @@
               <q-td key="heal" :props="p">{{ formatCompact(p.row.heal) }}</q-td>
               <q-td key="hit" :props="p">{{ formatPct(p.row.hitRate) }}</q-td>
               <q-td key="ult" :props="p">
-                <q-badge
-                  :color="p.row.ultRatio >= 0.9 ? 'positive' : 'grey-7'"
-                  :label="p.row.ultRatio >= 0.9 ? 'READY' : 'NOT READY'"
-                />
+                <q-badge :color="p.row.ultRatio >= 0.9 ? 'positive' : 'grey-7'"
+                  :label="p.row.ultRatio >= 0.9 ? 'READY' : 'NOT READY'" />
               </q-td>
             </q-tr>
           </template>
@@ -252,11 +202,7 @@
       </div>
 
       <div class="abilities-list q-mt-md">
-        <div
-          v-for="ability in selectedPlayer.abilities || []"
-          :key="ability.id"
-          class="ability-item"
-        >
+        <div v-for="ability in selectedPlayer.abilities || []" :key="ability.id" class="ability-item">
           <strong>
             {{ ability.id }}
             <template v-if="ability.name"> - {{ ability.name }}</template>
@@ -813,7 +759,7 @@ onBeforeUnmount(() => {
   gap: 12px;
 }
 
-.selected-grid > div,
+.selected-grid>div,
 .ability-item {
   background: #111827;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -835,6 +781,7 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1000px) {
+
   .page-header,
   .top-bar,
   .summary-row,

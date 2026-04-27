@@ -144,7 +144,9 @@ async function loadRooms() {
 }
 
 function openRoom(room) {
-  router.push(`/live/dashboard/${room.room_id}`)
+  // router.push(`/live/dashboard/${room.room_id}`)
+  console.log('Navigating to live dashboard with room id: ', room.room_id)
+  router.push({name: 'dashboard', query: { roomId: room.room_id}})
 }
 
 function getGroup(room, key) {
