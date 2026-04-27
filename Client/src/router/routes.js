@@ -14,6 +14,10 @@ const routes = [
       },
       {
         path: 'live',
+        children: [{ path: '', component: () => import('pages/LivePage.vue') }],
+      },
+      {
+        path: 'test',
         children: [{ path: '', component: () => import('pages/test/LiveDashboard.vue') }],
       }
     ],

@@ -12,6 +12,8 @@
 
         <q-btn stretch flat label="Live" @click="navigate('/live')"/>
 
+        <q-btn stretch flat label="Test" @click="navigate('/test')"/>
+
       </q-toolbar>
     </q-header>
 

@@ -3,7 +3,7 @@
     <div class="page-title q-mb-md">Live Rooms</div>
 
     <div class="toolbar q-mb-md">
-      <q-btn color="primary" icon="refresh" label="Refresh Rooms" @click="loadRooms" :loading="loading" />
+      <q-btn color="blue-grey-8" icon="refresh" label="Refresh Rooms" @click="loadRooms" :loading="loading" />
 
       <q-input v-model="search" dense filled dark clearable placeholder="Search room ID, battle ID or team..."
         class="search-input">
@@ -94,7 +94,7 @@ const columns = [
   { name: 'round', label: 'Round', field: 'cur_bo', align: 'center' },
   { name: 'match', label: 'Match', field: 'match', align: 'left' },
   { name: 'score', label: 'Score', field: 'score', align: 'center' },
-  { name: 'roundResult', label: 'Round Result', field: 'roundResult', align: 'left' },
+  { name: 'roundResults', label: 'Round Result', field: 'roundResults', align: 'left' },
   { name: 'meta', label: 'Meta', field: 'meta', align: 'left' },
   { name: 'action', label: 'Action', field: 'action', align: 'center' }
 ]
