@@ -10,7 +10,7 @@
 
         <q-btn stretch flat label="Room" @click="navigate('/room')"/>
 
-        <q-btn stretch flat label="Live" @click="navigate('/live')"/>
+        <q-btn stretch flat label="Live" @click="navigate('/live/dashboard')"/>
 
         <q-btn stretch flat label="Test" @click="navigate('/test')"/>
 

@@ -4,7 +4,7 @@
       <div class="score-box team1-box">{{ dashboard.meta.scoreLeft }}</div>
 
       <div class="main-board header-center">
-        <h1>{{ mapLabel }}</h1>
+        <h1>{{ dashboard.meta.mapName }}</h1>
 
         <div class="match-info-bar">
           <div><strong>Round:</strong> {{ dashboard.meta.roundIndex }}</div>
@@ -285,7 +285,8 @@ import { useRoute } from 'vue-router'
 import { api } from 'boot/axios'
 
 const route = useRoute()
-const roomId = computed(() => route.state?.roomId || route.query?.roomId)
+const activeTab = ref('stats')
+const roomId = computed(() => route.query?.roomId || 120001)
 const loading = ref(false)
 const isPolling = ref(false)
 const selectedPlayerId = ref(null)
