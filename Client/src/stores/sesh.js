@@ -7,7 +7,7 @@ import { socket } from 'boot/socket'
 
 export const useSeshStore = defineStore('sesh', {
   state: () => ({
-    room: 0,
+    room: '',
   }),
 
   actions: {

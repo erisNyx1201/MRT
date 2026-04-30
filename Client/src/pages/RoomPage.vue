@@ -84,7 +84,7 @@ import { useQuasar } from 'quasar'
 import { api } from 'boot/axios'
 import { useSeshStore } from '../stores/sesh'
 
-const SeshStore = useSeshStore()
+const seshStore = useSeshStore()
 const router = useRouter()
 const $q = useQuasar()
 
@@ -146,10 +146,9 @@ async function loadRooms() {
 }
 
 function openRoom(room) {
-  // router.push(`/live/dashboard/${room.room_id}`)
-  SeshStore.updateRoom(room.room_id);
+  seshStore.updateRoom(String(room.room_id));
   console.log('Navigating to live dashboard with room id: ', room.room_id)
-  router.push({name: 'dashboard', query: { roomId: room.room_id}})
+  router.push({name: 'DashboardPage', query: { roomId: String(room.room_id)}})
 }
 
 function getGroup(room, key) {

@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 const apiRoutes = require("./routes/api");
 const matchRoutes = require('./routes/matchRoutes');
 const teamRoutes = require('./routes/teamRoutes')
-const draftRoutes = require("./routes/draftroutes");
+// const draftRoutes = require("./routes/draftroutes");
 const liveRoutes = require('./routes/liveRoutes');
 const xpressionRoutes = require("./routes/xpressionRoutes");
 
@@ -23,11 +23,13 @@ connectDB();
 
 // Use API routes
 app.use("/api", apiRoutes);
-app.use("/api/draft", draftRoutes);
+// app.use("/api/draft", draftRoutes);
 app.use('/api/live', liveRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/teams', teamRoutes);
 app.use("/api/xpression", xpressionRoutes);
+
+let lastRoom = null; // Store the last room value
 
 const http = require("http");
 const server = http.createServer(app);
@@ -44,15 +46,27 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   serverLogger.info(`User connected: ${socket.id}`);
 
-//   socket.on('init', () => {
-//   })
+  if (lastRoom) socket.emit('room:sync', lastRoom);
+
+  socket.on('init', () => {
+    if (lastRoom) socket.emit('room:sync', lastRoom);
+  })
+
+  socket.on('room:update', (val) => {
+    if (JSON.stringify(val) !== JSON.stringify(lastRoom)) return;
+
+    serverLogger.info(`Room updated: ${JSON.stringify(val)}`);
+
+    lastRoom = val;
+    io.emit('room:sync', val);
+  })
 
   socket.on("disconnect", () => {
-    // serverLogger.info(`Disconnected: ${socket.id}`);
+    serverLogger.info(`Disconnected: ${socket.id}`);
   });
 });
 
-const PORT = process.env.PORT || 9006;
+const PORT = process.env.PORT || 9009;
 server.listen(PORT, () => 
   serverLogger.warn(`🚀 Server running on port ${PORT}`)
 );

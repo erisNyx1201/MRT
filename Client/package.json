@@ -11,6 +11,8 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
+    "dev:prod": "quasar dev -p 9007",
+    "dev:public": "quasar dev -p 9008",
     "build": "quasar build",
     "postinstall": "quasar prepare"
   },
@@ -19,7 +21,9 @@
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "pinia": "^3.0.1",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "quasar": "^2.16.0",
+    "socket.io-client": "^4.8.3",
     "vue": "^3.5.22",
     "vue-router": "^5.0.0"
   },

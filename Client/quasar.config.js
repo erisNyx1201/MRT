@@ -73,10 +73,10 @@ export default defineConfig((/* ctx */) => {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
       // https: true,
-      port: 9007,
+      port: 9004,
       proxy: {
         "/api": {
-          target: "http://localhost:9006", // Your Express backend URL
+          target: "http://localhost:9005", // Your Express backend URL
           changeOrigin: true,
           pathRewrite: { "^/api": "" },
         }

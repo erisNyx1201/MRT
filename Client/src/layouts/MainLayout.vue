@@ -35,3 +35,8 @@ function navigate(path) {
 }
 
 </script>
+<style scoped>
+:global(.q-loading-bar) {
+  display: none !important;
+}
+</style>

@@ -574,9 +574,6 @@ async function startDraftLoop() {
     for (let i = 0; i < source.length; i++) {
       draftLoop.value = source.slice(0, i + 1)
       currentStepIndex.value = i
-      // console.log('Current Step', draftLoop.value[i])
-      // console.log('draft', draftLoop.value)
-
       await wait(800)
 
       if (!isLooping.value) break
@@ -599,9 +596,6 @@ function wait(ms) {
 const displayedBanPick = computed(() => {
   return draftLoop.value.length ? draftLoop.value : banPickInfo.value
 })
-
-// console.log('Team 1', team1Players.value)
-// console.log('Team 2', team2Players.value)
 
 </script>
 

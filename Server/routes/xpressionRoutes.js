@@ -7,9 +7,9 @@ const express = require("express");
 const router = express.Router();
 const { xpressionLogger } = require("../modules/logger");
 
-const heroesRaw = require('../../Client/src/assets/heroes_UO.json');
+const heroesRaw = require("../../Client/src/assets/heroes_UO.json");
 
-// Hardcoded draft data
+// Hardcoded draft data from ban_pick_info
 const hardcodedDraftData = [
   {
     operate_type: 0,
@@ -168,55 +168,40 @@ function getCurrentTime() {
 }
 
 const heroMap = Object.fromEntries(
-  heroesRaw.map(hero => [String(hero.id), hero])
+  heroesRaw.map((hero) => [String(hero.id), hero]),
 );
 
-// function buildDraft(data = []) {
-//   const Draft = data.map(item => {
-//     const hero = heroMap[String(item.hero_id)];
-
-//     return {
-//       round: item.round_index,
-//       type: item.operate_type === 1 ? "PICK" : "BAN",
-//       camp: item.camp,
-//       hero_id: item.hero_id,
-//       hero_name: hero?.name?.toUpperCase() || `HERO ${item.hero_id}`
-//     };
-//   });
-
-//   const last = Draft[Draft.length - 1] || {};
-
-//   return {
-//     Draft,
-//     meta: {
-//       current_round: last.round ?? 0,
-//       phase: last.type ?? "BAN",
-//       active_camp: last.camp ?? 1
-//     }
-//   };
-// }
-
-// Helper to infer first picker in phase 1 based on round 1 data
-
-function buildDraft(data = [], { firstPickerPhase1 } = {}) {
+function buildDraft(data = [], { firstPickerPhase1 } = {}, isLive = false) {
   const actualFirstPicker =
     firstPickerPhase1 === 1 || firstPickerPhase1 === 2
       ? firstPickerPhase1
-      : inferFirstPickerPhase1(data)
+      : inferFirstPickerPhase1(data);
 
-  const plan = buildDraftPlan(actualFirstPicker || 1)
+  const plan = buildDraftPlan(actualFirstPicker || 1);
 
-  const Draft = data.map(item => {
-    const hero = heroMap[String(item.hero_id)]
+  const Draft = data.map((item) => {
+    if (isLive) {
+      const hero = heroMap[String(item.cur_pick_hero)];
 
-    return {
-      round: Number(item.round_index),
-      type: Number(item.operate_type) === 1 ? "PICK" : "BAN",
-      camp: Number(item.camp),
-      hero_id: item.hero_id ?? null,
-      hero_name: hero?.name?.toUpperCase() || `Hero ${item.hero_id}`
+      return {
+        round: Number(item.round_index),
+        type: Number(item.operate_type) === 1 ? "PICK" : "BAN",
+        camp: Number(item.camp),
+        hero_id: item.cur_pick_hero ?? null,
+        hero_name: hero?.name?.toUpperCase() || `Hero ${item.cur_pick_hero}`,
+      };
+    } else {
+      const hero = heroMap[String(item.hero_id)];
+
+      return {
+        round: Number(item.round_index),
+        type: Number(item.operate_type) === 1 ? "PICK" : "BAN",
+        camp: Number(item.camp),
+        hero_id: item.hero_id ?? null,
+        hero_name: hero?.name?.toUpperCase() || `Hero ${item.hero_id}`,
+      };
     }
-  })
+  });
 
   if (!Draft.length) {
     return {
@@ -224,23 +209,23 @@ function buildDraft(data = [], { firstPickerPhase1 } = {}) {
       meta: {
         current_round: -1,
         phase: "BAN",
-        active_camp: null
-      }
-    }
+        active_camp: null,
+      },
+    };
   }
 
   const roundCounts = Draft.reduce((acc, item) => {
-    acc[item.round] = (acc[item.round] || 0) + 1
-    return acc
-  }, {})
+    acc[item.round] = (acc[item.round] || 0) + 1;
+    return acc;
+  }, {});
 
-  let nextRoundMeta = null
+  let nextRoundMeta = null;
 
   for (const round of plan.rounds) {
-    const count = roundCounts[round.round_index] || 0
+    const count = roundCounts[round.round_index] || 0;
     if (count < round.expected_count) {
-      nextRoundMeta = round
-      break
+      nextRoundMeta = round;
+      break;
     }
   }
 
@@ -250,9 +235,9 @@ function buildDraft(data = [], { firstPickerPhase1 } = {}) {
       meta: {
         current_round: 10,
         phase: "END",
-        active_camp: null
-      }
-    }
+        active_camp: null,
+      },
+    };
   }
 
   return {
@@ -260,47 +245,45 @@ function buildDraft(data = [], { firstPickerPhase1 } = {}) {
     meta: {
       current_round: nextRoundMeta.round_index,
       phase: nextRoundMeta.phase,
-      active_camp: nextRoundMeta.camp
-    }
-  }
+      active_camp: nextRoundMeta.camp,
+    },
+  };
 }
 
 function inferFirstPickerPhase1(data = []) {
-  const round1 = data.find(item => Number(item.round_index) === 1)
+  const round1 = data.find((item) => Number(item.round_index) === 1);
   if (round1 && (Number(round1.camp) === 1 || Number(round1.camp) === 2)) {
-    return Number(round1.camp)
+    return Number(round1.camp);
   }
-  return null
+  return null;
 }
 
 // Helper to build the full draft plan based on first picker in phase 1
 function buildDraftPlan(firstPickerPhase1) {
   const first =
-    firstPickerPhase1 === 1 || firstPickerPhase1 === 2
-      ? firstPickerPhase1
-      : 1
+    firstPickerPhase1 === 1 || firstPickerPhase1 === 2 ? firstPickerPhase1 : 1;
 
-  const second = first === 1 ? 2 : 1
+  const second = first === 1 ? 2 : 1;
 
   return {
     firstPickerPhase1: first,
     firstPickerPhase2: second,
     rounds: [
-      { round_index: 0, phase: "BAN",  camp: "BOTH", expected_count: 2 },
+      { round_index: 0, phase: "BAN", camp: "BOTH", expected_count: 2 },
 
-      { round_index: 1, phase: "PICK", camp: first,  expected_count: 1 },
-      { round_index: 2, phase: "BAN",  camp: second, expected_count: 1 },
+      { round_index: 1, phase: "PICK", camp: first, expected_count: 1 },
+      { round_index: 2, phase: "BAN", camp: second, expected_count: 1 },
       { round_index: 3, phase: "PICK", camp: second, expected_count: 1 },
-      { round_index: 4, phase: "BAN",  camp: first,  expected_count: 1 },
+      { round_index: 4, phase: "BAN", camp: first, expected_count: 1 },
 
-      { round_index: 5, phase: "BAN",  camp: "BOTH", expected_count: 2 },
+      { round_index: 5, phase: "BAN", camp: "BOTH", expected_count: 2 },
 
       { round_index: 6, phase: "PICK", camp: second, expected_count: 1 },
-      { round_index: 7, phase: "BAN",  camp: first,  expected_count: 1 },
-      { round_index: 8, phase: "PICK", camp: first,  expected_count: 1 },
-      { round_index: 9, phase: "BAN",  camp: second, expected_count: 1 }
-    ]
-  }
+      { round_index: 7, phase: "BAN", camp: first, expected_count: 1 },
+      { round_index: 8, phase: "PICK", camp: first, expected_count: 1 },
+      { round_index: 9, phase: "BAN", camp: second, expected_count: 1 },
+    ],
+  };
 }
 
 // POST route to receive live draft data

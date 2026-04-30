@@ -114,8 +114,8 @@
                   </td>
 
                   <td>{{ player.kills }}</td>
-                  <td>{{ player.death }}</td>
-                  <td>{{ player.assist }}</td>
+                  <td>{{ player.deaths }}</td>
+                  <td>{{ player.assists }}</td>
                   <td>{{ formatCompact(player.damage) }}</td>
                   <td>{{ formatCompact(player.heal) }}</td>
                   <td>{{ formatPct(player.hitRate) }}</td>
@@ -159,7 +159,7 @@
 
                   <td>
                     <div class="hero-cell">
-                      <img :src="player.heroMeta?.localImage" :alt="player.heroMeta?.displayName"
+                      <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
                         @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
 
                       <div class="hero-text">
@@ -169,8 +169,8 @@
                     </div>
                   </td>
                   <td>{{ player.kills }}</td>
-                  <td>{{ player.death }}</td>
-                  <td>{{ player.assist }}</td>
+                  <td>{{ player.deaths }}</td>
+                  <td>{{ player.assists }}</td>
                   <td>{{ formatCompact(player.damage) }}</td>
                   <td>{{ formatCompact(player.heal) }}</td>
                   <td>{{ formatPct(player.hitRate) }}</td>
@@ -283,10 +283,11 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from 'boot/axios'
-
+import { useSeshStore } from 'src/stores/sesh'
+const seshStore = useSeshStore()
 const route = useRoute()
 const activeTab = ref('stats')
-const roomId = computed(() => route.query?.roomId || 120001)
+const roomId = computed(() => route.query?.roomId || seshStore.room || 120001)
 const loading = ref(false)
 const isPolling = ref(false)
 const selectedPlayerId = ref(null)
@@ -349,18 +350,6 @@ const emptyDashboard = () => ({
 })
 
 const dashboard = ref(emptyDashboard())
-
-// const playerColumns = [
-//   { name: 'player', label: 'Player', field: 'playerName', align: 'left' },
-//   { name: 'hero', label: 'Hero', field: 'heroId', align: 'left' },
-//   { name: 'k', label: 'K', field: 'kills', align: 'center' },
-//   { name: 'd', label: 'D', field: 'deaths', align: 'center' },
-//   { name: 'a', label: 'A', field: 'assists', align: 'center' },
-//   { name: 'dmg', label: 'DMG', field: 'damage', align: 'center' },
-//   { name: 'heal', label: 'Heal', field: 'heal', align: 'center' },
-//   { name: 'hit', label: 'Hit ◈', field: 'hitRate', align: 'center' },
-//   { name: 'ult', label: 'Ult', field: 'ultRatio', align: 'center' },
-// ]
 
 const allPlayers = computed(() => [
   ...(dashboard.value.teams.team1.players || []),
@@ -431,10 +420,12 @@ async function loadBattle() {
 }
 
 function startPolling() {
-  stopPolling()
-  isPolling.value = true
-  loadBattle()
-  pollTimer.value = setInterval(loadBattle, 500)
+  if (roomId.value !== 120001) {
+    stopPolling()
+    isPolling.value = true
+    loadBattle()
+    pollTimer.value = setInterval(loadBattle, 500)
+  }
 }
 
 function stopPolling() {

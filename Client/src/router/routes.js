@@ -15,7 +15,7 @@ const routes = [
       {
         path: 'live',
         children: [
-          { path: '', component: () => import('pages/LivePage.vue') },
+          // { path: '', component: () => import('pages/LivePage.vue') },
           { path: 'dashboard', name: 'DashboardPage', component: () => import('pages/DashboardPage.vue') },
         ],
       },
