@@ -27,7 +27,7 @@ async function getRoomList() {
         "Content-Type": "application/json",
       },
     });
-    return JSONBigInt.parse(JSON.stringify(response.data));
+    return JSONBigInt.parse(response.data);
   } catch (error) {
     console.error(":x: Marvel API ERROR:", {
       url: `${ROOM_BASE}/room_list`,
