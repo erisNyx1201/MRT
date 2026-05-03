@@ -1,13 +1,10 @@
-// src/stores/ocr.js
+// src/stores/sesh.js
 import { defineStore } from 'pinia'
 import { socket } from 'boot/socket'
-// import { io } from "socket.io-client";
-
-// let socket;
 
 export const useSeshStore = defineStore('sesh', {
   state: () => ({
-    room: '',
+    room: '120001',
   }),
 
   actions: {

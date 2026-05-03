@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const Match = require("../models/Match");
+
 const heroesRaw = require("../../Client/src/assets/heroes_UO.json");
-// const mapsRaw = require('../assets/maps_UO.json');
 const mapsRaw = require("../../Client/src/assets/maps.json");
 
 const { apiLogger } = require("../modules/logger");
@@ -25,7 +26,12 @@ const mapMap = Object.fromEntries(
   (Array.isArray(mapsRaw) ? mapsRaw : []).map((map) => [String(map.id), map]),
 );
 
-//#region helper functions
+const roomBattleTracker = new Map();
+
+/* -----------------------------
+   Draft helpers
+----------------------------- */
+
 function buildLiveDraft(data = [], { firstPickerPhase1 } = {}) {
   const actualFirstPicker =
     firstPickerPhase1 === 1 || firstPickerPhase1 === 2
@@ -101,7 +107,6 @@ function inferFirstPickerPhase1(data = []) {
   return null;
 }
 
-// Helper to build the full draft plan based on first picker in phase 1
 function buildDraftPlan(firstPickerPhase1) {
   const first =
     firstPickerPhase1 === 1 || firstPickerPhase1 === 2 ? firstPickerPhase1 : 1;
@@ -129,14 +134,222 @@ function buildDraftPlan(firstPickerPhase1) {
   };
 }
 
-//#region routes live data
-/**
- * GET /api/live/rooms
- */
+/* -----------------------------
+   Live battle save helpers
+----------------------------- */
+
+function getBattleData(raw = {}) {
+  return raw?.data || raw || {};
+}
+
+function hasValidBattleStats(raw = {}) {
+  const data = getBattleData(raw);
+
+  return (
+    data.players_data &&
+    Object.keys(data.players_data).length > 0 &&
+    data.level_info
+  );
+}
+
+function buildLiveMatchUid(roomId, battleData = {}) {
+  const level = battleData.level_info || {};
+  const mapId = level.map_id || "unknownMap";
+  const roundIndex = level.round_index ?? "unknownRound";
+
+  const startTime =
+    battleData.battle_start_time ||
+    battleData.start_time ||
+    level.fight_start_time ||
+    Math.floor(Date.now() / 1000);
+
+  return `${String(roomId)}_${startTime}_${mapId}_${roundIndex}`;
+}
+
+function getHitRateFromStats(statisticsData = {}, playerUid, heroId) {
+  const hitObj =
+    statisticsData[`Career_HitRate_hero:${playerUid}_${heroId}`] ||
+    statisticsData[`Career_HitRate_player:${playerUid}`];
+
+  if (!hitObj || !hitObj.use_cnt) return 0;
+
+  return Number(hitObj.enemy_hit || hitObj.hero_hit || 0) / Number(hitObj.use_cnt || 1);
+}
+
+function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {}) {
+  const common = player?.tab_data?.common_data || {};
+  const heroId = Number(player.select_hero || player.preview_hero || 0);
+
+  return {
+    player_uid: Number(playerUid),
+    nick_name: player.player_name || `Player ${playerUid}`,
+    camp: Number(player.camp || 0),
+    cur_hero_id: heroId,
+    is_online: 1,
+
+    k: Number(common.kill_score || 0),
+    d: Number(common.death_score || 0),
+    a: Number(common.assist_score || 0),
+
+    total_hero_damage: Number(common.total_hero_damage || 0),
+    total_damage: Number(common.total_hero_damage || 0),
+
+    total_hero_heal: Number(common.total_heal || 0),
+    total_heal: Number(common.total_heal || 0),
+
+    total_hero_damage_taken: Number(common.total_token_damage || 0),
+    total_damage_taken: Number(common.total_token_damage || 0),
+
+    session_hit_rate:
+      Number(common.main_hit_rate || 0) ||
+      getHitRateFromStats(statisticsData, playerUid, heroId),
+
+    dynamic_fields: {
+      live_responsibility: player.responsibility,
+      live_hp: player.hp,
+      live_curr_energy: player.curr_energy,
+      live_max_energy: player.max_energy,
+      live_mvp_val: player.mvp_val,
+      live_respawn_time: player.respawn_time,
+      live_abilities_cooldown: player.abilities_cooldown || {},
+      live_special_data: player?.tab_data?.special_data || {},
+    },
+
+    player_heroes: heroId
+      ? [
+          {
+            hero_id: heroId,
+            play_time: Number(
+              statisticsData[`Career_HeroUseTime_hero:${playerUid}_${heroId}`] || 0,
+            ),
+
+            k: Number(
+              statisticsData[`Career_K_hero:${playerUid}_${heroId}`] ||
+                common.kill_score ||
+                0,
+            ),
+            d: Number(
+              statisticsData[`Career_D_hero:${playerUid}_${heroId}`] ||
+                common.death_score ||
+                0,
+            ),
+            a: Number(
+              statisticsData[`Career_A_hero:${playerUid}_${heroId}`] ||
+                common.assist_score ||
+                0,
+            ),
+
+            total_hero_damage: Number(
+              statisticsData[`Career_Damage_hero:${playerUid}_${heroId}`] ||
+                common.total_hero_damage ||
+                0,
+            ),
+            total_hero_heal: Number(
+              statisticsData[`Career_Heal_hero:${playerUid}_${heroId}`] ||
+                common.total_heal ||
+                0,
+            ),
+            total_hero_damage_taken: Number(
+              statisticsData[`Career_DamageTaken_hero:${playerUid}_${heroId}`] ||
+                common.total_token_damage ||
+                0,
+            ),
+
+            last_kill: Number(
+              statisticsData[`Career_LastK_hero:${playerUid}_${heroId}`] || 0,
+            ),
+            session_hit_rate:
+              Number(common.main_hit_rate || 0) ||
+              getHitRateFromStats(statisticsData, playerUid, heroId),
+          },
+        ]
+      : [],
+  };
+}
+
+function buildLiveMatchFromBattleStats(roomId, rawBattleStats = {}) {
+  const battleData = getBattleData(rawBattleStats);
+  const level = battleData.level_info || {};
+  const playersData = battleData.players_data || {};
+  const statisticsData = battleData.statistics_data || {};
+  const mvps = battleData.mvps || {};
+
+  const matchPlayers = Object.entries(playersData).map(([playerUid, player]) =>
+    mapLivePlayerToMatchPlayer(playerUid, player, statisticsData),
+  );
+
+  return {
+    match_uid: buildLiveMatchUid(roomId, battleData),
+    source: "live_battle",
+    room_id: String(roomId),
+
+    match_time_stamp: Math.floor(Date.now() / 1000),
+    match_map_id: Number(level.map_id || 0),
+    game_mode_id: Number(level.game_mode_id || battleData.game_mode_id || 0),
+    match_play_duration: Number(level.fight_time || battleData.fight_time || 0),
+
+    mvp_uid: mvps?.[1] ? Number(mvps[1]) : undefined,
+    svp_uid: mvps?.[2] ? Number(mvps[2]) : undefined,
+
+    dynamic_fields: {
+      mode_id: Number(level.mode_id || battleData.mode_id || 0),
+      battle_id: String(battleData.battle_id || roomId),
+      score_info: {
+        1: Number(level.round_score?.[0] || 0),
+        2: Number(level.round_score?.[1] || 0),
+      },
+      live_level_info: level,
+    },
+
+    match_players: matchPlayers,
+    live_snapshot: rawBattleStats,
+  };
+}
+
+async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
+  const key = String(roomId);
+  const currentHasBattle = hasValidBattleStats(rawBattleStats);
+  const previous = roomBattleTracker.get(key);
+
+  if (currentHasBattle) {
+    roomBattleTracker.set(key, {
+      lastBattleStats: rawBattleStats,
+      saved: false,
+      lastSeenAt: Date.now(),
+    });
+    return;
+  }
+
+  if (!currentHasBattle && previous?.lastBattleStats && !previous.saved) {
+    const payload = buildLiveMatchFromBattleStats(key, previous.lastBattleStats);
+
+    await Match.findOneAndUpdate(
+      { match_uid: payload.match_uid },
+      { $setOnInsert: payload },
+      {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true,
+      },
+    );
+
+    roomBattleTracker.set(key, {
+      ...previous,
+      saved: true,
+      savedAt: Date.now(),
+    });
+
+    apiLogger.info(`✅ Saved live battle match: ${payload.match_uid}`);
+  }
+}
+
+/* -----------------------------
+   Routes
+----------------------------- */
+
 router.get("/rooms", async (req, res) => {
   try {
     const data = await getRoomList();
-    // console.log('Fetched room list:', data);
     res.json(data);
   } catch (err) {
     apiLogger.error("Error fetching room list:", err);
@@ -147,9 +360,6 @@ router.get("/rooms", async (req, res) => {
   }
 });
 
-/**
- * GET /api/live/ban-pick/:roomId
- */
 router.get("/ban-pick/:roomId", async (req, res) => {
   try {
     const data = await getRealtimeBanPick(req.params.roomId);
@@ -166,16 +376,13 @@ router.get("/ban-pick/:roomId", async (req, res) => {
   }
 });
 
-
-/**
- * GET /api/live/battle/:roomId
- * Fetches battle stats, then returns processed UI-ready data
- */
 router.get("/battle/:roomId", async (req, res) => {
   try {
-    const roomId = req.params.roomId;
+    const roomId = String(req.params.roomId);
 
     const battleStats = await getBattleStatistics(roomId);
+
+    await saveLiveBattleIfNeeded(roomId, battleStats);
 
     const rawLiveData = battleStats?.data || battleStats || {};
 
@@ -197,63 +404,19 @@ router.get("/battle/:roomId", async (req, res) => {
   }
 });
 
-/**
- * GET /api/live/battle/:roomId
- */
-router.get('/rawbattle/:roomId', async (req, res) => {
+router.get("/rawbattle/:roomId", async (req, res) => {
   try {
     const data = await getBattleStatistics(req.params.roomId);
     res.json(data);
   } catch (err) {
     apiLogger.error(`Error fetching battle statistics ${req.params.roomId}:`, err);
     res.status(500).json({
-      message: 'Failed to fetch battle statistics',
+      message: "Failed to fetch battle statistics",
       error: err.message,
     });
   }
 });
 
-/**
- * GET /api/live/dashboard/:roomId
- * Fetches battle stats + ban/pick, then returns processed UI-ready data
- */
-// router.get('/dashboard/:roomId', async (req, res) => {
-//   try {
-//     const roomId = req.params.roomId;
-
-//     const [battleStats, banPick] = await Promise.all([
-//       getBattleStatistics(roomId),
-//       getRealtimeBanPick(roomId),
-//     ]);
-
-//     // Adjust this depending on the official API's exact envelope.
-//     const rawLiveData = {
-//       ...(battleStats?.data || battleStats || {}),
-//       ban_pick_info:
-//         banPick?.data?.ban_pick_info ||
-//         banPick?.data ||
-//         banPick?.ban_pick_info ||
-//         [],
-//     };
-
-//     const processed = processLiveData(rawLiveData, {
-//       heroMap,
-//       mapMap,
-//     });
-
-//     res.json(processed);
-//   } catch (err) {
-//     apiLogger.error(`Error building live dashboard ${req.params.roomId}:`, err);
-//     res.status(500).json({
-//       message: 'Failed to fetch live dashboard data',
-//       error: err.message,
-//     });
-//   }
-// });
-
-/**
- * POST /api/live/replay-query-match
- */
 router.post("/replay-query-match", async (req, res) => {
   try {
     const data = await getReplayQueryMatch(req.body || {});

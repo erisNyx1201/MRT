@@ -1,4 +1,25 @@
-const mongoose = require("mongoose");
+// function normalizeMatchPayload(payload) {
+//   return {
+//     ...payload,
+//     dynamic_fields: payload.dynamic_fields || {},
+//     match_players: Array.isArray(payload.match_players)
+//       ? payload.match_players.map((player) => ({
+//           ...player,
+//           dynamic_fields: player.dynamic_fields || {},
+//           badge_ids: Array.isArray(player.badge_ids) ? player.badge_ids : null,
+//           player_heroes: Array.isArray(player.player_heroes)
+//             ? player.player_heroes.map((hero) => ({
+//                 ...hero,
+//                 add_dynamic_fields:
+//                   hero.add_dynamic_fields === undefined ? null : hero.add_dynamic_fields,
+//               }))
+//             : [],
+//         }))
+//       : [],
+//   };
+// }
+
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -7,7 +28,7 @@ const BadgeSchema = new Schema(
     id: { type: Number, required: true },
     count: { type: Number, default: 0 },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const BanPickInfoSchema = new Schema(
@@ -22,7 +43,7 @@ const BanPickInfoSchema = new Schema(
     conf_id: { type: Number, default: 0 },
     votes: { type: Schema.Types.Mixed, default: {} },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const RankScoreInfoSchema = new Schema(
@@ -43,7 +64,7 @@ const RankScoreInfoSchema = new Schema(
     warm_score: Number,
     score: Number,
   },
-  { _id: false },
+  { _id: false }
 );
 
 const PlayerDynamicFieldsSchema = new Schema(
@@ -54,12 +75,12 @@ const PlayerDynamicFieldsSchema = new Schema(
     rankscore_info: { type: RankScoreInfoSchema, default: undefined },
     show_name: Boolean,
     ai_special: { type: Schema.Types.Mixed, default: {} },
-    epic_moments: { type: String, default: "[]" },
+    epic_moments: { type: String, default: '[]' },
   },
   {
     _id: false,
     strict: false,
-  },
+  }
 );
 
 const PlayerHeroSchema = new Schema(
@@ -101,7 +122,7 @@ const PlayerHeroSchema = new Schema(
     replays: { type: Schema.Types.Mixed, default: null },
     add_dynamic_fields: { type: Schema.Types.Mixed, default: null },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const MatchPlayerSchema = new Schema(
@@ -181,7 +202,7 @@ const MatchPlayerSchema = new Schema(
       default: [],
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const MatchDynamicFieldsSchema = new Schema(
@@ -192,7 +213,7 @@ const MatchDynamicFieldsSchema = new Schema(
     replay_version: String,
 
     // kept as string because your stored data uses a JSON string
-    league_round_info: { type: String, default: "" },
+    league_round_info: { type: String, default: '' },
 
     replay_session_name: String,
     battle_replay_revision: Number,
@@ -207,7 +228,7 @@ const MatchDynamicFieldsSchema = new Schema(
   {
     _id: false,
     strict: false,
-  },
+  }
 );
 
 const MatchSchema = new Schema(
@@ -216,16 +237,8 @@ const MatchSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true,
-    },
-    source: {
-      type: String,
-      enum: ["replay", "live_battle"],
-      default: "replay",
-    },
-    room_id: {
-      type: String,
       index: true,
+      trim: true,
     },
     match_time_stamp: {
       type: Number,
@@ -259,11 +272,6 @@ const MatchSchema = new Schema(
       default: () => ({}),
     },
 
-    live_snapshot: {
-      type: Schema.Types.Mixed,
-      default: null,
-    },
-
     is_polymeric: { type: Number, default: 0 },
 
     match_players: {
@@ -275,7 +283,7 @@ const MatchSchema = new Schema(
     timestamps: true,
     minimize: false,
     versionKey: false,
-  },
+  }
 );
 
 // helpful indexes
@@ -283,6 +291,6 @@ const MatchSchema = new Schema(
 MatchSchema.index({ match_time_stamp: -1 });
 MatchSchema.index({ match_map_id: 1 });
 MatchSchema.index({ game_mode_id: 1 });
-MatchSchema.index({ "match_players.player_uid": 1 });
+MatchSchema.index({ 'match_players.player_uid': 1 });
 
-module.exports = mongoose.model("Match", MatchSchema);
+module.exports = mongoose.model('Match', MatchSchema);
