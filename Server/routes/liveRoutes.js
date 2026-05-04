@@ -26,7 +26,9 @@ const mapMap = Object.fromEntries(
   (Array.isArray(mapsRaw) ? mapsRaw : []).map((map) => [String(map.id), map]),
 );
 
+const latestRoomInfoCache = new Map()
 const roomBattleTracker = new Map();
+const latestBattleCache = new Map()
 
 /* -----------------------------
    Draft helpers
@@ -343,6 +345,30 @@ async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
   }
 }
 
+function buildPlayerKdaUltFromProcessed(player = {}, teamName = '', shortName = '') {
+  const ultRatio = Number(player.ultRatio || 0)
+  const percent = ultRatio * 100
+
+  return {
+    name: player.playerName || '-',
+    team: teamName,
+    short: shortName,
+    camp: player.camp,
+
+    k: Number(player.kills || 0),
+    d: Number(player.deaths || 0),
+    a: Number(player.assists || 0),
+
+    ult: {
+      percent: Number(percent.toFixed(1)),
+      is_ready: percent >= 100,
+      status: percent >= 100 ? 'READY' : 'NOT READY',
+    },
+
+    display: `${teamName} | ${player.playerName} | ${player.kills}/${player.deaths}/${player.assists}`
+  }
+}
+
 /* -----------------------------
    Routes
 ----------------------------- */
@@ -350,6 +376,17 @@ async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
 router.get("/rooms", async (req, res) => {
   try {
     const data = await getRoomList();
+
+    const rooms = data?.data || data || []
+
+    rooms.forEach(room => {
+      const roomId = String(room.room_id)
+
+      latestRoomInfoCache.set(roomId, {
+        group_info: room.group_info || {},
+      })
+    })
+
     res.json(data);
   } catch (err) {
     apiLogger.error("Error fetching room list:", err);
@@ -391,6 +428,8 @@ router.get("/battle/:roomId", async (req, res) => {
       mapMap,
     });
 
+    latestBattleCache.set(roomId, processed)
+
     res.json(processed);
   } catch (err) {
     apiLogger.error(
@@ -430,5 +469,60 @@ router.post("/replay-query-match", async (req, res) => {
     });
   }
 });
+
+router.get('/blue/:playerIndex', (req, res) => {
+  try {
+    const playerIndex = Number(req.params.playerIndex)
+
+    const latestRoom = Array.from(latestBattleCache.keys()).pop()
+    const data = latestBattleCache.get(latestRoom)
+
+    if (!data) {
+      return res.status(404).json({ message: 'No live data available' })
+    }
+
+    const roomInfo = latestRoomInfoCache.get(latestRoom) || {}
+    const teamName = roomInfo.group_info?.["1"]?.name || "BLUE"
+    const shortName = roomInfo.group_info?.["1"]?.mini_name || "BLU"
+
+    const players = data?.teams?.team1?.players || []
+    const player = players[playerIndex - 1]
+
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' })
+    }
+
+    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName))
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+router.get('/red/:playerIndex', (req, res) => {
+  try {
+    const playerIndex = Number(req.params.playerIndex)
+
+    const latestRoom = Array.from(latestBattleCache.keys()).pop()
+    const data = latestBattleCache.get(latestRoom)
+
+    if (!data) {
+      return res.status(404).json({ message: 'No live data available' })
+    }
+
+    const roomInfo = latestRoomInfoCache.get(latestRoom) || {}
+    const teamName = roomInfo.group_info?.["2"]?.name || "RED"
+    const shortName = roomInfo.group_info?.["2"]?.mini_name || "RED"
+    const players = data?.teams?.team2?.players || []
+    const player = players[playerIndex - 1]
+
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' })
+    }
+
+    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName))
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
 
 module.exports = router;
