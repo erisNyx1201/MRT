@@ -5,6 +5,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 
 const apiRoutes = require("./routes/api");
+const seriesRoutes = require('./routes/seriesRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const teamRoutes = require('./routes/teamRoutes')
 // const draftRoutes = require("./routes/draftroutes");
@@ -26,6 +27,7 @@ app.use("/api", apiRoutes);
 // app.use("/api/draft", draftRoutes);
 app.use('/api/live', liveRoutes);
 app.use('/api/matches', matchRoutes);
+app.use('/api/series', seriesRoutes);
 app.use('/api/teams', teamRoutes);
 app.use("/api/xpression", xpressionRoutes);
 

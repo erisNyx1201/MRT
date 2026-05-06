@@ -9901,7 +9901,7 @@
     "name": "deadpool",
     "real_name": "Wade Wilson",
     "imageUrl": "/rivals/heroes/card/deadpool.png",
-    "role": ["Vanguard", "Duelist", "Strategist"],
+    "role": ["Duelist", "Vanguard", "Strategist"],
     "attack_type": "Hitscan Heroes",
     "team": ["X_men"],
     "difficulty": "0",

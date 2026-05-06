@@ -108,16 +108,16 @@
     </div>
 
     <section class="main-board">
-      <div class="tabs-row">
+      <!-- <div class="tabs-row">
         <button class="tab-btn" :class="{ active: activeTab === 'stats' }" @click="activeTab = 'stats'">
           Current Stats
         </button>
         <button class="tab-btn" :class="{ active: activeTab === 'banpick' }" @click="activeTab = 'banpick'">
           Ban / Pick
         </button>
-      </div>
+      </div> -->
 
-      <div v-if="activeTab === 'stats'">
+      <!-- <div v-if="activeTab === 'stats'"> -->
         <div class="table-title-row">
           <div class="table-title">Camp 1</div>
           <div class="table-title">Camp 2</div>
@@ -154,7 +154,7 @@
                   <td>
                     <div class="hero-cell">
                       <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
-                        @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
+                        @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb" />
 
                       <div class="hero-text">
                         <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
@@ -210,7 +210,7 @@
                   <td>
                     <div class="hero-cell">
                       <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
-                        @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
+                        @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb" />
 
                       <div class="hero-text">
                         <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
@@ -260,7 +260,7 @@
             <div class="selected-hero-header">
               <div class="hero-cell hero-cell-large">
                 <img :src="selectedPlayer.heroMeta?.image" :alt="selectedPlayer.heroMeta?.displayName"
-                  @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb hero-thumb-large" />
+                  @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb hero-thumb-large" />
 
                 <div class="hero-text">
                   <span class="hero-name">{{ selectedPlayer.heroMeta?.displayName }}</span>
@@ -287,9 +287,9 @@
 
           <div v-else class="empty-state">Select a player from either team table</div>
         </div>
-      </div>
+      <!-- </div> -->
 
-      <div v-if="activeTab === 'banpick'" class="banpick-wrap">
+      <!-- <div v-if="activeTab === 'banpick'" class="banpick-wrap">
         <div style="display: flex; gap: 10px; margin-bottom: 12px;">
           <q-btn @click="startDraftLoop" color="secondary">Start Loop</q-btn>
           <q-btn @click="stopDraftLoop" color="red">Stop</q-btn>
@@ -313,7 +313,7 @@
               <td>
                 <div class="hero-cell">
                   <img :src="getHeroMeta(item.hero_id).localImage" :alt="getHeroMeta(item.hero_id).displayName"
-                    @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
+                    @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb" />
 
                   <div class="hero-text">
                     <span class="hero-name">{{ getHeroMeta(item.hero_id).displayName }}</span>
@@ -324,7 +324,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
@@ -336,16 +336,16 @@ import { api } from 'boot/axios'
 import { useSeshStore } from 'src/stores/sesh'
 const seshStore = useSeshStore()
 const route = useRoute()
-const activeTab = ref('stats')
+// const activeTab = ref('stats')
 const roomId = computed(() => route.query?.roomId || seshStore.room || '120001')
 const loading = ref(false)
 const isPolling = ref(false)
 const selectedPlayerId = ref(null)
 const pollTimer = ref(null)
-const draftLoop = ref([])
-const banPickInfo = computed(() => dashboard.value?.draft ?? [])
+// const draftLoop = ref([])
+// const banPickInfo = computed(() => dashboard.value?.draft ?? [])
 
-const displayedBanPick = computed(() => (draftLoop.value.length ? draftLoop.value : banPickInfo.value))
+// const displayedBanPick = computed(() => (draftLoop.value.length ? draftLoop.value : banPickInfo.value))
 
 
 const emptyDashboard = () => ({

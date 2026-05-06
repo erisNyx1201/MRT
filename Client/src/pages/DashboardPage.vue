@@ -13,22 +13,57 @@
           <div><strong>Updated:</strong> {{ updatedTime }}</div>
         </div>
 
-        <div class="objective-block">
+        <div class="objective-block" :class="objectiveView.modeClass">
           <div class="objective-top">
-            <!-- <span class="objective-label">Objective</span> -->
-            <span class="objective-label">{{ objectiveTitle }}</span>
-            <span class="objective-status">{{ dashboard.objective.label }}</span>
-            <span class="objective-percent">{{ dashboard.objective.percent.toFixed(1) }}%</span>
+            <div>
+              <span class="objective-label">{{ objectiveView.title }}</span>
+              <div class="objective-subtitle">{{ objectiveView.subtitle }}</div>
+            </div>
+
+            <div class="objective-right">
+              <span v-if="objectiveView.badge" class="objective-badge">{{ objectiveView.badge }}</span>
+              <span class="objective-percent">{{ objectiveView.percentLabel }}</span>
+            </div>
           </div>
 
-          <div class="objective-track">
-            <div class="objective-fill" :class="objectiveBarClass"
-              :style="{ width: `${dashboard.objective.percent}%` }" />
-          </div>
+          <template v-if="objectiveView.type === 'convoy'">
+            <div class="payload-track">
+              <div class="payload-line" />
+              <div v-for="checkpoint in objectiveView.checkpoints" :key="checkpoint.value" class="payload-checkpoint"
+                :class="{ reached: objectiveView.percent >= checkpoint.value }"
+                :style="{ left: `${checkpoint.value}%` }">
+                <span>{{ checkpoint.label }}</span>
+              </div>
+              <div class="payload-marker" :class="objectiveBarClass" :style="{ left: `${objectiveView.safePercent}%` }">
+                🚚
+              </div>
+            </div>
+          </template>
+
+          <template v-else-if="objectiveView.type === 'convergence'">
+            <div class="phase-row">
+              <div class="phase-pill" :class="{ active: objectiveView.phase === 'capture' }">Capture</div>
+              <div class="phase-line" />
+              <div class="phase-pill" :class="{ active: objectiveView.phase === 'escort' }">Escort</div>
+            </div>
+
+            <div class="objective-track">
+              <div class="objective-fill" :class="objectiveBarClass"
+                :style="{ width: `${objectiveView.safePercent}%` }" />
+            </div>
+          </template>
+
+          <template v-else>
+            <div class="objective-track">
+              <div class="objective-fill" :class="objectiveBarClass"
+                :style="{ width: `${objectiveView.safePercent}%` }" />
+            </div>
+          </template>
 
           <div class="objective-bottom">
-            <span>Camp 1: {{ dashboard.objective.team1OnPoint }}</span>
-            <span>Camp 2: {{ dashboard.objective.team2OnPoint }}</span>
+            <span>{{ objectiveView.leftStat }}</span>
+            <span>{{ objectiveView.centerStat }}</span>
+            <span>{{ objectiveView.rightStat }}</span>
           </div>
         </div>
       </div>
@@ -59,222 +94,174 @@
     </div>
 
     <section class="main-board">
-      <div class="tabs-row">
-        <button class="tab-btn" :class="{ active: activeTab === 'stats' }" @click="activeTab = 'stats'">
-          Current Stats
-        </button>
-        <button class="tab-btn" :class="{ active: activeTab === 'banpick' }" @click="activeTab = 'banpick'">
-          Ban / Pick
-        </button>
+      <div class="table-title-row">
+        <div class="table-title">Camp 1</div>
+        <div class="table-title">Camp 2</div>
       </div>
 
-      <div v-if="activeTab === 'stats'">
-        <div class="table-title-row">
-          <div class="table-title">Camp 1</div>
-          <div class="table-title">Camp 2</div>
-        </div>
-
-        <div class="team-table-grid">
-          <div class="table-wrap scroll-x">
-            <table class="team-table team1-table">
-              <thead>
-                <tr>
-                  <th>Player</th>
-                  <th>Hero</th>
-                  <th>K</th>
-                  <th>D</th>
-                  <th>A</th>
-                  <th>DMG</th>
-                  <th>Heal</th>
-                  <th>Hit</th>
-                  <th>Ult</th>
-                  <th>HP</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="player in dashboard.teams.team1.players" :key="player.playerId"
-                  :class="rowClass(player, 'team1')" @click="selectPlayer(player)">
-                  <td>
-                    <div class="name-stack">
-                      <span>{{ player.playerName }}</span>
-                      <span v-if="player.isMVP" class="badge mvp">MVP</span>
-                      <span v-else-if="player.isSVP" class="badge svp">SVP</span>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="hero-cell">
-                      <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
-                        @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
-
-                      <div class="hero-text">
-                        <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
-                        <span class="hero-id">ID {{ player.heroId }}</span>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>{{ player.kills }}</td>
-                  <td>{{ player.deaths }}</td>
-                  <td>{{ player.assists }}</td>
-                  <td>{{ formatCompact(player.damage) }}</td>
-                  <td>{{ formatCompact(player.heal) }}</td>
-                  <td>{{ formatPct(player.hitRate) }}</td>
-                  <td>
-                    <span class="ult-pill" :class="player.ultRatio >= 0.9 ? 'ready' : 'not-ready'">
-                      {{ player.ultRatio >= 0.9 ? 'READY' : `${Math.round(player.ultRatio * 100)}%` }}
-                    </span>
-                  </td>
-                  <td>{{ Math.round(player.hp) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="table-wrap scroll-x">
-            <table class="team-table team2-table">
-              <thead>
-                <tr>
-                  <th>Player</th>
-                  <th>Hero</th>
-                  <th>K</th>
-                  <th>D</th>
-                  <th>A</th>
-                  <th>DMG</th>
-                  <th>Heal</th>
-                  <th>Hit</th>
-                  <th>Ult</th>
-                  <th>HP</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="player in dashboard.teams.team2.players" :key="player.playerId"
-                  :class="rowClass(player, 'team2')" @click="selectPlayer(player)">
-                  <td>
-                    <div class="name-stack">
-                      <span>{{ player.playerName }}</span>
-                      <span v-if="player.isMVP" class="badge mvp">MVP</span>
-                      <span v-else-if="player.isSVP" class="badge svp">SVP</span>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="hero-cell">
-                      <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
-                        @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
-
-                      <div class="hero-text">
-                        <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
-                        <span class="hero-id">ID {{ player.heroId }}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{{ player.kills }}</td>
-                  <td>{{ player.deaths }}</td>
-                  <td>{{ player.assists }}</td>
-                  <td>{{ formatCompact(player.damage) }}</td>
-                  <td>{{ formatCompact(player.heal) }}</td>
-                  <td>{{ formatPct(player.hitRate) }}</td>
-                  <td>
-                    <span class="ult-pill" :class="player.ultRatio >= 0.9 ? 'ready' : 'not-ready'">
-                      {{ player.ultRatio >= 0.9 ? 'READY' : `${Math.round(player.ultRatio * 100)}%` }}
-                    </span>
-                  </td>
-                  <td>{{ Math.round(player.hp) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="selected-player-panel">
-          <div class="selected-player-header">
-            <h2>Selected Player</h2>
-            <span v-if="selectedPlayer">{{ selectedPlayer.playerName }}</span>
-          </div>
-
-          <div v-if="selectedPlayer" class="player-detail">
-            <div class="grid">
-              <div><strong>Name</strong><span>{{ selectedPlayer.playerName }}</span></div>
-              <div><strong>Hero</strong><span>{{ selectedPlayer.heroMeta?.displayName }}</span></div>
-              <div><strong>Hero ID</strong><span>{{ selectedPlayer.heroId }}</span></div>
-              <!-- <div><strong>Role</strong><span>{{ roleLabel(selectedPlayer.responsibility) }}</span></div> -->
-              <div><strong>KDA</strong><span>{{ selectedPlayer.kills }}/{{ selectedPlayer.deaths }}/{{
-                selectedPlayer.assists }}</span></div>
-              <div><strong>DMG</strong><span>{{ formatCompact(selectedPlayer.damage) }}</span></div>
-              <div><strong>HEAL</strong><span>{{ formatCompact(selectedPlayer.heal) }}</span></div>
-              <div><strong>Hit %</strong><span>{{ formatPct(selectedPlayer.hitRate) }}</span></div>
-              <div><strong>Ult</strong><span>{{ Math.round((selectedPlayer.ultRatio || 0) * 100) }}%</span></div>
-              <!-- <div><strong>Performance</strong><span>{{ Number(selectedPlayer.mvp_val ?? 0).toFixed(2) }}</span></div> -->
-            </div>
-
-            <div class="selected-hero-header">
-              <div class="hero-cell hero-cell-large">
-                <img :src="selectedPlayer.heroMeta?.image" :alt="selectedPlayer.heroMeta?.displayName"
-                  @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb hero-thumb-large" />
-
-                <div class="hero-text">
-                  <span class="hero-name">{{ selectedPlayer.heroMeta?.displayName }}</span>
-                  <span class="hero-id">ID {{ selectedPlayer.heroId }}</span>
-                </div>
-              </div>
-            </div>
-
-            <h3>Abilities</h3>
-            <div class="cooldown-list">
-              <div v-for="ability in selectedPlayer.abilities" :key="ability.id" class="cooldown-item">
-                <strong>
-                  {{ ability.id }}
-                  <template v-if="ability.name"> - {{ ability.name }}</template>
-                </strong>
-                <span>CD {{ Number(ability.cooldown ?? 0).toFixed(2) }}</span>
-                <span>
-                  Energy:
-                  {{ Math.round(Number(ability.energy || 0)) }}/{{ Math.round(Number(ability.energy_max || 0)) }}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div v-else class="empty-state">Select a player from either team table</div>
-        </div>
-      </div>
-
-      <div v-if="activeTab === 'banpick'" class="banpick-wrap">
-        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
-          <q-btn @click="startDraftLoop" color="secondary">Start Loop</q-btn>
-          <q-btn @click="stopDraftLoop" color="red">Stop</q-btn>
-        </div>
-
-        <table class="banpick-table">
-          <thead>
-            <tr>
-              <th>Round</th>
-              <th>Action</th>
-              <th>Camp</th>
-              <th>Hero</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in displayedBanPick" :key="`${item.round_index}-${item.camp}-${index}`"
-              :class="{ activeStep: index === currentStepIndex }">
-              <td>{{ item.round_index }}</td>
-              <td>{{ item.operate_type === 0 ? 'Ban' : 'Pick' }}</td>
-              <td>{{ item.camp }}</td>
-              <td>
-                <div class="hero-cell">
-                  <img :src="getHeroMeta(item.hero_id).localImage" :alt="getHeroMeta(item.hero_id).displayName"
-                    @error="e => (e.target.src = '/imgs/heroes/empty.png')" class="hero-thumb" />
-
-                  <div class="hero-text">
-                    <span class="hero-name">{{ getHeroMeta(item.hero_id).displayName }}</span>
-                    <span class="hero-id">ID {{ item.hero_id }}</span>
+      <div class="team-table-grid">
+        <div class="table-wrap scroll-x">
+          <table class="team-table team1-table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Hero</th>
+                <th>K</th>
+                <th>D</th>
+                <th>A</th>
+                <th>DMG</th>
+                <th>Heal</th>
+                <th>Hit</th>
+                <th>Ult</th>
+                <th>HP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="player in dashboard.teams.team1.players" :key="player.playerId"
+                :class="rowClass(player, 'team1')" @click="selectPlayer(player)">
+                <td>
+                  <div class="name-stack">
+                    <span>{{ player.playerName }}</span>
+                    <span v-if="player.isMVP" class="badge mvp">MVP</span>
+                    <span v-else-if="player.isSVP" class="badge svp">SVP</span>
                   </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </td>
+
+                <td>
+                  <div class="hero-cell">
+                    <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
+                      @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb" />
+
+                    <div class="hero-text">
+                      <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
+                      <span class="hero-id">ID {{ player.heroId }}</span>
+                    </div>
+                  </div>
+                </td>
+
+                <td>{{ player.kills }}</td>
+                <td>{{ player.deaths }}</td>
+                <td>{{ player.assists }}</td>
+                <td>{{ formatCompact(player.damage) }}</td>
+                <td>{{ formatCompact(player.heal) }}</td>
+                <td>{{ formatPct(player.hitRate) }}</td>
+                <td>
+                  <span class="ult-pill" :class="player.ultRatio >= 0.9 ? 'ready' : 'not-ready'">
+                    {{ player.ultRatio >= 0.9 ? 'READY' : `${Math.round(player.ultRatio * 100)}%` }}
+                  </span>
+                </td>
+                <td>{{ Math.round(player.hp) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-wrap scroll-x">
+          <table class="team-table team2-table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Hero</th>
+                <th>K</th>
+                <th>D</th>
+                <th>A</th>
+                <th>DMG</th>
+                <th>Heal</th>
+                <th>Hit</th>
+                <th>Ult</th>
+                <th>HP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="player in dashboard.teams.team2.players" :key="player.playerId"
+                :class="rowClass(player, 'team2')" @click="selectPlayer(player)">
+                <td>
+                  <div class="name-stack">
+                    <span>{{ player.playerName }}</span>
+                    <span v-if="player.isMVP" class="badge mvp">MVP</span>
+                    <span v-else-if="player.isSVP" class="badge svp">SVP</span>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="hero-cell">
+                    <img :src="player.heroMeta?.image" :alt="player.heroMeta?.displayName"
+                      @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb" />
+
+                    <div class="hero-text">
+                      <span class="hero-name">{{ player.heroMeta?.displayName }}</span>
+                      <span class="hero-id">ID {{ player.heroId }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ player.kills }}</td>
+                <td>{{ player.deaths }}</td>
+                <td>{{ player.assists }}</td>
+                <td>{{ formatCompact(player.damage) }}</td>
+                <td>{{ formatCompact(player.heal) }}</td>
+                <td>{{ formatPct(player.hitRate) }}</td>
+                <td>
+                  <span class="ult-pill" :class="player.ultRatio >= 0.9 ? 'ready' : 'not-ready'">
+                    {{ player.ultRatio >= 0.9 ? 'READY' : `${Math.round(player.ultRatio * 100)}%` }}
+                  </span>
+                </td>
+                <td>{{ Math.round(player.hp) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="selected-player-panel">
+        <div class="selected-player-header">
+          <h2>Selected Player</h2>
+          <span v-if="selectedPlayer">{{ selectedPlayer.playerName }}</span>
+        </div>
+
+        <div v-if="selectedPlayer" class="player-detail">
+          <div class="grid">
+            <div><strong>Name</strong><span>{{ selectedPlayer.playerName }}</span></div>
+            <div><strong>Hero</strong><span>{{ selectedPlayer.heroMeta?.displayName }}</span></div>
+            <div><strong>Hero ID</strong><span>{{ selectedPlayer.heroId }}</span></div>
+            <!-- <div><strong>Role</strong><span>{{ roleLabel(selectedPlayer.responsibility) }}</span></div> -->
+            <div><strong>KDA</strong><span>{{ selectedPlayer.kills }}/{{ selectedPlayer.deaths }}/{{
+              selectedPlayer.assists }}</span></div>
+            <div><strong>DMG</strong><span>{{ formatCompact(selectedPlayer.damage) }}</span></div>
+            <div><strong>HEAL</strong><span>{{ formatCompact(selectedPlayer.heal) }}</span></div>
+            <div><strong>Hit %</strong><span>{{ formatPct(selectedPlayer.hitRate) }}</span></div>
+            <div><strong>Ult</strong><span>{{ Math.round((selectedPlayer.ultRatio || 0) * 100) }}%</span></div>
+            <!-- <div><strong>Performance</strong><span>{{ Number(selectedPlayer.mvp_val ?? 0).toFixed(2) }}</span></div> -->
+          </div>
+
+          <div class="selected-hero-header">
+            <div class="hero-cell hero-cell-large">
+              <img :src="selectedPlayer.heroMeta?.image" :alt="selectedPlayer.heroMeta?.displayName"
+                @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" class="hero-thumb hero-thumb-large" />
+
+              <div class="hero-text">
+                <span class="hero-name">{{ selectedPlayer.heroMeta?.displayName }}</span>
+                <span class="hero-id">ID {{ selectedPlayer.heroId }}</span>
+              </div>
+            </div>
+          </div>
+
+          <h3>Abilities</h3>
+          <div class="cooldown-list">
+            <div v-for="ability in selectedPlayer.abilities" :key="ability.id" class="cooldown-item">
+              <strong>
+                {{ ability.id }}
+                <template v-if="ability.name"> - {{ ability.name }}</template>
+              </strong>
+              <span>CD {{ Number(ability.cooldown ?? 0).toFixed(2) }}</span>
+              <span>
+                Energy:
+                {{ Math.round(Number(ability.energy || 0)) }}/{{ Math.round(Number(ability.energy_max || 0)) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="empty-state">Select a player from either team table</div>
       </div>
     </section>
   </div>
@@ -287,16 +274,16 @@ import { api } from 'boot/axios'
 import { useSeshStore } from 'src/stores/sesh'
 const seshStore = useSeshStore()
 const route = useRoute()
-const activeTab = ref('stats')
+// const activeTab = ref('stats')
 const roomId = computed(() => route.query?.roomId || seshStore.room || '120001')
 const loading = ref(false)
 const isPolling = ref(false)
 const selectedPlayerId = ref(null)
 const pollTimer = ref(null)
-const draftLoop = ref([])
-const banPickInfo = computed(() => dashboard.value?.draft ?? [])
+// const draftLoop = ref([])
+// const banPickInfo = computed(() => dashboard.value?.draft ?? [])
 
-const displayedBanPick = computed(() => (draftLoop.value.length ? draftLoop.value : banPickInfo.value))
+// const displayedBanPick = computed(() => (draftLoop.value.length ? draftLoop.value : banPickInfo.value))
 
 
 const emptyDashboard = () => ({
@@ -375,14 +362,103 @@ const objectiveBarClass = computed(() => {
   return 'neutral'
 })
 
-const objectiveTitle = computed(() => {
-  const mode = String(dashboard.value.meta.mapMode || '').toLowerCase()
+// const objectiveTitle = computed(() => {
+//   const mode = String(dashboard.value.meta.mapMode || '').toLowerCase()
 
-  if (mode.includes('Domination')) return 'Capture Point'
-  if (mode.includes('Convoy')) return 'Payload Progress'
-  if (mode.includes('Convergence')) return 'Hybrid Objective'
+//   if (mode.includes('Domination')) return 'Capture Point'
+//   if (mode.includes('Convoy')) return 'Payload Progress'
+//   if (mode.includes('Convergence')) return 'Hybrid Objective'
 
-  return 'Objective'
+//   return 'Objective'
+// })
+
+const objectiveView = computed(() => {
+  const meta = dashboard.value?.meta || {}
+  const objective = dashboard.value?.objective || {}
+  const mode = String(meta.mapMode || '').toLowerCase()
+  const percent = clampPercent(objective.percent)
+  const owner = Number(objective.owner || 0)
+  const ownerLabel = owner === 1 ? 'Camp 1' : owner === 2 ? 'Camp 2' : 'Neutral'
+  const contested = Boolean(objective.contested)
+  const team1OnPoint = Number(objective.team1OnPoint || 0)
+  const team2OnPoint = Number(objective.team2OnPoint || 0)
+  const roundIndex = Number(meta.roundIndex ?? 0)
+
+  const base = {
+    type: 'generic',
+    modeClass: 'objective-generic',
+    title: 'Objective',
+    subtitle: objective.label || `${ownerLabel} objective`,
+    badge: contested ? 'CONTESTED' : null,
+    percent,
+    safePercent: percent,
+    percentLabel: `${percent.toFixed(1)}%`,
+    phase: null,
+    checkpoints: [],
+    leftStat: `Camp 1: ${team1OnPoint}`,
+    centerStat: contested ? 'Contested' : `${ownerLabel}`,
+    rightStat: `Camp 2: ${team2OnPoint}`,
+  }
+
+  if (mode.includes('domination') || mode.includes('point')) {
+    return {
+      ...base,
+      type: 'domination',
+      modeClass: 'objective-domination',
+      title: 'Capture Point',
+      subtitle: contested
+        ? 'Point is being contested'
+        : owner ? `${ownerLabel} controlling` : 'Neutral point',
+      badge: contested ? 'CONTESTED' : owner ? 'CONTROL' : 'NEUTRAL',
+      leftStat: `Camp 1 on point: ${team1OnPoint}`,
+      centerStat: `Round ${roundIndex}`,
+      rightStat: `Camp 2 on point: ${team2OnPoint}`,
+    }
+  }
+
+  if (mode.includes('convoy') || mode.includes('payload')) {
+    return {
+      ...base,
+      type: 'convoy',
+      modeClass: 'objective-convoy',
+      title: 'Payload Progress',
+      subtitle: owner ? `${ownerLabel} escorting payload` : 'Payload idle',
+      badge: contested ? 'CONTESTED' : 'ESCORT',
+      checkpoints: [
+        { label: 'CP1', value: 33 },
+        { label: 'CP2', value: 66 },
+        { label: 'Goal', value: 100 },
+      ],
+      leftStat: `Attackers nearby: ${team1OnPoint}`,
+      centerStat: `Payload ${percent.toFixed(1)}%`,
+      rightStat: `Defenders nearby: ${team2OnPoint}`,
+    }
+  }
+
+  if (mode.includes('convergence') || mode.includes('hybrid')) {
+    const phase = percent >= 100 || String(objective.label || '').toLowerCase().includes('escort')
+      ? 'escort'
+      : 'capture'
+
+    return {
+      ...base,
+      type: 'convergence',
+      modeClass: 'objective-convergence',
+      title: phase === 'capture' ? 'Capture Phase' : 'Escort Phase',
+      subtitle: phase === 'capture'
+        ? (contested ? 'Capture point contested' : owner ? `${ownerLabel} capturing` : 'Waiting for capture')
+        : (owner ? `${ownerLabel} escorting objective` : 'Payload waiting'),
+      badge: contested ? 'CONTESTED' : phase.toUpperCase(),
+      phase,
+      safePercent: phase === 'escort' && percent >= 100 ? 0 : percent,
+      percentLabel: phase === 'escort' && percent >= 100 ? 'Escort' : `${percent.toFixed(1)}%`,
+      leftStat: `Camp 1 nearby: ${team1OnPoint}`,
+      centerStat: phase === 'capture' ? 'Phase 1 / 2' : 'Phase 2 / 2',
+      rightStat: `Camp 2 nearby: ${team2OnPoint}`,
+    }
+  }
+
+  return base
 })
 
 const updatedTime = computed(() => {
@@ -473,6 +549,12 @@ function formatCompact(value) {
 
 function formatPct(value) {
   return `${(Number(value || 0) * 100).toFixed(1)}%`
+}
+
+function clampPercent(value) {
+  const n = Number(value || 0)
+  if (Number.isNaN(n)) return 0
+  return Math.min(100, Math.max(0, n))
 }
 
 function formatSeconds(value) {
@@ -901,33 +983,68 @@ onBeforeUnmount(() => {
 .objective-block {
   min-width: 260px;
   display: grid;
-  gap: 8px;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.objective-domination {
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+.objective-convoy {
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.14);
+}
+
+.objective-convergence {
+  box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.14);
 }
 
 .objective-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 .objective-label {
   color: #94a3b8;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.objective-subtitle {
+  margin-top: 3px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #e5e7eb;
+}
+
+.objective-right {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.objective-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  font-size: 10px;
+  font-weight: 900;
   letter-spacing: 0.05em;
 }
 
-.objective-status {
-  font-weight: 800;
-  font-size: 13px;
-}
-
 .objective-percent {
-  margin-left: auto;
-  font-weight: 800;
-  font-size: 13px;
+  font-weight: 900;
+  font-size: 15px;
 }
 
 .objective-track {
@@ -937,6 +1054,106 @@ onBeforeUnmount(() => {
   overflow: hidden;
   background: rgba(148, 163, 184, 0.18);
   border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.payload-track {
+  position: relative;
+  height: 42px;
+  margin: 2px 8px 0;
+}
+
+.payload-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.payload-marker {
+  position: absolute;
+  top: 2px;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #334155;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: left 0.3s ease;
+}
+
+.payload-marker.team1 {
+  background: #2563eb;
+}
+
+.payload-marker.team2 {
+  background: #dc2626;
+}
+
+.payload-marker.contested {
+  background: #f59e0b;
+}
+
+.payload-checkpoint {
+  position: absolute;
+  top: 13px;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #1e293b;
+  border: 2px solid #64748b;
+}
+
+.payload-checkpoint.reached {
+  background: #22c55e;
+  border-color: #86efac;
+}
+
+.payload-checkpoint span {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 800;
+}
+
+.phase-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.phase-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.phase-pill.active {
+  background: rgba(168, 85, 247, 0.28);
+  border-color: rgba(216, 180, 254, 0.5);
+  color: #f3e8ff;
+}
+
+.phase-line {
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
 }
 
 .objective-fill {

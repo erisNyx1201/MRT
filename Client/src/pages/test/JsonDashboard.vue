@@ -113,7 +113,7 @@
                   <td>
                     <div class="hero-cell">
                       <img v-if="player.heroMeta?.localImage" :src="player.heroMeta.localImage"
-                        :alt="player.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/empty.png'"
+                        :alt="player.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/0_unknown.png'"
                         class="hero-thumb" />
                       <div v-else class="hero-thumb hero-thumb-fallback">
                         {{ player.select_hero }}
@@ -179,7 +179,7 @@
                   <td>
                     <div class="hero-cell">
                       <img v-if="player.heroMeta?.localImage" :src="player.heroMeta.localImage"
-                        :alt="player.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/empty.png'"
+                        :alt="player.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/0_unknown.png'"
                         class="hero-thumb" />
                       <div v-else class="hero-thumb hero-thumb-fallback">
                         {{ player.select_hero }}
@@ -238,7 +238,7 @@
             <div class="selected-hero-header">
               <div class="hero-cell hero-cell-large">
                 <img v-if="selectedPlayer.heroMeta?.localImage" :src="selectedPlayer.heroMeta.localImage"
-                  :alt="selectedPlayer.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/empty.png'"
+                  :alt="selectedPlayer.heroMeta.name" @error="e => e.target.src = '/imgs/heroes/0_unknown.png'"
                   class="hero-thumb hero-thumb-large" />
                 <div v-else class="hero-thumb hero-thumb-large hero-thumb-fallback">
                   {{ selectedPlayer.select_hero }}
@@ -297,7 +297,7 @@
               <td>
                 <div class="hero-cell">
                   <img v-if="getHeroMeta(item.hero_id)?.localImage" :src="getHeroMeta(item.hero_id).localImage"
-                    :alt="getHeroMeta(item.hero_id).name" @error="e => e.target.src = '/imgs/heroes/empty.png'"
+                    :alt="getHeroMeta(item.hero_id).name" @error="e => e.target.src = '/imgs/heroes/0_unknown.png'"
                     class="hero-thumb" />
                   <div v-else class="hero-thumb hero-thumb-fallback">
                     {{ item.hero_id }}
@@ -361,6 +361,12 @@ function normalizeHeroName(name) {
 }
 
 function findHeroImage(heroId, heroName = '') {
+  let heroImageID = heroId
+
+  if(heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    heroImageID = 1057
+  }
+
   const safeName = String(heroName)
     .trim()
     .replace(/\s+/g, '_')
@@ -368,14 +374,20 @@ function findHeroImage(heroId, heroName = '') {
 
   // If no name, fallback to id-only image
   if (!safeName) {
-    return `/imgs/heroes/${heroId}.png`
+    return `/imgs/heroes/${heroImageID}.png`
   }
 
-  return `/imgs/heroes/${heroId}_${safeName}.png`
+  return `/imgs/heroes/${heroImageID}_${safeName}.png`
 }
 
 function getHeroMeta(heroId) {
-  const hero = heroMap[String(heroId)]
+
+  let normalizedId = heroId
+
+  if(heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    normalizedId = 1057
+  }
+  const hero = heroMap[String(normalizedId)]
 
   if (!hero) {
     return {

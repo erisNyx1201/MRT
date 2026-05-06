@@ -2,29 +2,13 @@
   <q-page class="matches-page q-pa-md bg-dark">
     <div class="page-title q-mb-md">List of Matches</div>
 
-    <q-table
-      flat
-      bordered
-      dark
-      :rows="matchRows"
-      :columns="columns"
-      row-key="match_uid"
-      hide-bottom
-      class="matches-table"
-      :pagination="{ rowsPerPage: 0 }"
-      :loading="loading"
-    >
+    <q-table flat bordered dark :rows="matchRows" :columns="columns" row-key="match_uid" hide-bottom
+      class="matches-table" :pagination="{ rowsPerPage: 0 }" :loading="loading">
       <template #body="props">
         <q-tr :props="props" class="match-row">
           <q-td auto-width>
-            <q-btn
-              round
-              dense
-              size="sm"
-              :color="props.expand ? 'negative' : 'positive'"
-              :icon="props.expand ? 'remove' : 'add'"
-              @click="props.expand = !props.expand"
-            />
+            <q-btn round dense size="sm" :color="props.expand ? 'negative' : 'positive'"
+              :icon="props.expand ? 'remove' : 'add'" @click="props.expand = !props.expand" />
           </q-td>
 
           <q-td key="name" :props="props">
@@ -55,16 +39,50 @@
 
           <q-td key="leftHeroes" :props="props">
             <div class="hero-strip left-strip">
-              <!-- <div class="outer-hero-thumb-wrap">
-                <img
-                  v-for="hero in props.row.leftPicks"
-                  :key="hero"
-                  :src="heroImage(hero.hero_id)"
-                  :alt="heroLabel(hero.hero_id)"
-                  class="outer-hero-thumb"
-                  @error="e => (e.target.src = '/imgs/heroes/empty.png')"
-                />
-              </div> -->
+              <div class="hero-group picks">
+                <div v-for="hero in props.row.leftPicks" :key="`lp-${hero.hero_id}-${hero.round_idx}`"
+                  class="hero-box pick">
+                  <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="hero-box-img"
+                    @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
+                  <q-tooltip>{{ heroLabel(hero.hero_id) }} - PICK</q-tooltip>
+                </div>
+              </div>
+
+              <div class="hero-group bans">
+                <div v-for="hero in props.row.leftBans" :key="`lb-${hero.hero_id}-${hero.round_idx}`"
+                  class="hero-box ban">
+                  <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="hero-box-img"
+                    @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
+                  <q-tooltip>{{ heroLabel(hero.hero_id) }} - BAN</q-tooltip>
+                </div>
+              </div>
+            </div>
+          </q-td>
+
+          <q-td key="rightHeroes" :props="props">
+            <div class="hero-strip right-strip">
+              <div class="hero-group bans">
+                <div v-for="hero in props.row.rightBans" :key="`rb-${hero.hero_id}-${hero.round_idx}`"
+                  class="hero-box ban">
+                  <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="hero-box-img"
+                    @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
+                  <q-tooltip>{{ heroLabel(hero.hero_id) }} - BAN</q-tooltip>
+                </div>
+              </div>
+
+              <div class="hero-group picks">
+                <div v-for="hero in props.row.rightPicks" :key="`rp-${hero.hero_id}-${hero.round_idx}`"
+                  class="hero-box pick">
+                  <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="hero-box-img"
+                    @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
+                  <q-tooltip>{{ heroLabel(hero.hero_id) }} - PICK</q-tooltip>
+                </div>
+              </div>
+            </div>
+          </q-td>
+
+          <!-- <q-td key="leftHeroes" :props="props">
+            <div class="hero-strip left-strip">
               <div class="hero-group picks">
                 <div
                   v-for="hero in props.row.leftPicks"
@@ -113,13 +131,18 @@
                 </div>
               </div>
             </div>
-          </q-td>
+          </q-td> -->
 
           <q-td key="rightSummary" :props="props" class="team-summary-cell text-right">
             <div>{{ props.row.rightSummary.kills }} : Total Kills ⚔️</div>
             <div>{{ formatCompact(props.row.rightSummary.damage) }} : Total Damage 💥</div>
             <div>{{ formatCompact(props.row.rightSummary.heal) }} : Total Heal 💚</div>
             <div>{{ formatPct(props.row.rightSummary.avgHitRate) }} : Avg Hit % 🎯</div>
+          </q-td>
+
+          <q-td key="view" :props="props">
+            <q-btn label="View" icon="visibility" color="blue-grey-10" text-color="white"
+              @click.stop="openMatch(props.row.match_uid)" class="q-mb-sm q-ml-sm" />
           </q-td>
         </q-tr>
 
@@ -131,23 +154,26 @@
                   <div class="team-label">{{ props.row.leftTeamName }}</div>
                   <div class="draft-icons">
                     <div class="mini-group">
-                      <div
-                        v-for="hero in props.row.leftPicks"
-                        :key="`lp-${hero.hero_id}-${hero.round_idx}`"
-                        class="mini-hero pick"
-                        :title="hero.heroName"
-                      >
-                        {{ hero.shortName }}
+                      <div v-for="hero in props.row.leftPicks" :key="`lp-${hero.hero_id}-${hero.round_idx}`"
+                        class="mini-hero pick">
+                        <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="mini-hero-img"
+                          @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+
+                        <q-tooltip>
+                          {{ hero.heroName }} - PICK
+                        </q-tooltip>
                       </div>
                     </div>
+
                     <div class="mini-group bans">
-                      <div
-                        v-for="hero in props.row.leftBans"
-                        :key="`lb-${hero.hero_id}-${hero.round_idx}`"
-                        class="mini-hero ban"
-                        :title="hero.heroName"
-                      >
-                        {{ hero.shortName }}
+                      <div v-for="hero in props.row.leftBans" :key="`lb-${hero.hero_id}-${hero.round_idx}`"
+                        class="mini-hero ban">
+                        <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="mini-hero-img"
+                          @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+
+                        <q-tooltip>
+                          {{ hero.heroName }} - BAN
+                        </q-tooltip>
                       </div>
                     </div>
                   </div>
@@ -158,34 +184,36 @@
                     {{ props.row.leftScore }} - {{ props.row.rightScore }}
                   </div>
                   <div class="text-caption text-grey-5">
-                    {{ props.row.modeLabel }} · {{ formatDuration(props.row.match_play_duration) }}
+                    {{ props.row.modeLabel }} · {{ props.row.mapLabel }}
                   </div>
                 </div>
 
                 <div class="draft-side right">
                   <div class="draft-icons">
                     <div class="mini-group bans">
-                      <div
-                        v-for="hero in props.row.rightBans"
-                        :key="`rb-${hero.hero_id}-${hero.round_idx}`"
-                        class="mini-hero ban"
-                        :title="hero.heroName"
-                      >
-                        {{ hero.shortName }}
+                      <div v-for="hero in props.row.rightBans" :key="`rb-${hero.hero_id}-${hero.round_idx}`"
+                        class="mini-hero ban">
+                        <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="mini-hero-img"
+                          @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+
+                        <q-tooltip>
+                          {{ hero.heroName }} - BAN
+                        </q-tooltip>
                       </div>
                     </div>
+
                     <div class="mini-group">
-                      <div
-                        v-for="hero in props.row.rightPicks"
-                        :key="`rp-${hero.hero_id}-${hero.round_idx}`"
-                        class="mini-hero pick"
-                        :title="hero.heroName"
-                      >
-                        {{ hero.shortName }}
+                      <div v-for="hero in props.row.rightPicks" :key="`rp-${hero.hero_id}-${hero.round_idx}`"
+                        class="mini-hero pick">
+                        <img :src="heroImage(hero.hero_id)" :alt="heroLabel(hero.hero_id)" class="mini-hero-img"
+                          @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+
+                        <q-tooltip>
+                          {{ hero.heroName }} - PICK
+                        </q-tooltip>
                       </div>
                     </div>
                   </div>
-                  <div class="team-label text-right">{{ props.row.rightTeamName }}</div>
                 </div>
               </div>
 
@@ -193,16 +221,8 @@
                 <div class="col-12 col-md-6">
                   <div class="team-panel">
                     <div class="team-panel-title">{{ props.row.leftTeamName }}</div>
-                    <q-table
-                      flat
-                      dense
-                      hide-bottom
-                      :rows="props.row.leftPlayers"
-                      :columns="playerColumns"
-                      row-key="player_uid"
-                      class="inner-table team-table team1-table"
-                      :pagination="{ rowsPerPage: 0 }"
-                    >
+                    <q-table flat dense hide-bottom :rows="props.row.leftPlayers" :columns="playerColumns"
+                      row-key="player_uid" class="inner-table team-table team1-table" :pagination="{ rowsPerPage: 0 }">
                       <template #body="p">
                         <q-tr :props="p" :class="playerRowClass(p.row, 'team1')">
                           <q-td key="player" :props="p">
@@ -216,16 +236,13 @@
                           <q-td key="hero" :props="p">
                             <div class="inner-hero-cell">
                               <div class="inner-hero-thumb-wrap">
-                                <img
-                                  :src="heroImage(p.row.cur_hero_id)"
-                                  :alt="heroLabel(p.row.cur_hero_id)"
+                                <img :src="heroImage(p.row.cur_hero_id)" :alt="heroLabel(p.row.cur_hero_id)"
                                   class="inner-hero-thumb"
-                                  @error="e => (e.target.src = '/imgs/heroes/empty.png')"
-                                />
+                                  @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
                               </div>
                               <div class="inner-hero-text">
                                 <span class="inner-hero-name">{{ heroNameOnly(p.row.cur_hero_id) }}</span>
-                                <span class="inner-hero-id">ID {{ p.row.cur_hero_id }}</span>
+                                <span class="inner-hero-role">{{ heroRole(p.row.cur_hero_id) }}</span>
                               </div>
                             </div>
                           </q-td>
@@ -245,16 +262,8 @@
                 <div class="col-12 col-md-6">
                   <div class="team-panel">
                     <div class="team-panel-title">{{ props.row.rightTeamName }}</div>
-                    <q-table
-                      flat
-                      dense
-                      hide-bottom
-                      :rows="props.row.rightPlayers"
-                      :columns="playerColumns"
-                      row-key="player_uid"
-                      class="inner-table team-table team2-table"
-                      :pagination="{ rowsPerPage: 0 }"
-                    >
+                    <q-table flat dense hide-bottom :rows="props.row.rightPlayers" :columns="playerColumns"
+                      row-key="player_uid" class="inner-table team-table team2-table" :pagination="{ rowsPerPage: 0 }">
                       <template #body="p">
                         <q-tr :props="p" :class="playerRowClass(p.row, 'team2')">
                           <q-td key="player" :props="p">
@@ -268,16 +277,13 @@
                           <q-td key="hero" :props="p">
                             <div class="inner-hero-cell">
                               <div class="inner-hero-thumb-wrap">
-                                <img
-                                  :src="heroImage(p.row.cur_hero_id)"
-                                  :alt="heroLabel(p.row.cur_hero_id)"
+                                <img :src="heroImage(p.row.cur_hero_id)" :alt="heroLabel(p.row.cur_hero_id)"
                                   class="inner-hero-thumb"
-                                  @error="e => (e.target.src = '/imgs/heroes/empty.png')"
-                                />
+                                  @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
                               </div>
                               <div class="inner-hero-text">
                                 <span class="inner-hero-name">{{ heroNameOnly(p.row.cur_hero_id) }}</span>
-                                <span class="inner-hero-id">ID {{ p.row.cur_hero_id }}</span>
+                                <span class="inner-hero-role">{{ heroRole(p.row.cur_hero_id) }}</span>
                               </div>
                             </div>
                           </q-td>
@@ -305,12 +311,13 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router'
 import { api, publicAPI } from 'src/boot/axios';
 import heroesRaw from '../assets/heroes_UO.json'
 import mapsRaw from '../assets/maps.json'
 
 const $q = useQuasar();
-
+const router = useRouter()
 const matches = ref([])
 const loading = ref(false)
 
@@ -325,9 +332,10 @@ const columns = [
   { name: 'name', label: 'Name', field: 'title', align: 'left', style: 'width: 15%' },
   { name: 'score', label: 'Score', field: 'scoreLabel', align: 'center', style: 'width: 10%' },
   { name: 'leftSummary', label: 'Summary Team 1', field: 'leftSummary', align: 'left', style: 'width: 10%' },
-  { name: 'leftHeroes', label: 'Heroes Team 1', field: 'leftHeroes', align: 'left', style: 'width: 25%' },
-  { name: 'rightHeroes', label: 'Heroes Team 2', field: 'rightHeroes', align: 'right', style: 'width: 25%' },
-  { name: 'rightSummary', label: 'Summary Team 2', field: 'rightSummary', align: 'right', style: 'width: 10%' }
+  { name: 'leftHeroes', label: 'Ban/Pick Team 1', field: 'leftHeroes', align: 'left', style: 'width: 20%' },
+  { name: 'rightHeroes', label: 'Ban/Pick Team 2', field: 'rightHeroes', align: 'right', style: 'width: 20%' },
+  { name: 'rightSummary', label: 'Summary Team 2', field: 'rightSummary', align: 'right', style: 'width: 10%' },
+  { name: 'view', label: '', field: 'view', align: 'center', style: 'width: 10%' }
 ]
 
 const playerColumns = [
@@ -358,6 +366,10 @@ const loadMatches = async () => {
   }
 };
 
+function openMatch(matchUid) {
+  router.push(`/matches/${encodeURIComponent(matchUid)}`)
+}
+
 function safeParseLeagueInfo(value) {
   try {
     return typeof value === 'string' ? JSON.parse(value) : (value || {})
@@ -373,13 +385,21 @@ function toTitle(text = '') {
 }
 
 function heroLabel(heroId) {
-  const hero = heroMap[Number(heroId)]
-  if (!hero) return `Hero ${heroId}`
+  let normalizedId = heroId
+  if (heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    normalizedId = 1057
+  }
+  const hero = heroMap[Number(normalizedId)]
+  if (!hero) return `None`
   return `${toTitle(hero.name)} (${hero.id})`
 }
 
 function shortHeroName(heroId) {
-  const hero = heroMap[Number(heroId)]
+  let normalizedId = heroId
+  if (heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    normalizedId = 1057
+  }
+  const hero = heroMap[Number(normalizedId)]
   if (!hero?.name) return String(heroId)
 
   const words = toTitle(hero.name).split(' ')
@@ -390,7 +410,12 @@ function shortHeroName(heroId) {
 
 function mapLabel(mapId) {
   const map = mapMap[Number(mapId)]
-  return map?.full_name || map?.name || `Map ${mapId}`
+  return map?.sub_name || map?.name || `Map ${mapId}`
+}
+
+function mapMode(mapId) {
+  const map = mapMap[Number(mapId)]
+  return map?.game_mode || `Map ${mapId}`
 }
 
 function formatCompact(value) {
@@ -404,12 +429,12 @@ function formatPct(value) {
   return `${(Number(value || 0) * 100).toFixed(1)}%`
 }
 
-function formatDuration(seconds) {
-  const total = Math.floor(Number(seconds || 0))
-  const m = Math.floor(total / 60)
-  const s = total % 60
-  return `${m}:${String(s).padStart(2, '0')}`
-}
+// function formatDuration(seconds) {
+//   const total = Math.floor(Number(seconds || 0))
+//   const m = Math.floor(total / 60)
+//   const s = total % 60
+//   return `${m}:${String(s).padStart(2, '0')}`
+// }
 
 function summarizeTeam(players) {
   const total = players.reduce((acc, p) => {
@@ -437,13 +462,17 @@ function normalizeDraft(info = []) {
 
     const roundIdx = item.round_index ?? item.round_idx ?? 0
 
+    let normalizedHeroId = item.hero_id
+    if (item.hero_id === 10571 || item.hero_id === 10572 || item.hero_id === 10573) {
+      normalizedHeroId = 1057
+    }
     return {
       ...item,
       camp: Number(camp),
       round_idx: Number(roundIdx),
       isPick,
-      heroName: heroLabel(item.hero_id),
-      shortName: shortHeroName(item.hero_id)
+      heroName: heroLabel(normalizedHeroId),
+      shortName: shortHeroName(normalizedHeroId)
     }
   })
 }
@@ -467,7 +496,7 @@ const matchRows = computed(() => {
       }))
 
     const rightPlayers = players
-      .filter(p => Number(p.camp) === 0)
+      .filter(p => Number(p.camp) === 2)
       .map(p => ({
         ...p,
         isMVP: Number(row.mvp_uid) === Number(p.player_uid),
@@ -477,13 +506,9 @@ const matchRows = computed(() => {
     const leftTeamName = leagueInfo?.['1']?.club_team_name || 'Team 1'
     const rightTeamName = leagueInfo?.['2']?.club_team_name || 'Team 2'
 
-    const leftScore =
-      leagueInfo?.['1']?.score ??
-      dynamic?.score_info?.['1'] ?? 0
+    const leftScore = dynamic?.score_info?.['1'] ?? 0
 
-    const rightScore =
-      leagueInfo?.['2']?.score ??
-      dynamic?.score_info?.['0'] ?? 0
+    const rightScore = dynamic?.score_info?.['2'] ?? 0
 
     return {
       ...row,
@@ -498,69 +523,16 @@ const matchRows = computed(() => {
       rightSummary: summarizeTeam(rightPlayers),
       leftPicks: draft.filter(d => d.camp === 1 && d.isPick),
       leftBans: draft.filter(d => d.camp === 1 && !d.isPick),
-      rightPicks: draft.filter(d => d.camp === 0 && d.isPick),
-      rightBans: draft.filter(d => d.camp === 0 && !d.isPick),
+      rightPicks: draft.filter(d => d.camp === 2 && d.isPick),
+      rightBans: draft.filter(d => d.camp === 2 && !d.isPick),
       scoreLabel: `${leftScore} - ${rightScore}`,
       // stateLabel: 'Ended',
       // stateColor: 'positive',
       mapLabel: mapLabel(row.match_map_id),
-      modeLabel: `Mode ${row.game_mode_id}`
+      modeLabel: mapMode(row.match_map_id)
     }
   })
 })
-// const matchRows = computed(() => {
-//   return matches.value.map((row) => {
-//     const leagueInfo = safeParseLeagueInfo(row.dynamic_fields?.league_round_info)
-//     const draft = normalizeDraft(row.dynamic_fields?.ban_pick_info || [])
-
-//     const leftPlayers = (row.match_players || [])
-//       .filter(p => Number(p.camp) === 1)
-//       .map(p => ({
-//         ...p,
-//         isMVP: Number(row.mvp_uid) === Number(p.player_uid),
-//         isSVP: Number(row.svp_uid) === Number(p.player_uid)
-//       }))
-
-//     const rightPlayers = (row.match_players || [])
-//       .filter(p => Number(p.camp) === 0)
-//       .map(p => ({
-//         ...p,
-//         isMVP: Number(row.mvp_uid) === Number(p.player_uid),
-//         isSVP: Number(row.svp_uid) === Number(p.player_uid)
-//       }))
-
-//     const leftTeamName = leagueInfo?.['1']?.club_team_name || 'Team 1'
-//     const rightTeamName = leagueInfo?.['2']?.club_team_name || 'Team 2'
-//     const leftScore = leagueInfo?.['1']?.score ?? row.dynamic_fields?.score_info?.['1'] ?? 0
-//     const rightScore = leagueInfo?.['2']?.score ?? row.dynamic_fields?.score_info?.['0'] ?? 0
-
-//     const leftPicks = draft.filter(d => d.camp === 1 && d.isPick)
-//     const leftBans = draft.filter(d => d.camp === 1 && !d.isPick)
-//     const rightPicks = draft.filter(d => d.camp === 0 && d.isPick)
-//     const rightBans = draft.filter(d => d.camp === 0 && !d.isPick)
-
-//     return {
-//       ...row,
-//       title: `${leftTeamName} vs ${rightTeamName}`,
-//       leftTeamName,
-//       rightTeamName,
-//       leftScore,
-//       rightScore,
-//       leftPlayers,
-//       rightPlayers,
-//       leftSummary: summarizeTeam(leftPlayers),
-//       rightSummary: summarizeTeam(rightPlayers),
-//       leftPicks,
-//       leftBans,
-//       rightPicks,
-//       rightBans,
-//       stateLabel: 'Ended',
-//       stateColor: 'positive',
-//       mapLabel: mapLabel(row.match_map_id),
-//       modeLabel: `Mode ${row.game_mode_id}`
-//     }
-//   })
-// })
 
 function normalizeHeroName(name = '') {
   return String(name)
@@ -577,14 +549,36 @@ function toHeroFileName(name = '') {
 }
 
 function heroNameOnly(heroId) {
-  const hero = heroMap[Number(heroId)]
+  let normalizedId = heroId
+  if (heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    normalizedId = 1057
+  }
+  const hero = heroMap[Number(normalizedId)]
   return hero ? normalizeHeroName(hero.name) : `Hero ${heroId}`
 }
 
 function heroImage(heroId) {
-  const hero = heroMap[Number(heroId)]
-  if (!hero?.name) return '/imgs/heroes/empty.png'
-  return `/imgs/heroes/${heroId}_${toHeroFileName(normalizeHeroName(hero.name))}.png`
+  let heroImageID = heroId
+  if (heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    heroImageID = 1057
+  }
+  const hero = heroMap[Number(heroImageID)]
+  if (!hero?.name) return '/imgs/heroes/0_unknown.png'
+  return `/imgs/heroes/${heroImageID}_${toHeroFileName(normalizeHeroName(hero.name))}.png`
+}
+
+function heroRole(heroId) {
+  let role = 'Unknown'
+  if (heroId === 10571 || heroId === 10572 || heroId === 10573) {
+    const hero = heroMap[Number(1057)]
+    if (heroId === 10571) role = hero?.role?.[0]
+    else if (heroId === 10572) role = hero?.role?.[1]
+    else if (heroId === 10573) role = hero?.role?.[2]
+  } else {
+    const hero = heroMap[Number(heroId)]
+    role = hero?.role || 'Unknown'
+  }
+  return `${role}`
 }
 
 function playerRowClass(player, team) {
@@ -681,38 +675,65 @@ onMounted(() => {
 
 .draft-icons {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 6px;
 }
 
 .mini-group {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
-.mini-group.bans .mini-hero {
+.mini-group.bans {
+  opacity: 0.9;
+}
+
+/* .mini-group.bans .mini-hero {
   opacity: 0.75;
   border-style: dashed;
-}
+} */
 
 .mini-hero {
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-  font-weight: 700;
-  background: #26262b;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
 }
 
 .mini-hero.pick {
-  background: #223047;
+  width: 50px;
+  height: 50px;
+  border-color: rgba(96, 165, 250, 0.55);
 }
 
 .mini-hero.ban {
-  background: #3a2222;
+  width: 50px;
+  height: 50px;
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.mini-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12) translateY(-5%);
+}
+
+.mini-hero.ban .mini-hero-img {
+  filter: grayscale(1) brightness(0.5);
+  opacity: 0.8;
+}
+
+.mini-hero.ban::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
 }
 
 .score-center {
@@ -748,8 +769,7 @@ onMounted(() => {
 .hero-strip {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-width: 220px;
+  gap: 8px;
 }
 
 .left-strip {
@@ -763,36 +783,76 @@ onMounted(() => {
 .hero-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .hero-group.bans {
   gap: 4px;
 }
 
-.hero-box {
+/* .hero-box {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
   display: grid;
   place-items: center;
   font-weight: 700;
   color: #fff;
+} */
+
+.hero-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12) translateY(-4%);
 }
 
 .hero-box.pick {
+  border-color: rgba(96, 165, 250, 0.45);
+}
+
+.hero-box.ban {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.hero-box.ban .hero-box-img {
+  filter: grayscale(1) brightness(0.55);
+  opacity: 0.75;
+}
+
+.hero-box.ban::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+/* .hero-box.pick {
   width: 34px;
   height: 34px;
   background: #223047;
   font-size: 11px;
-}
+} */
 
-.hero-box.ban {
+/* .hero-box.ban {
   width: 24px;
   height: 24px;
   background: #3a2222;
   font-size: 9px;
   opacity: 0.85;
-}
+} */
 
 .team-summary-cell {
   line-height: 1.8;
@@ -866,7 +926,7 @@ onMounted(() => {
   /* height: 80%; */
   object-fit: cover;
   transform: scale(1.2) translateY(-8%)
-  /* transform: scale(1.08); */
+    /* transform: scale(1.08); */
 }
 
 .inner-hero-cell {
@@ -892,7 +952,7 @@ onMounted(() => {
   /* height: 80%; */
   object-fit: cover;
   transform: scale(1.2) translateY(-8%)
-  /* transform: scale(1.08); */
+    /* transform: scale(1.08); */
 }
 
 .inner-hero-text {
@@ -906,7 +966,7 @@ onMounted(() => {
   line-height: 1.2;
 }
 
-.inner-hero-id {
+.inner-hero-role {
   font-size: 12px;
   color: #94a3b8;
   line-height: 1.1;

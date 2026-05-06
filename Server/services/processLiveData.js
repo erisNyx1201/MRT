@@ -37,7 +37,7 @@ function formatHeroMeta(heroId, heroMap = {}) {
       imageId: imageHeroId,
       name: `Hero ${heroId}`,
       displayName: `Hero ${heroId}`,
-      image: '/imgs/heroes/empty.png',
+      image: '/imgs/heroes/0_unknown.png',
       abilities: [],
     }
   }
@@ -62,7 +62,7 @@ function formatHeroMeta(heroId, heroMap = {}) {
 //       id: heroId,
 //       name: `Hero ${heroId}`,
 //       displayName: `Hero ${heroId}`,
-//       image: '/imgs/heroes/empty.png',
+//       image: '/imgs/heroes/0_unknown.png',
 //       abilities: [],
 //     };
 //   }

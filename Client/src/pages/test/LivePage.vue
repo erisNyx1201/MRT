@@ -88,9 +88,9 @@
               <q-td key="hero" :props="p">
                 <div class="hero-cell">
                   <div class="hero-thumb-wrap">
-                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
+                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/0_unknown.png'"
                       :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`" class="hero-thumb"
-                      @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+                      @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
                   </div>
                   <div class="hero-text">
                     <span class="hero-name">
@@ -135,9 +135,9 @@
               <q-td key="hero" :props="p">
                 <div class="hero-cell">
                   <div class="hero-thumb-wrap">
-                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/empty.png'"
+                    <img :src="p.row.heroMeta?.image || '/imgs/heroes/0_unknown.png'"
                       :alt="p.row.heroMeta?.displayName || `Hero ${p.row.heroId}`" class="hero-thumb"
-                      @error="e => (e.target.src = '/imgs/heroes/empty.png')" />
+                      @error="e => (e.target.src = '/imgs/heroes/0_unknown.png')" />
                   </div>
                   <div class="hero-text">
                     <span class="hero-name">

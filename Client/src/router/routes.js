@@ -3,32 +3,30 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('pages/RoomPage.vue') },
+      { path: '/', component: () => import('pages/MatchesPage.vue') },
+      { path: '/team', component: () => import('pages/database/TeamManager.vue') },
+      { path: '/room', component: () => import('pages/RoomPage.vue') },
+      { path: '/matches', component: () => import('pages/MatchesPage.vue') },
       {
-        path: 'team',
-        children: [{ path: '', component: () => import('pages/database/TeamManager.vue') }],
-      },
-      {
-        path: 'room',
-        children: [{ path: '', component: () => import('pages/RoomPage.vue') }],
-      },
-      {
-        path: 'matches',
-        children: [
-          { path: '', component: () => import('pages/MatchesPage.vue') },
-        ],
+        path: '/matches/:match_uid',
+        name: 'match-detail',
+        component: () => import('pages/MatchDetailPage.vue'),
       },
       {
         path: 'live',
         children: [
-          // { path: '', component: () => import('pages/LivePage.vue') },
-          { path: 'dashboard', name: 'DashboardPage', component: () => import('pages/DashboardPage.vue') },
+          { path: 'draft', name: 'DraftPage', component: () => import('pages/DraftPage.vue') },
+          {
+            path: 'dashboard',
+            name: 'DashboardPage',
+            component: () => import('pages/DashboardPage.vue'),
+          },
         ],
       },
       {
         path: 'test',
         // children: [{ path: '', component: () => import('pages/test/LiveDashboard.vue') }],
-        children: [{ path: '', component: () => import('pages/test/LiveObjective.vue') }],
+        children: [{ path: '', component: () => import('pages/test/testObjective.vue') }],
       },
     ],
   },

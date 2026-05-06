@@ -26,9 +26,9 @@ const mapMap = Object.fromEntries(
   (Array.isArray(mapsRaw) ? mapsRaw : []).map((map) => [String(map.id), map]),
 );
 
-const latestRoomInfoCache = new Map()
+const latestRoomInfoCache = new Map();
 const roomBattleTracker = new Map();
-const latestBattleCache = new Map()
+const latestBattleCache = new Map();
 
 /* -----------------------------
    Draft helpers
@@ -175,17 +175,27 @@ function getHitRateFromStats(statisticsData = {}, playerUid, heroId) {
 
   if (!hitObj || !hitObj.use_cnt) return 0;
 
-  return Number(hitObj.enemy_hit || hitObj.hero_hit || 0) / Number(hitObj.use_cnt || 1);
+  return (
+    Number(hitObj.enemy_hit || hitObj.hero_hit || 0) /
+    Number(hitObj.use_cnt || 1)
+  );
 }
 
-function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {}) {
+function mapLivePlayerToMatchPlayer(
+  playerUid,
+  player = {},
+  statisticsData = {},
+) {
   const common = player?.tab_data?.common_data || {};
   const heroId = Number(player.select_hero || player.preview_hero || 0);
+  const hitRateDetail =
+    statisticsData[`Career_HitRate_hero:${playerUid}_${heroId}`] || {};
 
   return {
     player_uid: Number(playerUid),
     nick_name: player.player_name || `Player ${playerUid}`,
-    camp: Number(player.camp || 0),
+    // camp: Number(player.camp || 0),
+    camp: Number(player.camp) || Number(player.battle_side) || 0,
     cur_hero_id: heroId,
     is_online: 1,
 
@@ -201,10 +211,28 @@ function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {})
 
     total_hero_damage_taken: Number(common.total_token_damage || 0),
     total_damage_taken: Number(common.total_token_damage || 0),
+    solo_kill: Number(player.solo_kill || 0),
+    max_continue_kill_count: Number(player["consecutive KOs"] || 0),
 
     session_hit_rate:
       Number(common.main_hit_rate || 0) ||
       getHitRateFromStats(statisticsData, playerUid, heroId),
+
+    curr_energy: Number(player.curr_energy || 0),
+    max_energy: Number(player.max_energy || 0),
+
+    ult_ratio:
+      Number(player.max_energy || 0) > 0
+        ? Number(player.curr_energy || 0) / Number(player.max_energy || 1)
+        : 0,
+
+    hp: Number(player.hp || 0),
+
+    abilities: player.abilities_cooldown || {},
+    special_data: player?.tab_data?.special_data || {},
+
+    continue_kill_kda: Number(player["continue_kill(KDA)"] || 0),
+    consecutive_kos: Number(player["consecutive KOs"] || 0),
 
     dynamic_fields: {
       live_responsibility: player.responsibility,
@@ -212,9 +240,16 @@ function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {})
       live_curr_energy: player.curr_energy,
       live_max_energy: player.max_energy,
       live_mvp_val: player.mvp_val,
+      live_solo_kill: Number(player.solo_kill || 0),
+      live_continue_kill_kda: Number(player["continue_kill(KDA)"] || 0),
+      live_consecutive_kos: Number(player["consecutive KOs"] || 0),
       live_respawn_time: player.respawn_time,
       live_abilities_cooldown: player.abilities_cooldown || {},
       live_special_data: player?.tab_data?.special_data || {},
+      live_ult_ratio:
+        Number(player.max_energy || 0) > 0
+          ? Number(player.curr_energy || 0) / Number(player.max_energy || 1)
+          : 0,
     },
 
     player_heroes: heroId
@@ -222,7 +257,9 @@ function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {})
           {
             hero_id: heroId,
             play_time: Number(
-              statisticsData[`Career_HeroUseTime_hero:${playerUid}_${heroId}`] || 0,
+              statisticsData[
+                `Career_HeroUseTime_hero:${playerUid}_${heroId}`
+              ] || 0,
             ),
 
             k: Number(
@@ -252,7 +289,9 @@ function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {})
                 0,
             ),
             total_hero_damage_taken: Number(
-              statisticsData[`Career_DamageTaken_hero:${playerUid}_${heroId}`] ||
+              statisticsData[
+                `Career_DamageTaken_hero:${playerUid}_${heroId}`
+              ] ||
                 common.total_token_damage ||
                 0,
             ),
@@ -263,13 +302,36 @@ function mapLivePlayerToMatchPlayer(playerUid, player = {}, statisticsData = {})
             session_hit_rate:
               Number(common.main_hit_rate || 0) ||
               getHitRateFromStats(statisticsData, playerUid, heroId),
+
+            hit_rate_detail: hitRateDetail || {},
+
+            hero_dynamic_fields: {
+              enemy_hit: hitRateDetail?.enemy_hit || 0,
+              ally_hit: hitRateDetail?.ally_hit || 0,
+              real_hit_hero_cnt: hitRateDetail?.real_hit_hero_cnt || 0,
+              shield_hit: hitRateDetail.shield_hit || 0,
+              summoner_hit: hitRateDetail.summoner_hit || 0,
+              chaos_hit: hitRateDetail.chaos_hit || 0,
+              use_cnt: hitRateDetail.use_cnt || 0,
+            },
           },
         ]
       : [],
   };
 }
 
-function buildLiveMatchFromBattleStats(roomId, rawBattleStats = {}) {
+async function getRoomInfoByRoomId(roomId) {
+  const roomList = await getRoomList();
+  const rooms = Array.isArray(roomList?.data) ? roomList.data : [];
+
+  return rooms.find((room) => String(room.room_id) === String(roomId)) || null;
+}
+
+function buildLiveMatchFromBattleStats(
+  roomId,
+  rawBattleStats = {},
+  roomInfo = null,
+) {
   const battleData = getBattleData(rawBattleStats);
   const level = battleData.level_info || {};
   const playersData = battleData.players_data || {};
@@ -285,10 +347,11 @@ function buildLiveMatchFromBattleStats(roomId, rawBattleStats = {}) {
     source: "live_battle",
     room_id: String(roomId),
 
-    match_time_stamp: Math.floor(Date.now() / 1000),
-    match_map_id: Number(level.map_id || 0),
-    game_mode_id: Number(level.game_mode_id || battleData.game_mode_id || 0),
-    match_play_duration: Number(level.fight_time || battleData.fight_time || 0),
+    match_time_stamp:
+      Number(battleData.battle_start_time) || Math.floor(Date.now() / 1000),
+    match_map_id: Number(level.map_id ?? battleData.map_id ?? 0),
+    game_mode_id: Number(level.game_mode_id ?? battleData.game_mode_id ?? 0),
+    match_play_duration: Number(level.fight_time ?? battleData.fight_time ?? 0),
 
     mvp_uid: mvps?.[1] ? Number(mvps[1]) : undefined,
     svp_uid: mvps?.[2] ? Number(mvps[2]) : undefined,
@@ -297,15 +360,67 @@ function buildLiveMatchFromBattleStats(roomId, rawBattleStats = {}) {
       mode_id: Number(level.mode_id || battleData.mode_id || 0),
       battle_id: String(battleData.battle_id || roomId),
       score_info: {
-        1: Number(level.round_score?.[0] || 0),
-        2: Number(level.round_score?.[1] || 0),
+        1: Number(
+          roomInfo?.group_info?.["1"]?.score ?? level.round_score?.[0] ?? 0,
+        ),
+        2: Number(
+          roomInfo?.group_info?.["2"]?.score ?? level.round_score?.[1] ?? 0,
+        ),
       },
       live_level_info: level,
+      league_round_info: JSON.stringify({
+        1: {
+          club_team_name: roomInfo?.group_info?.["1"]?.name || "Team 1",
+          club_team_mini_name: roomInfo?.group_info?.["1"]?.mini_name || "T1",
+          score: Number(roomInfo?.group_info?.["1"]?.score ?? 0),
+        },
+        2: {
+          club_team_name: roomInfo?.group_info?.["2"]?.name || "Team 2",
+          club_team_mini_name: roomInfo?.group_info?.["2"]?.mini_name || "T2",
+          score: Number(roomInfo?.group_info?.["2"]?.score ?? 0),
+        },
+        max_round_cnt: Number(roomInfo?.max_bo || 0),
+        round_result: roomInfo?.round_results || [],
+        league_tag: roomInfo?.league_tag || "",
+      }),
+      ban_pick_info: battleData.ban_pick_info || [],
     },
 
     match_players: matchPlayers,
     live_snapshot: rawBattleStats,
   };
+}
+
+function isRealPlayedMatch(rawBattleStats = {}) {
+  const battle = getBattleData(rawBattleStats);
+
+  const players = battle.players_data || {};
+  const level = battle.level_info || {};
+
+  // no players
+  if (Object.keys(players).length === 0) {
+    return false;
+  }
+
+  // total activity check
+  let totalKills = 0;
+  let totalDamage = 0;
+  let totalHeal = 0;
+
+  Object.values(players).forEach((player) => {
+    const common = player?.tab_data?.common_data || {};
+
+    totalKills += Number(common.kill_score || 0);
+    totalDamage += Number(common.total_hero_damage || 0);
+    totalHeal += Number(common.total_heal || 0);
+  });
+
+  // absolutely nothing happened
+  if (totalKills === 0 && totalDamage < 500 && totalHeal < 500) {
+    return false;
+  }
+
+  return true;
 }
 
 async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
@@ -323,7 +438,24 @@ async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
   }
 
   if (!currentHasBattle && previous?.lastBattleStats && !previous.saved) {
-    const payload = buildLiveMatchFromBattleStats(key, previous.lastBattleStats);
+    if (!isRealPlayedMatch(previous.lastBattleStats)) {
+      roomBattleTracker.set(key, {
+        ...previous,
+        saved: true,
+        skipped: true,
+        skippedAt: Date.now(),
+      });
+
+      apiLogger.info(`⏭️ Skipped cancelled round for room ${key}`);
+      return;
+    }
+
+    const roomInfo = await getRoomInfoByRoomId(key);
+    const payload = buildLiveMatchFromBattleStats(
+      key,
+      previous.lastBattleStats,
+      roomInfo,
+    );
 
     await Match.findOneAndUpdate(
       { match_uid: payload.match_uid },
@@ -332,6 +464,44 @@ async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
         upsert: true,
         new: true,
         setDefaultsOnInsert: true,
+      },
+    );
+
+    await Series.findOneAndUpdate(
+      { room_id: key },
+      {
+        $set: {
+          battle_id: roomInfo?.battle_id,
+          max_bo: roomInfo?.max_bo || 0,
+          cur_bo: roomInfo?.cur_bo || 0,
+          round_results: roomInfo?.round_results || [],
+
+          team1: {
+            camp: 1,
+            name: roomInfo?.group_info?.["1"]?.name || "Team 1",
+            mini_name: roomInfo?.group_info?.["1"]?.mini_name || "T1",
+            icon_url: roomInfo?.group_info?.["1"]?.icon_url || "",
+            score: roomInfo?.group_info?.["1"]?.score || 0,
+          },
+
+          team2: {
+            camp: 2,
+            name: roomInfo?.group_info?.["2"]?.name || "Team 2",
+            mini_name: roomInfo?.group_info?.["2"]?.mini_name || "T2",
+            icon_url: roomInfo?.group_info?.["2"]?.icon_url || "",
+            score: roomInfo?.group_info?.["2"]?.score || 0,
+          },
+
+          raw_room_info: roomInfo || null,
+        },
+
+        $addToSet: {
+          matches: payload.match_uid,
+        },
+      },
+      {
+        upsert: true,
+        new: true,
       },
     );
 
@@ -345,12 +515,16 @@ async function saveLiveBattleIfNeeded(roomId, rawBattleStats) {
   }
 }
 
-function buildPlayerKdaUltFromProcessed(player = {}, teamName = '', shortName = '') {
-  const ultRatio = Number(player.ultRatio || 0)
-  const percent = ultRatio * 100
+function buildPlayerKdaUltFromProcessed(
+  player = {},
+  teamName = "",
+  shortName = "",
+) {
+  const ultRatio = Number(player.ultRatio || 0);
+  const percent = ultRatio * 100;
 
   return {
-    name: player.playerName || '-',
+    name: player.playerName || "-",
     team: teamName,
     short: shortName,
     camp: player.camp,
@@ -362,11 +536,11 @@ function buildPlayerKdaUltFromProcessed(player = {}, teamName = '', shortName = 
     ult: {
       percent: Number(percent.toFixed(1)),
       is_ready: percent >= 100,
-      status: percent >= 100 ? 'READY' : 'NOT READY',
+      status: percent >= 100 ? "READY" : "NOT READY",
     },
 
-    display: `${teamName} | ${player.playerName} | ${player.kills}/${player.deaths}/${player.assists}`
-  }
+    display: `${teamName} | ${player.playerName} | ${player.kills}/${player.deaths}/${player.assists}`,
+  };
 }
 
 /* -----------------------------
@@ -377,15 +551,15 @@ router.get("/rooms", async (req, res) => {
   try {
     const data = await getRoomList();
 
-    const rooms = data?.data || data || []
+    const rooms = data?.data || data || [];
 
-    rooms.forEach(room => {
-      const roomId = String(room.room_id)
+    rooms.forEach((room) => {
+      const roomId = String(room.room_id);
 
       latestRoomInfoCache.set(roomId, {
         group_info: room.group_info || {},
-      })
-    })
+      });
+    });
 
     res.json(data);
   } catch (err) {
@@ -428,7 +602,7 @@ router.get("/battle/:roomId", async (req, res) => {
       mapMap,
     });
 
-    latestBattleCache.set(roomId, processed)
+    latestBattleCache.set(roomId, processed);
 
     res.json(processed);
   } catch (err) {
@@ -448,7 +622,10 @@ router.get("/rawbattle/:roomId", async (req, res) => {
     const data = await getBattleStatistics(req.params.roomId);
     res.json(data);
   } catch (err) {
-    apiLogger.error(`Error fetching battle statistics ${req.params.roomId}:`, err);
+    apiLogger.error(
+      `Error fetching battle statistics ${req.params.roomId}:`,
+      err,
+    );
     res.status(500).json({
       message: "Failed to fetch battle statistics",
       error: err.message,
@@ -470,59 +647,59 @@ router.post("/replay-query-match", async (req, res) => {
   }
 });
 
-router.get('/blue/:playerIndex', (req, res) => {
+router.get("/blue/:playerIndex", (req, res) => {
   try {
-    const playerIndex = Number(req.params.playerIndex)
+    const playerIndex = Number(req.params.playerIndex);
 
-    const latestRoom = Array.from(latestBattleCache.keys()).pop()
-    const data = latestBattleCache.get(latestRoom)
+    const latestRoom = Array.from(latestBattleCache.keys()).pop();
+    const data = latestBattleCache.get(latestRoom);
 
     if (!data) {
-      return res.status(404).json({ message: 'No live data available' })
+      return res.status(404).json({ message: "No live data available" });
     }
 
-    const roomInfo = latestRoomInfoCache.get(latestRoom) || {}
-    const teamName = roomInfo.group_info?.["1"]?.name || "BLUE"
-    const shortName = roomInfo.group_info?.["1"]?.mini_name || "BLU"
+    const roomInfo = latestRoomInfoCache.get(latestRoom) || {};
+    const teamName = roomInfo.group_info?.["1"]?.name || "BLUE";
+    const shortName = roomInfo.group_info?.["1"]?.mini_name || "BLU";
 
-    const players = data?.teams?.team1?.players || []
-    const player = players[playerIndex - 1]
+    const players = data?.teams?.team1?.players || [];
+    const player = players[playerIndex - 1];
 
     if (!player) {
-      return res.status(404).json({ message: 'Player not found' })
+      return res.status(404).json({ message: "Player not found" });
     }
 
-    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName))
+    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName));
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(500).json({ message: err.message });
   }
-})
+});
 
-router.get('/red/:playerIndex', (req, res) => {
+router.get("/red/:playerIndex", (req, res) => {
   try {
-    const playerIndex = Number(req.params.playerIndex)
+    const playerIndex = Number(req.params.playerIndex);
 
-    const latestRoom = Array.from(latestBattleCache.keys()).pop()
-    const data = latestBattleCache.get(latestRoom)
+    const latestRoom = Array.from(latestBattleCache.keys()).pop();
+    const data = latestBattleCache.get(latestRoom);
 
     if (!data) {
-      return res.status(404).json({ message: 'No live data available' })
+      return res.status(404).json({ message: "No live data available" });
     }
 
-    const roomInfo = latestRoomInfoCache.get(latestRoom) || {}
-    const teamName = roomInfo.group_info?.["2"]?.name || "RED"
-    const shortName = roomInfo.group_info?.["2"]?.mini_name || "RED"
-    const players = data?.teams?.team2?.players || []
-    const player = players[playerIndex - 1]
+    const roomInfo = latestRoomInfoCache.get(latestRoom) || {};
+    const teamName = roomInfo.group_info?.["2"]?.name || "RED";
+    const shortName = roomInfo.group_info?.["2"]?.mini_name || "RED";
+    const players = data?.teams?.team2?.players || [];
+    const player = players[playerIndex - 1];
 
     if (!player) {
-      return res.status(404).json({ message: 'Player not found' })
+      return res.status(404).json({ message: "Player not found" });
     }
 
-    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName))
+    res.json(buildPlayerKdaUltFromProcessed(player, teamName, shortName));
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(500).json({ message: err.message });
   }
-})
+});
 
 module.exports = router;
