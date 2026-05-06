@@ -18,27 +18,64 @@ function toHeroFileName(name = '') {
     .replace(/[^\w-]/g, '');
 }
 
+const HERO_IMAGE_ALIASES = {
+  10571: 1057, // Deadpool Duelist
+  10572: 1057, // Deadpool Vanguard
+  10573: 1057, // Deadpool Strategist
+}
+
 function formatHeroMeta(heroId, heroMap = {}) {
-  const hero = heroMap[String(heroId)] || heroMap[Number(heroId)];
+  const imageHeroId = HERO_IMAGE_ALIASES[Number(heroId)] || heroId
+  const hero =
+    heroMap[String(heroId)] ||
+    heroMap[String(imageHeroId)] ||
+    heroMap[Number(imageHeroId)]
+
   if (!hero) {
     return {
       id: heroId,
+      imageId: imageHeroId,
       name: `Hero ${heroId}`,
       displayName: `Hero ${heroId}`,
       image: '/imgs/heroes/empty.png',
       abilities: [],
-    };
+    }
   }
 
-  const displayName = normalizeHeroName(hero.name);
+  const displayName = normalizeHeroName(hero.name)
 
   return {
     ...hero,
+    id: heroId,          
+    imageId: imageHeroId,
     displayName,
-    image: `/imgs/heroes/${heroId}_${toHeroFileName(displayName)}.png`,
+    image: `/imgs/heroes/${imageHeroId}_${toHeroFileName(displayName)}.png`,
     abilities: Array.isArray(hero.abilities) ? hero.abilities : [],
-  };
+  }
 }
+
+// before deadpool rework
+// function formatHeroMeta(heroId, heroMap = {}) {
+//   const hero = heroMap[String(heroId)] || heroMap[Number(heroId)];
+//   if (!hero) {
+//     return {
+//       id: heroId,
+//       name: `Hero ${heroId}`,
+//       displayName: `Hero ${heroId}`,
+//       image: '/imgs/heroes/empty.png',
+//       abilities: [],
+//     };
+//   }
+
+//   const displayName = normalizeHeroName(hero.name);
+
+//   return {
+//     ...hero,
+//     displayName,
+//     image: `/imgs/heroes/${heroId}_${toHeroFileName(displayName)}.png`,
+//     abilities: Array.isArray(hero.abilities) ? hero.abilities : [],
+//   };
+// }
 
 function getAbilityName(heroId, abilityId, heroMap = {}) {
   const hero = heroMap[String(heroId)] || heroMap[Number(heroId)];

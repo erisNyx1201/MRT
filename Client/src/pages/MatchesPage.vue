@@ -305,7 +305,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar';
-import { api } from 'src/boot/axios';
+import { api, publicAPI } from 'src/boot/axios';
 import heroesRaw from '../assets/heroes_UO.json'
 import mapsRaw from '../assets/maps.json'
 
@@ -343,7 +343,14 @@ const playerColumns = [
 
 const loadMatches = async () => {
   try {
-    const response = await api.get('/matches');
+    let response = null;
+
+    if (window.location.href.includes('devtunnels') && window.location.href.includes('9008')) {
+      response = await publicAPI.get('/matches');
+    } else {
+      response = await api.get('/matches');
+    }
+    // const response = await api.get('/matches');
     matches.value = response.data;
   } catch (err) {
     console.error('Failed to load matches', err);

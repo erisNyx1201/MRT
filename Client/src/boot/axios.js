@@ -5,8 +5,8 @@ const api = axios.create({ baseURL: `http://${window.location.hostname}:9005/api
 
 const baseURL =
   window.location.href.includes('devtunnels') && window.location.href.includes('9009')
-    ? 'https://2n594s43-9005.usw3.devtunnels.ms/api' //forwarded public-port
-    : 'http://localhost:9005/api'
+    ? 'https://wzh1z8xd-9005.asse.devtunnels.ms/api' //forwarded public-port
+    : `http://${window.location.hostname}:9005`
 
 const publicAPI = axios.create({ baseURL });
 

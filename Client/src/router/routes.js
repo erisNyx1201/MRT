@@ -3,7 +3,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('pages/MatchesPage.vue') },
+      { path: '/', component: () => import('pages/RoomPage.vue') },
       {
         path: 'team',
         children: [{ path: '', component: () => import('pages/database/TeamManager.vue') }],
@@ -11,6 +11,12 @@ const routes = [
       {
         path: 'room',
         children: [{ path: '', component: () => import('pages/RoomPage.vue') }],
+      },
+      {
+        path: 'matches',
+        children: [
+          { path: '', component: () => import('pages/MatchesPage.vue') },
+        ],
       },
       {
         path: 'live',

@@ -8,11 +8,11 @@
 
         <q-btn stretch flat label="Team" @click="navigate('/team')"/>
 
-        <q-btn stretch flat label="Room" @click="navigate('/room')"/>
+        <q-btn stretch flat label="Room" @click="navigate('/room')" v-if="isViewMode === '9004'"/>
 
         <q-btn stretch flat label="Live" @click="navigate('/live/dashboard')"/>
 
-        <q-btn stretch flat label="Test" @click="navigate('/test')"/>
+        <q-btn stretch flat label="Test" @click="navigate('/test')" v-if="isViewMode === '9004'"/>
 
       </q-toolbar>
     </q-header>
@@ -27,7 +27,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 
-// const isViewMode = window.location.port
+const isViewMode = window.location.port
 const router = useRouter()
 
 function navigate(path) {
